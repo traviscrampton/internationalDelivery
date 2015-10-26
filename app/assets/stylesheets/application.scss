@@ -6,6 +6,10 @@ html{
   background-color: #F8F8F8;
 }
 
+li{
+  list-style-type: none;
+}
+
 .homephoto {
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('mtcook.jpg') no-repeat center ;
   color: white;
