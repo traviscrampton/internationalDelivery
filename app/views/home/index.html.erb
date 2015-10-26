@@ -1,0 +1,53 @@
+<div class="col-md-12">
+
+  <div class="jumbotron homephoto">
+    <div class="introtext">
+      <h3>Welcome To Retrieve</h3>
+      <p>A Peer To Peer International Shipping Service</p>
+    </div>
+    <br><br>
+
+    <% if current_user %>
+    <div class="row">
+    <div class="input-group alignment">
+      <input type="text" class="form-control" placeholder="Look For Coming To You">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+
+
+
+  <% else %>
+    <%= link_to 'Sign Up', new_user_registration_path, class:'btn btn-primary' %>
+    <%= link_to 'Log in', new_user_session_path, class: 'btn btn-danger' %>
+  <% end %>
+  </div>
+</div>
+
+<br><br>
+<div class="">
+    <div class="col-md-4 undertext">
+      <h3>What is it?</h3><hr>
+      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank. <%= link_to "READ MORE[...]", new_user_registration_path %></p>
+      <div class="imagetag">
+        <%=image_tag("air6.png", alt: "Example Image")%>
+      </div>
+    </div>
+
+    <div class="col-md-4 undertext">
+      <h3>How Does It Work?</h3><hr>
+      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank.<%= link_to "READ MORE[...]", new_user_registration_path %></p>
+      <div class="imagetag">
+        <%=image_tag("package36", alt: "Example Image")%>
+      </div>
+    </div>
+
+    <div class="col-md-4 undertext">
+      <h3>Pay for your Luggage</h3><hr>
+      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank. <%= link_to "READ MORE[...]", new_user_registration_path %></p>
+      <div class="imagetag">
+        <%=image_tag("delivery33.png", alt: "Example Image")%>
+      </div>
+    </div>
+</div>

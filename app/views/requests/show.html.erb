@@ -1,0 +1,11 @@
+<div class="container">
+
+  <h1><%= @request.itemname %></h1>
+  <h4><%= @request.itemdescription %></h4>
+  <h2><%= @request.country %></h2>
+  <h3><%= @request.airport %></h3>
+  <h5><%= @request.user_id %></h5>
+  <div class="">
+    <%= image_tag @request.itemphoto.url(:medium) %>
+  </div>
+</div>

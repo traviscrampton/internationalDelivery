@@ -1,0 +1,42 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html{
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #F8F8F8;
+}
+
+.homephoto {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('mtcook.jpg') no-repeat center ;
+  color: white;
+  text-shadow: 2px 2px black;
+  text-align: center;
+
+  margin: 0px;
+}
+.homephoto {
+  width: 100%;
+}
+
+.jumbotron{
+  height: 600px;
+  width: 100%;
+}
+
+.alignment {
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+
+}
+
+.introtext{
+  margin-top: 12%;
+}
+.undertext{
+  margin-top: 40px;
+}
+
+.imagetag{
+  text-align: center;
+}
