@@ -1,5 +1,7 @@
 class Request < ActiveRecord::Base
-  validates :date, :presence => true
+  validates :day, :presence => true
+  validates :month, :presence => true
+  validates :year, :presence => true
   validates :country, :presence => true
   validates :airport, :presence => true
   validates :itemname, :presence => true

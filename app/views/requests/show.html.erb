@@ -1,11 +1,16 @@
 <div class="container">
 
-  <h1><%= @request.itemname %></h1>
-  <h4><%= @request.itemdescription %></h4>
-  <h2><%= @request.country %></h2>
-  <h3><%= @request.airport %></h3>
-  <h5><%= @request.user_id %></h5>
-  <div class="">
+  <div class="col-md-4">
     <%= image_tag @request.itemphoto.url(:medium) %>
+  </div>
+  <div class="col-md-4">
+    <h1><%= @request.itemname %></h1>
+    <h4><%= @request.itemdescription %></h4>
+    <h2><%= @request.country %></h2>
+    <h3><%= @request.airport %></h3>
+    <h3><%= @request.month %> <%= @request.day %>, <%= @request.year %> </h3>
+  </div>
+  <div class="col-md-4 google">
+    <h2>This is where I'm Going to put in the google map API to show where I would actually like to have this thing delievered but I'm writing a bunch of text so you can see the actual column adjustment.</h2>
   </div>
 </div>

@@ -24,6 +24,6 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:date, :country, :airport, :itemname, :itemdescription, :itemphoto)
+    params.require(:request).permit(:day, :year, :month, :country, :airport, :itemname, :itemdescription, :itemphoto)
   end
 end
