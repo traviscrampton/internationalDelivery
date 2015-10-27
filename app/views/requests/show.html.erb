@@ -9,6 +9,16 @@
     <h2><%= @request.country %></h2>
     <h3><%= @request.airport %></h3>
     <h3><%= @request.month %> <%= @request.day %>, <%= @request.year %> </h3>
+    <h3> <%=  link_to  @request.user.lastname, user_path(@request.user) %></h3>
+    <h4> <%= @request.user.email %></h4>
+
+    <% if current_user.id == @request.user_id %>
+    <%= link_to "Delete", request_path(@request),
+                           :data => {:confirm => "Ya sure mate?",
+                                     :method => "delete"} %>
+      <% else %>
+      <h1>Im Doing It</h1>
+      <% end %>
   </div>
   <div class="col-md-4 google">
     <h2>This is where I'm Going to put in the google map API to show where I would actually like to have this thing delievered but I'm writing a bunch of text so you can see the actual column adjustment.</h2>

@@ -22,6 +22,13 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
   end
 
+  def destroy
+    @request = Request.find(params[:id])
+    @user = @request.user
+    @request.destroy
+    redirect_to user_path(@user)
+  end
+
   private
   def request_params
     params.require(:request).permit(:day, :year, :month, :country, :airport, :itemname, :itemdescription, :itemphoto)

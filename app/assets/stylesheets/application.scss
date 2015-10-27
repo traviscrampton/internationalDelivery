@@ -15,6 +15,8 @@ li{
   color: white;
   text-shadow: 2px 2px black;
   text-align: center;
+  height: 600px;
+  width: 100%;
 
   margin: 0px;
 }
@@ -22,9 +24,13 @@ li{
   width: 100%;
 }
 
-.jumbotron{
-  height: 600px;
+.asdf{
+
+  height:500px;
   width: 100%;
+  background: no-repeat center;
+  color: white;
+  margin: 0px;
 }
 
 .alignment {
@@ -33,6 +39,8 @@ li{
   margin-right: 30%;
 
 }
+
+
 
 .introtext{
   margin-top: 12%;
@@ -48,4 +56,30 @@ li{
 .google{
   border: solid 2px;
   background-color: #F8F8F8;
+}
+
+.imag{
+  border-radius: 20px;
+  border: 4px solid white;
+}
+.editcover{
+  float: right;
+  margin-top: 50%
+}
+
+.nameAndpic{
+  float:right;
+  margin-top: 8%;
+  text-align: center;
+
+}
+
+.nameAndpic h2{
+  text-align: center;
+  text-shadow: 1px 1px black;
+}
+
+.contact{
+  color: black
+
 }
