@@ -14,9 +14,9 @@
       <div class="col-md-12">
         <h2><%= @user.firstname %>'s Requests </h2><hr>
         <% if @user.requests.any? %>
-          <% @user.requests.each do |request| %>
-          <h3><%= image_tag request.itemphoto.url(:thumb)%> <%= link_to request.itemname, request_path(request) %> || <%= request.country %> || <%= request.airport %> || <%= request.month %> <%= request.day %>, <%= request.year %>    <button class="btn btn-danger">Take Item</button></h3><hr>
-          <% end %>
+            <% @user.requests.each do |request| %>
+            <h3><%= image_tag request.itemphoto.url(:thumb)%> <%= link_to request.itemname, request_path(request) %> || <%= request.country %> || <%= request.airport %> || <%= request.month %> <%= request.day %>, <%= request.year %>    <button class="btn btn-danger">Take Item</button>
+              <% end %>
         <% else %>
         <h3>No Requests Made</h3>
         <% end %>

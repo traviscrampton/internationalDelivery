@@ -29,6 +29,20 @@ class RequestsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def edit
+    @request = Request.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @request = Request.find(params[:id])
+    if @request.update(request_params)
+      redirect_to user_path(@request.user)
+    else
+      render :edit
+    end
+  end
+
   private
   def request_params
     params.require(:request).permit(:day, :year, :month, :country, :airport, :itemname, :itemdescription, :itemphoto)

@@ -13,11 +13,11 @@
     <h4> <%= @request.user.email %></h4>
 
     <% if current_user.id == @request.user_id %>
+    <%= link_to "Edit", edit_request_path %>
     <%= link_to "Delete", request_path(@request),
                            :data => {:confirm => "Ya sure mate?",
                                      :method => "delete"} %>
       <% else %>
-      <h1>Im Doing It</h1>
       <% end %>
   </div>
   <div class="col-md-4 google">
