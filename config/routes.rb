@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :answers
 
-  resources :user, only: [:show]
+  resources :users, only: [:show]
 
 
 

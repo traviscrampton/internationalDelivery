@@ -1,1 +1,11 @@
-<h1>There just has to be something in this page to load</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag @user.avatar.url(:medium) %>
+    </div>
+    <div class="col-md-12">
+      <h2><%= @user.firstname %> <%= @user.lastname %></h2>
+
+    </div>
+  </div>
+</div>
