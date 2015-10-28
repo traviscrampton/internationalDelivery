@@ -1,17 +1,16 @@
-<div class="row">
 
-  <div class="col-md-12">
-    <div class="jumbotron asdf" style="background-image: url(<%= @user.coverphoto.url %>); width: 100%; t">
+<div class="row">
+    <div class='asdf container' style="background-image: url(<%= @user.coverphoto.url %>);">
       <div class="col-md-3 nameAndpic">
         <%= image_tag @user.avatar.url(:medium), :class => "imag" %><hr>
         <h2><%= @user.firstname %> <%= @user.lastname %></h2><hr>
-        <%= link_to 'Edit Cover Photo', edit_user_registration_path %>
       </div>
     </div>
-  </div>
 </div>
+<div class='container coveredit'>
+        <%= link_to 'Edit Cover Photo', edit_user_registration_path %>
 
-      <div class="col-md-12">
+      <div class="row">
         <h2><%= @user.firstname %>'s Requests </h2><hr>
         <% if @user.requests.any? %>
             <% @user.requests.each do |request| %>
@@ -22,9 +21,10 @@
         <% end %>
       </div>
 
-      <div class="col-md-12 contact" >
+      <div class="row contact" >
         <h2>Contact Information</h2>
         <h4><%= @user.firstname %> <%= @user.lastname %> </h4>
         <h5><%= @user.email %></h5>
         <h5> <%= @user.territory %>, <%= @user.country %> </h5>
       </div>
+</div>

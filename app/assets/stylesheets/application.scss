@@ -25,12 +25,14 @@ li{
 }
 
 .asdf{
-
-  height:500px;
+  height:50rem;
+  overflow: hidden;
   width: 100%;
   background: no-repeat center;
+  background-size: cover;
   color: white;
-  margin: 0px;
+  margin-right: 20%;
+
 }
 
 .alignment {
@@ -59,7 +61,7 @@ li{
 }
 
 .imag{
-  border-radius: 20px;
+  margin-right: 10%;
   border: 4px solid white;
 }
 .editcover{
@@ -84,4 +86,7 @@ li{
 }
 .bringItem{
   text-align: center;
+}
+.coveredit{
+  float: right;
 }
