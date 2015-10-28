@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :requests do
-    resources :connections
+    resources :answers
   end
 
-  resources :answers
+  # resources :answers do
+  #   resources :connections
+  # end
 
 
   resources :users, only: [:show]
