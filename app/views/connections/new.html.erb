@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 bringItem">
+      <h1>Bring Request</h1><hr>
+    </div>
+    <div class="col-md-4">
+      <%= image_tag @request.itemphoto.url(:medium) %>
+    </div>
+    <div class="col-md-4">
+      <h1><%= @request.itemname %></h1>
+      <h4> <%= @request.itemdescription %></h4>
+      <h3> <%= @request.month %> <%= @request.day %>, <%= @request.year %></h3>
+      <h5><%= @request.airport %></h5>
+    </div>
+  </div>
+</div>

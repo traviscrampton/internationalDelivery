@@ -2,6 +2,7 @@
 
   <div class="col-md-4">
     <%= image_tag @request.itemphoto.url(:medium) %>
+    <%= link_to "Bring Item", new_request_connection_path(@request) %>
   </div>
   <div class="col-md-4">
     <h1><%= @request.itemname %></h1>

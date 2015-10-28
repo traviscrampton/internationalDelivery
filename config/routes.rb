@@ -3,9 +3,12 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :requests
+  resources :requests do
+    resources :connections
+  end
 
   resources :answers
+
 
   resources :users, only: [:show]
 
