@@ -8,9 +8,9 @@ class AnswersController < ApplicationController
     @request = Request.find(params[:request_id])
     @user = current_user
     @answer = @user.answers.new(answer_params)
-    @request_user = User.find(params[:request_id])
+    @item = @request.item
+    @item.update(answer: @answer)
     if @answer.save
-      @answer.requests.push(@request)
       render :answer_success
     else
       render :new
@@ -21,5 +21,5 @@ end
 
 private
 def answer_params
-  params.require(:answer).permit(:day, :year, :month, :country, :airport, :description, )
+  params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description)
 end
