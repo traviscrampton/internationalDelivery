@@ -5,5 +5,20 @@ class ItemsController < ApplicationController
       @item = Item.new
   end
 
+  def create
+    @request = Request.find(params[:request_id])
+    @item = @request.items.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+  def item_params
+    params.require(:item).permit(:itemname, :itemdescription, :itemimage)
+  end
+
 
 end

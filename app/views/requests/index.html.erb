@@ -1,9 +1,13 @@
 
 <div class="container">
 <h2>All Delivery Requests</h2><hr>
-  <% @requests.each do |request| %>
-    <ul>
-      <li><%= image_tag request.itemphoto.url(:thumb) %><%= link_to request.itemname, request_path(request) %> || <%= link_to request.country, request_path(request) %>  ||  <%= link_to request.airport, request_path(request) %> </li><hr>
-    </ul>
-  <% end %>
+<div class="list_text_size">
+    <% @requests.each do |request| %>
+      <ul>
+      <% request.items.each do |item| %>
+      <li><%= image_tag item.itemimage.url(:thumb)%> <%= item.itemname %> || Coming From: <%= request.fromcountry %> || Going To: <%= request.airport %></li><hr>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>

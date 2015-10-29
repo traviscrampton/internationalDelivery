@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="col-md-4">
-    <%= image_tag @request.itemphoto.url(:medium) %>
+    <%= image_tag @request.item.itemimage.url(:medium) %>
     <%= link_to "Bring Item", new_request_answer_path(@request) %>
   </div>
   <div class="col-md-4">
