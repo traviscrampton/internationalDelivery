@@ -5,11 +5,11 @@
     <%= link_to "Bring Item", new_request_answer_path(@request) %>
   </div>
   <div class="col-md-4">
-    <h1><%= @request.itemname %></h1>
-    <h4><%= @request.itemdescription %></h4>
-    <h2><%= @request.country %></h2>
+    <h1><%= @request.item.itemname %></h1>
+    <h4><%= @request.item.itemdescription %></h4>
+    <h2><%= @request.fromcountry %></h2>
     <h3><%= @request.airport %></h3>
-    <h3><%= @request.month %> <%= @request.day %>, <%= @request.year %> </h3>
+    <h3>Between The Dates of: <%= @request.monthstart %> <%= @request.daystart %>, <%= @request.yearstart %> - <%= @request.monthend %> <%= @request.dayend %>, <%=@request.yearend %> </h3>
     <h3> <%=  link_to  @request.user.lastname, user_path(@request.user) %></h3>
     <h4> <%= @request.user.email %></h4>
 

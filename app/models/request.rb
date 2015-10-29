@@ -10,7 +10,7 @@ class Request < ActiveRecord::Base
 
 
   belongs_to :user
-  has_many :items
+  has_one :item
   has_many :answers, through: :items
   has_many :items
 end

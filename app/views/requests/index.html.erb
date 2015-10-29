@@ -4,9 +4,7 @@
 <div class="list_text_size">
     <% @requests.each do |request| %>
       <ul>
-      <% request.items.each do |item| %>
-      <li><%= image_tag item.itemimage.url(:thumb)%> <%= item.itemname %> || Coming From: <%= request.fromcountry %> || Going To: <%= request.airport %></li><hr>
-      <% end %>
+        <li> <%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || Coming From: <%= request.fromcountry %> || Going To: <%= request.airport %></li>
       </ul>
     <% end %>
   </div>
