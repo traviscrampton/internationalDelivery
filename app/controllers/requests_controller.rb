@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
     @user = current_user
     @request = @user.requests.new(request_params)
     if @request.save
-      redirect_to request_path(@request)
+      redirect_to new_request_item_path(@request)
     else
       render :new
     end
@@ -45,6 +45,6 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:day, :year, :month, :country, :airport, :itemname, :itemdescription, :itemphoto)
+    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :fromcountry, :airport)
   end
 end

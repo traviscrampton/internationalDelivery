@@ -2,31 +2,37 @@
 <h1>Request An International Delivery</h1><hr>
 
 
-  <%= bootstrap_form_for @request do |f| %>
+  <%= bootstrap_form_for [@request] do |f| %>
+<div class="dates">
+  <h4>Pick A Starting Date</h4><hr>
+</div>
 
     <div class="field form-group col-md-4">
-      <%= f.select(:day, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ])) %>
+      <%= f.select(:daystart, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Day')%>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:month, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ])) %>
+      <%= f.select(:monthstart, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Month' )%>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:year, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ])) %>
+      <%= f.select(:yearstart, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Year') %>
+    </div>
+    <div class="dates">
+      <h4>Pick An Ending Date</h4><hr>
+    </div>
+    <div class="field form-group col-md-4">
+      <%= f.select(:dayend, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Day') %>
+    </div>
+    <div class="field form-group col-md-4">
+      <%= f.select(:monthend, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Month') %>
+    </div>
+    <div class="field form-group col-md-4">
+      <%= f.select(:yearend, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Year') %>
     </div>
     <div class="field form-group">
-      <%= f.text_field :country %>
+      <%= f.text_field :fromcountry, label: "Which Country Would You Like The Item From?" %>
     </div>
     <div class="field form-group">
-      <%= f.text_field :airport %>
-    </div>
-    <div class="field form-group">
-      <%= f.text_field :itemname %>
-    </div>
-    <div class="field form-group">
-      <%= f.text_field :itemdescription %>
-    </div>
-    <div class="field form-group">
-      <%= f.file_field :itemphoto %>
+      <%= f.text_field :airport, label: "Which Airport Would You Like To Pick It Up At?" %>
     </div>
     <div class="actions form-group">
       <%= f.submit "Post Request", class:"btn btn-primary" %>

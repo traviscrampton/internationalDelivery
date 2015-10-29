@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :requests do
+    resources :items
+  end
+
+  resources :requests do
     resources :answers
   end
+
 
   # resources :answers do
   #   resources :connections

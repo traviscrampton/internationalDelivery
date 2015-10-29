@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028210656) do
+ActiveRecord::Schema.define(version: 20151029182403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "country"
-    t.string  "airport"
-    t.text    "description"
+    t.string  "fromcountry"
+    t.string  "toairport"
+    t.string  "description"
     t.string  "day"
     t.string  "month"
     t.string  "year"
@@ -32,19 +32,29 @@ ActiveRecord::Schema.define(version: 20151028210656) do
     t.boolean "deal",       default: false
   end
 
-  create_table "requests", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "country"
-    t.string   "airport"
+  create_table "items", force: :cascade do |t|
     t.string   "itemname"
-    t.string   "itemdescription"
-    t.string   "itemphoto_file_name"
-    t.string   "itemphoto_content_type"
-    t.integer  "itemphoto_file_size"
-    t.datetime "itemphoto_updated_at"
-    t.string   "day"
-    t.string   "month"
-    t.string   "year"
+    t.text     "itemdescription"
+    t.string   "itemimage_file_name"
+    t.string   "itemimage_content_type"
+    t.integer  "itemimage_file_size"
+    t.datetime "itemimage_updated_at"
+    t.integer  "answer_id"
+    t.integer  "request_id"
+    t.boolean  "answer_deal",            default: false
+    t.boolean  "request_deal",           default: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "fromcountry"
+    t.string  "airport"
+    t.string  "daystart"
+    t.string  "monthstart"
+    t.string  "yearstart"
+    t.string  "dayend"
+    t.string  "monthend"
+    t.string  "yearend"
   end
 
   create_table "users", force: :cascade do |t|
