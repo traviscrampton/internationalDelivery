@@ -8,6 +8,8 @@ class Request < ActiveRecord::Base
   validates :fromcountry, :presence => true
   validates :airport, :presence => true
 
+  
+
 
   belongs_to :user
   has_one :item

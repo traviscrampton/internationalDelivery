@@ -9,4 +9,8 @@ validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 validates_attachment_content_type :coverphoto, :content_type => /\Aimage\/.*\Z/
 has_many :requests
 has_many :answers
+
+def fullname
+  return self.firstname + " " + self.lastname
+end
 end
