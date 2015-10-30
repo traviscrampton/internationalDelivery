@@ -8,6 +8,9 @@ class Answer < ActiveRecord::Base
   validates :year, :presence => true
 
   belongs_to :user
-  has_many :requests, through: :items
-  has_one :item
+  belongs_to :request
+
+  def fulldate
+    return self.month + " " + self.day + "," + " " + self.year 
+  end
 end

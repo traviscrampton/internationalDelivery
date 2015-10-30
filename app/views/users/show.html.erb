@@ -14,10 +14,15 @@
         <h2><%= @user.firstname %>'s Requests </h2><hr>
         <% if @user.requests.any? %>
             <% @user.requests.each do |request| %>
-            <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>   <button class="btn btn-danger">Take Item</button>
-              <% end %>
+              <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>   <button class="btn btn-danger">Take Item</button>
+                <% if request.answers.any? %>
+                    <% request.answers.each do |answer| %>
+                        <h4>See <%= link_to answer.user.fullname , request_answer_path(request, answer) %>'s offer</h4>
+                    <% end %>
+                <% end %>
+            <% end %>
         <% else %>
-        <h3>No Requests Made</h3>
+          <h3>No Requests Made</h3>
         <% end %>
       </div>
 

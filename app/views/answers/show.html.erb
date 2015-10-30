@@ -1,0 +1,10 @@
+  <div class="container">
+    <div class="row">
+      <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %>'s Offer to take your <%= @request.item.itemname%></h1>
+      <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+      <h2><%= @request.item.itemname %></h2>
+      <h2><%= @request.item.itemdescription %></h2>
+    </div>
+    <h3><%= @answer.description %></h3>
+    <h4>Arriving at <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
+  </div>

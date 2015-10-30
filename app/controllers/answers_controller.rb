@@ -8,13 +8,18 @@ class AnswersController < ApplicationController
     @request = Request.find(params[:request_id])
     @user = current_user
     @answer = @user.answers.new(answer_params)
-    @item = @request.item
-    @item.update(answer: @answer)
+    @request.answers.push(@answer)
+    binding.pry
     if @answer.save
       render :answer_success
     else
       render :new
     end
+  end
+
+  def show
+    @request = Request.find(params[:request_id])
+    @answer = Answer.find(params[:id])
   end
 end
 

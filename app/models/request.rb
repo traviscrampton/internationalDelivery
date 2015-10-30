@@ -8,11 +8,18 @@ class Request < ActiveRecord::Base
   validates :fromcountry, :presence => true
   validates :airport, :presence => true
 
-  
+
 
 
   belongs_to :user
   has_one :item
-  has_many :answers, through: :items
-  has_many :items
+  has_many :answers
+
+  def startdate
+    return monthstart + " " + daystart + "," + " " + yearstart
+  end
+  def enddate
+    return monthend + " " + dayend + "," + " " + yearend
+  end
+
 end
