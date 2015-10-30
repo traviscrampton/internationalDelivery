@@ -14,8 +14,12 @@
         <h2><%= @user.firstname %>'s Requests </h2><hr>
         <% if @user.requests.any? %>
             <% @user.requests.each do |request| %>
-              <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>   <button class="btn btn-danger">Take Item</button>
-                <% if request.answers.any? %>
+              <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>
+              <% if current_user.id != request.user_id %>
+                <%= link_to "Request To Take Item", new_request_answer_path(request), class: "btn btn-danger" %>
+              <% end %>
+                <% if request.answers.any? && current_user.id == request.user_id %>
+              <h4>Offers From</h4>
                     <% request.answers.each do |answer| %>
                         <h4>See <%= link_to answer.user.fullname , request_answer_path(request, answer) %>'s offer</h4>
                     <% end %>

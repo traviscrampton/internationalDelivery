@@ -2,13 +2,13 @@
 
   <div class="col-md-4">
     <%= image_tag @request.item.itemimage.url(:medium) %>
-    <%= link_to "Bring Item", new_request_answer_path(@request) %>
+    <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
   </div>
   <div class="col-md-4">
     <h1><%= @request.item.itemname %></h1>
     <h4><%= @request.item.itemdescription %></h4>
-    <h2><%= @request.fromcountry %></h2>
-    <h3><%= @request.airport %></h3>
+    <h2>From: <%= @request.fromcountry %></h2>
+    <h3>To: <%= @request.airport %></h3>
     <h3>Between The Dates of: <%= @request.startdate %> - <%= @request.enddate %></h3>
     <h3> <%=  link_to  @request.user.fullname, user_path(@request.user) %></h3>
     <h4> <%= @request.user.email %></h4>
