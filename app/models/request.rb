@@ -13,7 +13,7 @@ class Request < ActiveRecord::Base
 
   belongs_to :user
   has_one :item
-  has_many :answers
+  has_and_belongs_to_many :answers
 
   def startdate
     return monthstart + " " + daystart + "," + " " + yearstart

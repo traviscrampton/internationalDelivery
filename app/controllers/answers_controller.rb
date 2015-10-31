@@ -9,7 +9,6 @@ class AnswersController < ApplicationController
     @user = current_user
     @answer = @user.answers.new(answer_params)
     @request.answers.push(@answer)
-    binding.pry
     if @answer.save
       render :answer_success
     else
