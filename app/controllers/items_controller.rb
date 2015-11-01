@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   def create
     @request = Request.find(params[:request_id])
-    @item = @request.items.new(item_params)
+    @item = @request.build_item(item_params)
     if @item.save
       redirect_to root_path
     else

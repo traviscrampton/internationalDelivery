@@ -6,5 +6,5 @@ class Item < ActiveRecord::Base
 validates_attachment_content_type :itemimage, :content_type => /\Aimage\/.*\Z/
 
   belongs_to :request
-  
+
 end

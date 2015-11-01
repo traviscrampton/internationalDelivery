@@ -8,8 +8,9 @@
     </div>
 </div>
 <div class='container'>
+  <% if current_user.id == @user.id %>
         <%= link_to 'Edit Cover Photo', edit_user_registration_path %>
-
+  <% end %>
       <div class="row">
         <h2><%= @user.firstname %>'s Requests </h2><hr>
         <% if @user.requests.any? %>
