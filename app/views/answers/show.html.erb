@@ -1,10 +1,15 @@
   <div class="container">
     <div class="row">
       <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is interested in taking your <%= @request.item.itemname%></h1>
-      <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+      <div class="col-md-6">
+        <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+      </div>
+      <div class="col-md-6">
+        <%= image_tag @answer.user.avatar.url(:medium) %>
+      </div>
     </div>
     <h3><%= @answer.description %></h3>
-    <h4>Arriving at <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
+    <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
 
     <button class="btn btn-primary">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %></button>
   </div>

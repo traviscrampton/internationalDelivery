@@ -4,7 +4,9 @@
     <%= image_tag @request.item.itemimage.url(:medium) %>
     <h1><%= @request.item.itemname %></h1>
     <h4><%= @request.item.itemdescription %></h4>
-    <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
+    <% if current_user.id != @request.user.id %>
+      <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
+    <% end %>
   </div>
   <div class="col-md-4">
     <h4>This is blank space for right now still deciding what I should be doing I really don't know how else I should be taking care of this but instead i'll just write a bunch of random stuff in here.</h4>
@@ -28,8 +30,9 @@
     <h4> <%= @request.user.email %></h4>
 
     <% if current_user.id == @request.user_id %>
-    <%= link_to "Edit", edit_request_path %>
-    <%= link_to "Delete", request_path(@request),
+    <%= link_to "Edit Request", edit_request_path, class:"btn btn-default" %>
+
+    <%= link_to "Delete", request_path(@request), class: "btn btn-default",
                            :data => {:confirm => "Ya sure mate?",
                                      :method => "delete"} %>
       <% else %>
