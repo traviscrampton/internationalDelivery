@@ -3,7 +3,7 @@
     <div class='asdf container' style="background-image: url(<%= @user.coverphoto.url %>);">
       <div class="col-md-3 nameAndpic">
         <%= image_tag @user.avatar.url(:medium), :class => "imag" %><hr>
-        <h2><%= @user.firstname %> <%= @user.lastname %></h2><hr>
+        <h2><%= @user.fullname %></h2><hr>
       </div>
     </div>
 </div>

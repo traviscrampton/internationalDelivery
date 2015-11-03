@@ -1,0 +1,10 @@
+$(document).ready(function(){
+  $('#unitedstates').click(function(){
+    $('#Australian').fadeToggle();
+    $('#American').remove();
+  });
+  $('#Australia').click(function(){
+    $('#American').fadeToggle();
+    $('#Australian').remove(;)
+  });
+});
