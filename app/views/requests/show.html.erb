@@ -1,5 +1,5 @@
 <div class="container">
-
+<h2><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   <div class="col-md-4 item_border">
     <%= image_tag @request.item.itemimage.url(:medium) %>
     <h1><%= @request.item.itemname %></h1>
@@ -15,28 +15,38 @@
     <h2>This is where I'm Going to put in the google map API to show where I would actually like to have this thing delievered but I'm writing a bunch of text so you can see the actual column adjustment.</h2>
   </div>
   <div class="col-md-12 ">
-
     <div class="col-md-4">
-      <h2>From: <%= @request.fromcountry %></h2>
+      <% if @request.fromcountry == "Australia" %>
+        <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
+      <% else %>
+        <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
+      <% end %>
+        <h2>From: <%= @request.fromcountry %></h2>
     </div>
     <div class="col-md-4">
       <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
-    <h3><%= @request.startdate %> - <%= @request.enddate %></h3>
+      <h3><%= @request.startdate %> - <%= @request.enddate %></h3>
+      <div class="editanddelete">
+        <% if current_user.id == @request.user_id %>
+      <hr>
+        <%= link_to "Edit Request", edit_request_path(@request), class:"btn btn-default" %>
+
+        <%= link_to "Delete", request_path(@request), class: "btn btn-default",
+                               :data => {:confirm => "Ya sure mate?",
+                                         :method => "delete"} %>
+          <% else %>
+          <% end %>
+
+      </div>
     </div>
     <div class="col-md-4">
+      <% if @request.fromcountry == "Australia" %>
+        <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
+      <% else %>
+        <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
+      <% end %>
       <h3>To: <%= @request.airport %></h3>
     </div>
-    <h3> <%=  link_to  @request.user.fullname, user_path(@request.user) %></h3>
-    <h4> <%= @request.user.email %></h4>
-
-    <% if current_user.id == @request.user_id %>
-    <%= link_to "Edit Request", edit_request_path(@request), class:"btn btn-default" %>
-
-    <%= link_to "Delete", request_path(@request), class: "btn btn-default",
-                           :data => {:confirm => "Ya sure mate?",
-                                     :method => "delete"} %>
-      <% else %>
-      <% end %>
 
   </div>
 </div>
