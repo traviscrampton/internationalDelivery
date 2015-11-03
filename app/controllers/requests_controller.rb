@@ -6,11 +6,16 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+    @australians = Australian.all
+    @americans = American.all
   end
 
   def create
     @user = current_user
     @request = @user.requests.new(request_params)
+    @australians = Australian.all
+    @americans = American.all
+    binding.pry
     if @request.save
       redirect_to new_request_item_path(@request)
     else
@@ -30,11 +35,15 @@ class RequestsController < ApplicationController
   end
 
   def edit
+    @australians = Australian.all
+    @americans = American.all
     @request = Request.find(params[:id])
     render :edit
   end
 
   def update
+    @australians = Australian.all
+    @americans = American.all
     @request = Request.find(params[:id])
     if @request.update(request_params)
       redirect_to user_path(@request.user)

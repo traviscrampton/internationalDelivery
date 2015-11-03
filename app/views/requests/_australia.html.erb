@@ -1,0 +1,5 @@
+<%= bootstrap_form_for [@request] do |f| %>
+  <div class="field form-group">
+    <%= f.select(:airport, options_from_collection_for_select( @australians, 'id', 'name')) %>
+  </div>
+<% end %>

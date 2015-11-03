@@ -30,7 +30,7 @@
     <h4> <%= @request.user.email %></h4>
 
     <% if current_user.id == @request.user_id %>
-    <%= link_to "Edit Request", edit_request_path, class:"btn btn-default" %>
+    <%= link_to "Edit Request", edit_request_path(@request), class:"btn btn-default" %>
 
     <%= link_to "Delete", request_path(@request), class: "btn btn-default",
                            :data => {:confirm => "Ya sure mate?",

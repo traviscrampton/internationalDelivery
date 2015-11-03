@@ -92,7 +92,7 @@ li{
 }
 
 .delivery_index{
-background-color: darkgray;
+background-color: white;
 border: 1px black solid;
 }
 
@@ -111,4 +111,14 @@ border: 1px black solid;
   height: 70%;
   margin-left: 10%;
   margin-top: 5%;
+}
+.whichcountry{
+  text-align: center;
+}
+#American{
+  display: none;
+}
+
+#Australian{
+  display: none;
 }
