@@ -22,7 +22,7 @@
                 <% if request.answers.any? && current_user.id == request.user_id %>
               <h4>Offers From</h4>
                     <% request.answers.each do |answer| %>
-                        <h4>See <%= link_to answer.user.fullname , request_answer_path(request, answer) %>'s offer</h4>
+                        <h4>See <%= link_to answer.user.fullname, user_path(answer.user)  %>'s <%= link_to 'offer', request_answer_path(request, answer) %></h4>
                     <% end %>
                 <% end %>
             <% end %>

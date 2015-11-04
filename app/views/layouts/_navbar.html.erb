@@ -5,8 +5,12 @@
     </div>
     <div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/requests/new">Make A Delivery Request</a></li>
+
+        <li><%= link_to "Make A Delivery Request", new_request_path %></li>
         <li><%= link_to 'Requests', requests_path %></a></li>
+        <li><%= link_to 'Add A Flight', new_answer_path %></li>
+        <li><%= link_to 'Outgoing Flights', answers_path %></a></li>
+
         <% if user_signed_in? %>
         <li><%= link_to 'Profile', user_path(current_user) %></a></li>
 
