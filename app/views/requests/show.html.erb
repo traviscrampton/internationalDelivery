@@ -1,18 +1,32 @@
 <div class="container">
-<h2><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
+<h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   <div class="col-md-4 item_border">
-    <%= image_tag @request.item.itemimage.url(:medium) %>
-    <h1><%= @request.item.itemname %></h1>
-    <h4><%= @request.item.itemdescription %></h4>
-    <% if current_user.id != @request.user.id %>
-      <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
-    <% end %>
+    <div class="row">
+
+      <div id="formForItem">
+        <%= render 'edit' %>
+        <div class="col-md-3">
+          <button class="btn btn-default inlineButtons" id="backToNorm">Nevermind</button>
+        </div>
+      </div>
+    </div>
+    <div id="nameAndDescription">
+      <%= image_tag @request.item.itemimage.url(:medium) %>
+      <h1><%= @request.item.itemname %></h1>
+      <h4><%= @request.item.itemdescription %></h4>
+      <button class="btn btn-default" id="editItem">Edit Item</button>
+    </div>
   </div>
   <div class="col-md-4">
-    <h4>This is blank space for right now still deciding what I should be doing I really don't know how else I should be taking care of this but instead i'll just write a bunch of random stuff in here.</h4>
+    <%= image_tag(('arrow.png'), class: "airplaneimg") %>
+    <div class="bringbtn">
+      <% if current_user.id != @request.user.id %>
+        <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-4 google">
-    <h2>This is where I'm Going to put in the google map API to show where I would actually like to have this thing delievered but I'm writing a bunch of text so you can see the actual column adjustment.</h2>
+  <div class="col-md-4">
+    <%= image_tag(('backpack.jpg'), class: "airplaneimg") %>
   </div>
   <div class="col-md-12 ">
     <div class="col-md-4">
@@ -29,7 +43,7 @@
       <div class="editanddelete">
         <% if current_user.id == @request.user_id %>
       <hr>
-        <%= link_to "Edit Request", edit_request_path(@request), class:"btn btn-default" %>
+        <button class="btn btn-default" id="editExpand">Edit Request</button>
 
         <%= link_to "Delete", request_path(@request), class: "btn btn-default",
                                :data => {:confirm => "Ya sure mate?",
@@ -47,6 +61,13 @@
       <% end %>
       <h3>To: <%= @request.airport %></h3>
     </div>
-
+  </div>
+  <div id="keepItHidden">
+    <div class="col-md-12">
+      <div class="keepItmargin">
+        <h1>Edit Your Dates and Locations</h1><hr>
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
 </div>

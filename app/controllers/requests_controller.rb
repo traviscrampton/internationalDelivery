@@ -15,7 +15,6 @@ class RequestsController < ApplicationController
     @request = @user.requests.new(request_params)
     @australians = Australian.all
     @americans = American.all
-    binding.pry
     if @request.save
       redirect_to new_request_item_path(@request)
     else
@@ -25,6 +24,9 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+    @australians = Australian.all
+    @americans = American.all
+    @item = @request.item
   end
 
   def destroy

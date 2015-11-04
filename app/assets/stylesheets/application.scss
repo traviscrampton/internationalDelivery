@@ -2,8 +2,7 @@
 @import "bootstrap";
 
 html{
-  font-family: 'Roboto Condensed', sans-serif;
-  background-color: #F8F8F8;
+  font-family: 'Arvo', serif;
 }
 
 li{
@@ -125,4 +124,25 @@ border: 1px black solid;
 }
 .editanddelete{
   text-align: center;
+}
+.bringbtn{
+  text-align: center;
+  margin-top: 30%;
+}
+#keepItHidden{
+  display:none;
+}
+#formForItem{
+  display: none;
+
+}
+.keepItmargin {
+  margin-top: 10%;
+}
+.inlineButtons{
+  display: inline;
+}
+
+.profilePic{
+  border-radius: 100px;
 }
