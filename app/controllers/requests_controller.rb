@@ -27,6 +27,12 @@ class RequestsController < ApplicationController
     @australians = Australian.all
     @americans = American.all
     @item = @request.item
+
+    # if params.has_key?(:nevermind)
+    #   render :nevermind
+    # elsif params.has_key?(:somethingelse)
+    #   render :somethingelse
+    # end
   end
 
   def destroy

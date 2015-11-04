@@ -8,7 +8,9 @@
         <%= image_tag @request.item.itemimage.url(:medium) %>
         <h1><%= @request.item.itemname %></h1>
         <h4><%= @request.item.itemdescription %></h4>
-        <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
+        <% if current_user.id == @request.user_id %>
+          <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
+        <% end %>
       </div>
       <div id="editRender">
         <%= render 'items/form' %>
