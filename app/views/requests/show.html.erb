@@ -4,7 +4,21 @@
     <div class="row">
 
       <div id="formForItem">
-        <%= render 'edit' %>
+        <%= bootstrap_form_for [@request, @item], remote:true do |f| %>
+          <div class="field form-group">
+            <%= f.text_field :itemname, label: 'Name Of Item' %>
+          </div>
+          <div class="field form-group">
+            <%= f.text_field :itemdescription, label: 'Description Of Item' %>
+          </div>
+          <div class="field form-group">
+                <%= f.file_field :itemimage, label: 'Profile Picture'%>
+          </div>
+          <div class="actions form-group col-md-4">
+            <%= f.submit "Post Item", class:"btn btn-primary inlineButtons" %>
+          </div>
+
+        <% end %>
         <div class="col-md-3">
           <button class="btn btn-default inlineButtons" id="backToNorm">Nevermind</button>
         </div>
