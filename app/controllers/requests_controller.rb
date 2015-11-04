@@ -48,7 +48,10 @@ class RequestsController < ApplicationController
     @americans = American.all
     @request = Request.find(params[:id])
     if @request.update(request_params)
-      redirect_to user_path(@request.user)
+      respond_to do |format|
+        format.html {redirect_to request_path(@request)}
+        format.js
+      end
     else
       render :edit
     end

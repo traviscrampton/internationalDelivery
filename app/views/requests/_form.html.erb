@@ -29,25 +29,15 @@
     <div class="col-md-12 whichcountry">
       <h3>Which Country Would You Like To Ship From</h3><hr>
     </div>
-    <div class="btn btn-default col-md-6" data-toggle="buttons">
+
       <div class="field form-group">
-        <%= f.radio_button :fromcountry, "Australia", id:"Australia", label:'Australia', type:'radio' %>
-      </div>
+        <%= f.text_field :fromcountry, label:"Which Country Are You Coming From" %>
     </div>
-    <div class="btn btn-default col-md-6" data-toggle="buttons">
       <div class="field form-group">
-        <%= f.radio_button :fromcountry, "United States", id:"unitedstates", label:'United States', type:'radio' %>
-      </div>
+        <%= f.text_field :airport, label:"Which Airport are you flying to" %>
     </div>
     <br>
-  <div class="american" id="Australian">
-    <div class="field form-group">
-      <%= f.select(:airport, options_from_collection_for_select( @australians, 'name', 'name'), label:"Which Australian Airport Would You Like To Meet At?") %>
-    </div>
-  </div>
-  <div id="American">
-    <%= f.select(:airport, options_from_collection_for_select( @americans, 'name', 'name')) %>
-  </div>
+
     <div class="actions form-group">
       <%= f.submit "Post Request", class:"btn btn-primary" %>
     </div>

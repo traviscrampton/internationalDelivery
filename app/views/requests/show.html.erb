@@ -28,7 +28,7 @@
       <%= image_tag @request.item.itemimage.url(:medium) %>
       <h1><%= @request.item.itemname %></h1>
       <h4><%= @request.item.itemdescription %></h4>
-      <button class="btn btn-default" id="editItem">Edit Item</button>
+      <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
     </div>
   </div>
   <div class="col-md-4">
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <%= image_tag(('backpack.jpg'), class: "airplaneimg") %>
+    <%= image_tag(('backpack.jpg'), class: "airplaneimg backpack") %>
   </div>
   <div class="col-md-12 ">
     <div class="col-md-4">
@@ -49,7 +49,7 @@
       <% else %>
         <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
       <% end %>
-        <h2>From: <%= @request.fromcountry %></h2>
+        <h2>From: <%= @request.fromcountry %></h2><hr>
     </div>
     <div class="col-md-4">
       <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
@@ -57,7 +57,8 @@
       <div class="editanddelete">
         <% if current_user.id == @request.user_id %>
       <hr>
-        <button class="btn btn-default" id="editExpand">Edit Request</button>
+        <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default", remote:true %>
+
 
         <%= link_to "Delete", request_path(@request), class: "btn btn-default",
                                :data => {:confirm => "Ya sure mate?",
@@ -73,7 +74,7 @@
       <% else %>
         <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
       <% end %>
-      <h3>To: <%= @request.airport %></h3>
+      <h3>To: <%= @request.airport %></h3><hr>
     </div>
   </div>
   <div id="keepItHidden">
