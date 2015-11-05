@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="col-md-6">
+    <%= image_tag @answer.user.avatar.url(:thumb), :class => "imag" %>
+    <h1> <%= @answer.user.fullname %>'s Itinerary </h1><hr>
+  </div>
+  <div class="col-md-8">
+    <h3>Flying From: <%= @answer.fromcountry %> </h3>
+    <h3>Flying into: <%= @answer.toairport %></h3>
+    <h3>Date Of Flight: <%= @answer.fulldate %>  </h3>
+    <%= link_to "Request them to bring an item", new_answer_request_path(@answer), class:"btn btn-default" %>
+  </div>
+</div>

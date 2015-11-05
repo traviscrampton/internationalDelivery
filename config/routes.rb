@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :answers
+  resources :answers do
+    resources :requests
+  end
 
 
   # resources :answers do

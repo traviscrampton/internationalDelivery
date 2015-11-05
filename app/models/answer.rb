@@ -8,7 +8,7 @@ class Answer < ActiveRecord::Base
   validates :year, :presence => true
 
   belongs_to :user
-  has_and_belongs_to_many :request
+  has_and_belongs_to_many :requests
 
   def fulldate
     return self.month + " " + self.day + "," + " " + self.year

@@ -1,7 +1,5 @@
-<div class="container">
-<h1>Request an International Delivery</h1>
-
-  <%= bootstrap_form_for [@request] do |f| %>
+  <h1>Request <%= @answer.user.fullname %> to bring an Item </h1><hr>
+  <%= bootstrap_form_for [@answer, @request] do |f| %>
 <div class="dates">
   <h4>Pick A Starting Date</h4><hr>
 </div>
@@ -43,4 +41,3 @@
       <%= f.submit "Post Request", class:"btn btn-primary" %>
     </div>
     <% end %>
-</div>

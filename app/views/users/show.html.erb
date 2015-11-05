@@ -30,6 +30,25 @@
           <h3>No Requests Made</h3>
         <% end %>
       </div>
+      <div class="row">
+        <h2>Outgoing Flights</h2><hr>
+        <% if @user.answers.any? %>
+            <% @user.answers.each do |answer| %>
+              <h3> Coming From: <%= answer.fromcountry %>, Going To: <%= answer.toairport %>, on <%= answer.fulldate %> </h3>
+              <% if current_user.id != answer.user_id %>
+                <%= link_to "Request To Have Item Brought", new_answer_request_path(answer), class: "btn btn-default" %>
+              <% end %>
+                <% if answer.requests.any? && current_user.id == answer.user_id %>
+              <h4>Offers From</h4>
+                    <% answer.requests.each do |request| %>
+                        <h4>See <%= link_to request.user.fullname, user_path(request.user)  %>'s <%= link_to 'offer', answer_request_path(answer, request) %></h4>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% else %>
+          <h3>No Requests Made</h3>
+        <% end %>
+      </div>
 
       <div class="row contact" >
         <h2>Contact Information</h2>

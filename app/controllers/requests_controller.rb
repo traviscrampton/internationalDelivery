@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  before_action :find_answer
 
   def index
     @requests = Request.all
@@ -6,15 +7,13 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
-    @australians = Australian.all
-    @americans = American.all
   end
 
   def create
     @user = current_user
     @request = @user.requests.new(request_params)
-    @australians = Australian.all
-    @americans = American.all
+    binding.pry
+    @answer.requests.push(@request) if @answer
     if @request.save
       redirect_to new_request_item_path(@request)
     else
@@ -60,5 +59,9 @@ class RequestsController < ApplicationController
   private
   def request_params
     params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :fromcountry, :airport)
+  end
+
+  def find_answer
+    @answer = params[:answer_id] ? Answer.find(params[:answer_id]) : nil
   end
 end

@@ -14,23 +14,28 @@ class AnswersController < ApplicationController
     @answer = @user.answers.new(answer_params)
     @request.answers.push(@answer) if @request
     if @answer.save
-      render :answer_success
+      redirect_to answer_path(@answer)
     else
       render :new
     end
   end
 
   def show
-    @answer = Answer.find(params[:id])
+    if @request
+      @answer = Answer.find(params[:id])
+    else
+      @answer = Answer.find(params[:id])
+      render :answerShow
+    end
   end
-end
 
 
 private
-def answer_params
-  params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description)
-end
+  def answer_params
+    params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description)
+  end
 
-def find_request
-  @request = params[:request_id] ? Request.find(params[:request_id]) : nil
+  def find_request
+    @request = params[:request_id] ? Request.find(params[:request_id]) : nil
+  end
 end
