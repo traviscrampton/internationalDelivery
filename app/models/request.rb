@@ -7,6 +7,7 @@ class Request < ActiveRecord::Base
   validates :yearend, :presence => true
   validates :fromcountry, :presence => true
   validates :airport, :presence => true
+  validates :deal, :presence => true
 
 
 
