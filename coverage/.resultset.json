@@ -2,41 +2,20 @@
   "RSpec": {
     "coverage": {
       "/Users/Guest/Desktop/internationalDelivery/spec/features/requests/add_a_request_spec.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/Guest/Desktop/internationalDelivery/spec/features/users/add_user_spec.rb": [
         1,
         null,
         1,
         1,
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
         null,
         null
       ],
@@ -764,7 +743,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -820,7 +799,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null
       ],
@@ -917,6 +896,27 @@
         null,
         null
       ],
+      "/Users/Guest/Desktop/internationalDelivery/spec/features/users/add_user_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/Guest/Desktop/internationalDelivery/spec/features/users/log_user_in_spec.rb": [
         1,
         null,
@@ -984,6 +984,6 @@
         null
       ]
     },
-    "timestamp": 1446766307
+    "timestamp": 1446767022
   }
 }
