@@ -13,7 +13,7 @@ describe "the add a user process" do
     fill_in 'Email', :with => "crampton.travis@gmail.com"
     fill_in 'Password', :with => "travis12"
     fill_in 'Password confirmation', :with => "travis12"
-    find('input[type="submit"]').click
+    click_button "Sign up"
     expect(page).to have_content ('GIT IT')
   end
 end

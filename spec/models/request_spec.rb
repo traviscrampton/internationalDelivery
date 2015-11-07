@@ -9,6 +9,5 @@ describe Request do
   it {should validate_presence_of :yearend}
   it {should validate_presence_of :fromcountry}
   it {should validate_presence_of :airport}
-  it {should validate_presence_of :deal}
   it {should belong_to :user}
 end

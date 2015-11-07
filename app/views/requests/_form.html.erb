@@ -7,25 +7,25 @@
 </div>
 
     <div class="field form-group col-md-4">
-      <%= f.select(:daystart, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Day')%>
+      <%= f.select(:daystart, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Start Day')%>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:monthstart, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Month' )%>
+      <%= f.select(:monthstart, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Start Month' )%>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:yearstart, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Year') %>
+      <%= f.select(:yearstart, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Start Year') %>
     </div>
     <div class="dates">
       <h4>Pick An Ending Date</h4><hr>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:dayend, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Day') %>
+      <%= f.select(:dayend, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'End Day') %>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:monthend, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Month') %>
+      <%= f.select(:monthend, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'End Month') %>
     </div>
     <div class="field form-group col-md-4">
-      <%= f.select(:yearend, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Year') %>
+      <%= f.select(:yearend, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'End Year') %>
     </div>
     <div class="col-md-12 whichcountry">
       <h3>Which Country Would You Like To Ship From</h3><hr>

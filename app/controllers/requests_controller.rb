@@ -12,8 +12,7 @@ class RequestsController < ApplicationController
   def create
     @user = current_user
     @request = @user.requests.new(request_params)
-    binding.pry
-    @answer.requests.push(@request) if @answer
+      @answer.requests.push(@request) if @answer
     if @request.save
       redirect_to new_request_item_path(@request)
     else
