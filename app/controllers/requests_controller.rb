@@ -22,8 +22,6 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
-    @australians = Australian.all
-    @americans = American.all
     @item = @request.item
   end
 

@@ -1,75 +1,75 @@
 <div class="container">
-<h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
-<div class="topThree">
-    <div class="col-md-4 item_border">
-      <div class="row">
-      </div>
-      <div id="nameAndDescription">
-        <%= image_tag @request.item.itemimage.url(:medium) %>
-        <h1><%= @request.item.itemname %></h1>
-        <h4><%= @request.item.itemdescription %></h4>
-        <% if current_user.id == @request.user_id %>
-          <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
-        <% end %>
-      </div>
-      <div id="editRender">
-        <%= render 'items/form' %>
-        <button class="btn btn-default" id="backToNorm">Nevermind</button>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <%= image_tag(('arrow.png'), class: "airplaneimg") %>
-      <div class="bringbtn">
-        <% if current_user.id != @request.user.id %>
-          <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <%= image_tag(('backpack.jpg'), class: "airplaneimg backpack") %>
-    </div>
-</div>
-  <div class="col-md-12 ">
-    <div class="col-md-4">
-      <% if @request.fromcountry == "Australia" %>
-        <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
-      <% else %>
-        <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
-      <% end %>
-        <h2>From: <%= @request.fromcountry %></h2><hr>
-    </div>
-    <div class="col-md-4">
-      <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
-      <h3><%= @request.startdate %> - <%= @request.enddate %></h3>
-      <div class="editanddelete">
-        <% if current_user.id == @request.user_id %>
-      <hr>
-        <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default", remote:true %>
-
-
-        <%= link_to "Delete", request_path(@request), class: "btn btn-default",
-                               :data => {:confirm => "Ya sure mate?",
-                                         :method => "delete"} %>
-          <% else %>
+  <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
+  <div class="topThree">
+      <div class="col-md-4 item_border">
+        <div class="row">
+        </div>
+        <div id="nameAndDescription">
+          <%= image_tag @request.item.itemimage.url(:medium) %>
+          <h1><%= @request.item.itemname %></h1>
+          <h4><%= @request.item.itemdescription %></h4>
+          <% if current_user.id == @request.user_id %>
+            <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
           <% end %>
-
+        </div>
+        <div id="editRender">
+          <%= render 'items/form' %>
+          <button class="btn btn-default" id="backToNorm">Nevermind</button>
+        </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <% if @request.fromcountry == "Australia" %>
-        <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
-      <% else %>
-        <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
-      <% end %>
-      <h3>To: <%= @request.airport %></h3><hr>
-    </div>
+      <div class="col-md-4">
+        <%= image_tag(('arrow.png'), class: "airplaneimg") %>
+        <div class="bringbtn">
+          <% if current_user.id != @request.user.id %>
+            <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag(('backpack.jpg'), class: "airplaneimg backpack") %>
+      </div>
   </div>
-  <div id="keepItHidden">
-    <div class="col-md-12">
-      <div class="keepItmargin">
-        <h1>Edit Your Dates and Locations</h1><hr>
-        <%= render 'form' %>
-        <%= link_to "Nevermind", request_path(@request), class:'btn btn-default ', remote:true %>
+    <div class="col-md-12 ">
+      <div class="col-md-4">
+        <% if @request.fromcountry == "Australia" %>
+          <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
+        <% else %>
+          <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
+        <% end %>
+          <h2>From: <%= @request.fromcountry %></h2><hr>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
+        <h3><%= @request.startdate %> - <%= @request.enddate %></h3>
+        <div class="editanddelete">
+          <% if current_user.id == @request.user_id %>
+        <hr>
+          <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default", remote:true %>
+
+
+          <%= link_to "Delete", request_path(@request), class: "btn btn-default",
+                                 :data => {:confirm => "Ya sure mate?",
+                                           :method => "delete"} %>
+            <% else %>
+            <% end %>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <% if @request.fromcountry == "Australia" %>
+          <%= image_tag(('unitedstates.png'), :class => "airplaneimg") %>
+        <% else %>
+          <%= image_tag(('Australia.gif'), :class => "airplaneimg") %>
+        <% end %>
+        <h3>To: <%= @request.airport %></h3><hr>
       </div>
     </div>
+    <div id="keepItHidden">
+      <div class="col-md-12">
+        <div class="keepItmargin">
+          <h1>Edit Your Dates and Locations</h1><hr>
+          <%= render 'form' %>
+          <%= link_to "Nevermind", request_path(@request), class:'btn btn-default ', remote:true %>
+        </div>
+      </div>
   </div>

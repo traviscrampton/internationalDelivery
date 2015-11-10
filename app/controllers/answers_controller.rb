@@ -23,6 +23,7 @@ class AnswersController < ApplicationController
   def show
     if @request
       @answer = Answer.find(params[:id])
+      render :show
     else
       @answer = Answer.find(params[:id])
       render :answerShow

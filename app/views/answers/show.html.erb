@@ -1,30 +1,69 @@
-  <div class="container">
-    <div class="row">
-      <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is interested in taking your <%= @request.item.itemname%></h1>
-      <div class="col-md-6">
-        <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
-      </div>
-      <div class="col-md-6">
-        <%= image_tag @answer.user.avatar.url(:medium) %>
-      </div>
-    </div>
-    <h3><%= @answer.description %></h3>
-    <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
-    <% if current_user.id == @request.user.id %>
-      <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %> </button>
-    <% end %>
+<% if current_user.id == @request.user.id %>
+      <div class="container">
+        <div class="row">
+          <% if @request.deal == true %>
+            <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is able to take your <%= @request.item.itemname%></h1>
+          <% else %>
+            <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> maybe able to take your <%= @request.item.itemname%></h1>
+          <% end %>
+          <div class="col-md-6">
+            <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+          </div>
+          <div class="col-md-6">
+            <%= image_tag @answer.user.avatar.url(:medium) %>
+          </div>
+        </div>
+        <h3><%= @answer.description %></h3>
+        <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
+        <% if current_user.id == @request.user.id %>
+          <% if @request.deal == true %>
+            <h3>Waiting For <%= link_to @answer.user.fullname, user_path(@answer.user) %> to respond </h3>
+          <% else %>
+            <% if @answer.deal == true %>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %> </button>
+            <% else %>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @answer.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
+            <% end %>
+          <% end %>
+        <% end %>
 
-    <div class="modal" id="modalGo">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Delivery Confirmation</h3>
-            <div class="modal-body">
-              <p>Are you sure that You want to <%= @answer.user.fullname %> to take your <%= @request.item.itemname %>? </p>
-              <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
+        <div class="modal" id="modalGo">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Delivery Confirmation</h3>
+                <div class="modal-body">
+                  <p>Are you sure that You want to <%= @answer.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+                  <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+<% elsif current_user.id == @answer.user.id %>
+  <div class="container ">
+    <% if @request.deal == true %>
+      <div class="row">
+        <h1> <%= @request.user.fullname %> wants you to take their <%= @request.item.itemname %></h1>
+          <div class="col-md-6">
+            <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+          </div>
+          <div class="col-md-6">
+            <h1><%= image_tag @request.user.avatar.url(:medium) %></h1>
+          </div>
+      </div><hr>
+      <div class="col-md-12">
+        <h1> <%= @request.item.itemname %> </h1>
+        <h2> <%= @request.item.itemdescription %> </h2>
+      </div>
+      <div class="col-md-12">
+        <h3>Between the dates of <%= @request.startdate %> and <%= @request.enddate %> </h3>
+      </div>
+      <div class="col-md-12">
+        <h3>From: <%= @request.fromcountry %> to <%= @request.airport %> </h3>
+      </div>
+
+    <% end %>
   </div>
+<% end %>
