@@ -29,6 +29,18 @@ class AnswersController < ApplicationController
     end
   end
 
+  def update
+      @answer = Answer.find(params[:id])
+      if @answer.update(answer_params)
+      respond_to do |format|
+        format.html {redirect_to answer_path(@answer)}
+        format.js
+      end
+    else
+      render :edit
+    end
+  end
+
 
 private
   def answer_params
