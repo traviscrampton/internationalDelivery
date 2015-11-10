@@ -42,18 +42,22 @@ class RequestsController < ApplicationController
   end
 
   def update
-    @australians = Australian.all
-    @americans = American.all
     @request = Request.find(params[:id])
-    if @request.update(request_params)
-      respond_to do |format|
-        format.html {redirect_to request_path(@request)}
-        format.js
-      end
+    if params[:toggle] == 'true'
+      @request.update(deal:true)
+      redirect_to user_path(current_user)
     else
-      render :edit
+      if @request.update(request_params)
+        respond_to do |format|
+          format.html {redirect_to request_path(@request)}
+          format.js
+        end
+      else
+        render :edit
+      end
     end
   end
+
 
   private
   def request_params

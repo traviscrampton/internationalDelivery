@@ -10,6 +10,21 @@
     </div>
     <h3><%= @answer.description %></h3>
     <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
+    <% if current_user.id == @request.user.id %>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %> </button>
+    <% end %>
 
-    <button class="btn btn-primary">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %></button>
+    <div class="modal" id="modalGo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Delivery Confirmation</h3>
+            <div class="modal-body">
+              <p>Are you sure that You want to <%= @answer.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+              <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>

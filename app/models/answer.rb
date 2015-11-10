@@ -13,4 +13,7 @@ class Answer < ActiveRecord::Base
   def fulldate
     return self.month + " " + self.day + "," + " " + self.year
   end
+
+
+
 end
