@@ -23,7 +23,6 @@ class AnswersController < ApplicationController
   def show
     if @request
       @answer = Answer.find(params[:id])
-      render :show
     else
       @answer = Answer.find(params[:id])
       render :answerShow
@@ -31,19 +30,24 @@ class AnswersController < ApplicationController
   end
 
   def update
-      @answer = Answer.find(params[:id])
-      if @answer.update(answer_params)
-      respond_to do |format|
-        format.html {redirect_to answer_path(@answer)}
-        format.js
-      end
+    @answer = Answer.find(params[:id])
+    if params[:toggle] == 'true'
+      @answer.update(deal:true)
+      redirect_to user_path(current_user)
     else
-      render :edit
+      if @answer.update(answer_params)
+        respond_to do |format|
+          format.html {redirect_to answer_path(@answer)}
+          format.js
+        end
+      else
+        render :edit
+      end
     end
   end
 
 
-private
+  private
   def answer_params
     params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description)
   end

@@ -1,5 +1,6 @@
 <% if current_user.id == @request.user.id %>
       <div class="container">
+        <% binding.pry %>
         <div class="row">
           <% if @request.deal == true %>
             <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is able to take your <%= @request.item.itemname%></h1>
@@ -41,29 +42,4 @@
           </div>
         </div>
       </div>
-<% elsif current_user.id == @answer.user.id %>
-  <div class="container ">
-    <% if @request.deal == true %>
-      <div class="row">
-        <h1> <%= @request.user.fullname %> wants you to take their <%= @request.item.itemname %></h1>
-          <div class="col-md-6">
-            <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
-          </div>
-          <div class="col-md-6">
-            <h1><%= image_tag @request.user.avatar.url(:medium) %></h1>
-          </div>
-      </div><hr>
-      <div class="col-md-12">
-        <h1> <%= @request.item.itemname %> </h1>
-        <h2> <%= @request.item.itemdescription %> </h2>
-      </div>
-      <div class="col-md-12">
-        <h3>Between the dates of <%= @request.startdate %> and <%= @request.enddate %> </h3>
-      </div>
-      <div class="col-md-12">
-        <h3>From: <%= @request.fromcountry %> to <%= @request.airport %> </h3>
-      </div>
-
-    <% end %>
-  </div>
 <% end %>

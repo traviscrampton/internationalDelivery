@@ -21,8 +21,13 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Request.find(params[:id])
-    @item = @request.item
+    if @answer
+      @request = Request.find(params[:id])
+      @item = @request.item
+      render :requestShow
+    else
+      render :show
+    end
   end
 
   def destroy
