@@ -1,6 +1,11 @@
 <div class="container">
-  <h2>Between <%= @request.monthstart %> <%= @request.daystart %>,  <%= @request.yearstart %> and <%= @request.monthend %> <%= @request.dayend %>, <%= @request.yearend %></h2>
+  <% if (@request.daystart == "No" && @request.monthstart == "No" && @request.yearstart == "No") %>
+    <h2>Delivery Date: <%= @request.monthend %> <%= @request.dayend %>, <%= @request.yearend %></h2>
+  <% else %>
+    <h2>Between <%= @request.monthstart %> <%= @request.daystart %>,  <%= @request.yearstart %> and <%= @request.monthend %> <%= @request.dayend %>, <%= @request.yearend %></h2>
+  <% end %>
   <h3>From: <%= @request.fromcountry %> </h3>
+  <% binding.pry %>
   <h3>To: <%= @request.airport %> </h3>
     <h2>What Item Would You Like To Bring?</h2><hr>
     <%= render 'form' %>

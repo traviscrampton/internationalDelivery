@@ -13,12 +13,12 @@ class RequestsController < ApplicationController
     @user = current_user
     @request = @user.requests.new(request_params)
       @answer.requests.push(@request) if @answer
-    if @request.save
-      redirect_to new_request_item_path(@request)
-    else
-      render :new
+      if @request.save
+        redirect_to new_request_item_path(@request)
+      else
+        render :new
+      end
     end
-  end
 
   def show
     if @answer
@@ -26,6 +26,8 @@ class RequestsController < ApplicationController
       @item = @request.item
       render :requestShow
     else
+      @request = Request.find(params[:id])
+      @item = @request.item
       render :show
     end
   end
@@ -64,7 +66,7 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :fromcountry, :airport)
+    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :fromcountry, :airport, :deal)
   end
 
   def find_answer
