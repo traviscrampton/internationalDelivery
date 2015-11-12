@@ -4,6 +4,7 @@
     <h1> <%= @answer.user.fullname %>'s Itinerary </h1><hr>
   </div>
   <div class="col-md-8">
+    <% binding.pry %>
     <div id="answerInfo">
       <h3>Flying From: <%= @answer.fromcountry %> </h3>
       <h3>Flying into: <%= @answer.toairport %></h3>

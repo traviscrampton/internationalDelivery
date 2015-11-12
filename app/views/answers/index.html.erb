@@ -2,10 +2,10 @@
 <h2>Potential Flight Deliveries</h2><hr>
 <div class="list_text_size">
     <% @answers.each do |answer| %>
-    <% unless answer.requests.any?  %>
+    <% unless answer.deal == true  %>
     <div class="delivery_index">
       <ul>
-          <li><%= answer.user.fullname %>'s <%= link_to "Flight", answer_path(answer) %> From: <%= answer.fromcountry %>, To: <%= answer.toairport %> on <%= answer.fulldate %></li>
+          <li><%= answer.user.fullname %>'s <%= link_to "Flight", answer_path(answer) %> From: <%= answer.fromcountry %>, To: <%= answer.toairport %> on <%= answer.fulldate %></li><br>
       </ul>
     </div>
     <% end %>

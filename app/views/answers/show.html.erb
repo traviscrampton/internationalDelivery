@@ -1,6 +1,5 @@
 <% if current_user.id == @request.user.id %>
       <div class="container">
-        <% binding.pry %>
         <div class="row">
           <% if @request.deal == true %>
             <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is able to take your <%= @request.item.itemname%></h1>

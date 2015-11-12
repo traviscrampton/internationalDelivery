@@ -23,6 +23,7 @@ class AnswersController < ApplicationController
   def show
     if @request
       @answer = Answer.find(params[:id])
+      render :show
     else
       @answer = Answer.find(params[:id])
       render :answerShow
@@ -49,7 +50,7 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-    params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description)
+    params.require(:answer).permit(:day, :year, :month, :fromcountry, :toairport, :description, :deal)
   end
 
   def find_request

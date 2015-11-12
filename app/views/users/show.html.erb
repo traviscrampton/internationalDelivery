@@ -14,37 +14,19 @@
       <div class="row">
         <div class="requestArea">
           <h2><%= @user.firstname %>'s Requests </h2><hr>
-          <% if @user.requests.any? %>
+            <% if @user.requests.any? %>
               <% @user.requests.each do |request| %>
                 <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>
-                <% if current_user.id != request.user_id %>
-                  <%= link_to "Request To Take Item", new_request_answer_path(request), class: "btn btn-danger" %>
-                <% end %>
-                  <% if request.answers.any? && current_user.id == request.user_id  %>
-
-                    <h4>Potential Opportunities</h4><hr>
-                      <% request.answers.each do |answer| %>
-                        <% if answer.deal == false %>
-                          <%= link_to "Potential Deal", request_answer_path(request, answer) %> With <%= link_to answer.user.fullname, user_path(answer.user) %>
-                          <% else %>
-                          <p>No Potential Deals</p>
-                        <% end %>
-                      <% end %>
-
-                    <h4>Those who have already agreed to take your Item</h4><hr>
-                      <% request.answers.each do |answer| %>
+                        <h3>Delivery Offers:</h3>
+                        <% request.answers.each do |answer| %>
                         <% if answer.deal == true %>
-                          <h4>See <%= link_to answer.user.fullname, user_path(answer.user)  %>'s <%= link_to 'offer', request_answer_path(request, answer) %></h4>
-                        <% else %>
-                          <p>No One Is Down Yet</p>
-                          <br>
+                          <%= link_to answer.user.fullname, user_path(answer.user) %>'s <%= link_to 'Offer', request_answer_path(request, answer) %>
                         <% end %>
-                      <% end %>
-                  <% end %>
+                    <% end %>
               <% end %>
-          <% else %>
-            <h3>No Requests Made</h3>
-          <% end %>
+            <% else %>
+            <h4>bebebe You Ain't Seen Nothing Yet</h4>
+            <% end %>
         </div>
       </div>
       <div class="row">

@@ -1,6 +1,5 @@
-<% if current_user.id == @answer.user.id %>
+<h1>Dogs</h1>
   <div class="container ">
-    <% if @request.deal == true %>
       <div class="row">
         <h1> <%= @request.user.fullname %> wants you to take their <%= @request.item.itemname %></h1>
           <div class="col-md-6">
@@ -35,7 +34,4 @@
           </div>
         </div>
       </div>
-
-    <% end %>
   </div>
-<% end %>
