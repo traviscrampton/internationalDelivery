@@ -1,8 +1,9 @@
 <% if current_user.id == @request.user.id %>
       <div class="container">
         <div class="row">
-          <% binding.pry %>
-            <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is able to take your <%= @request.item.itemname%></h1>
+          <% if (@answer.deal == false && @request.deal == true) %>
+            <h1>Waiting to hear back from <%= link_to @answer.user.fullname, user_path(@answer.user) %> </h1>
+          <% end %>
           <div class="col-md-6">
             <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
           </div>
@@ -13,17 +14,11 @@
         <h3><%= @answer.description %></h3>
         <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
         <% if current_user.id == @request.user.id %>
-          <% if @request.deal == true %>
-            <h3>Waiting For <%= link_to @answer.user.fullname, user_path(@answer.user) %> to respond </h3>
-          <% else %>
-            <% if @answer.deal == true %>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Let <%= @answer.user.fullname %> Take Your <%= @request.item.itemname %> </button>
-            <% else %>
+            <% if (@answer.deal == false && @request.deal == false) %>
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @answer.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
             <% end %>
           <% end %>
-        <% end %>
-
+          
         <div class="modal" id="modalGo">
           <div class="modal-dialog">
             <div class="modal-content">

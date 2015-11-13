@@ -39,7 +39,7 @@
             <% @user.answers.each do |answer| %>
                 <h4> Coming From: <%= answer.fromcountry %>, Going To: <%= answer.toairport %>, on <%= answer.fulldate %> <%= link_to "View Flight", answer_path(answer), class:"btn btn-default" %> </h4>
                 <% if current_user.id == answer.user.id %>
-                  <h3> Requests for Your flight:</h3>
+                  <h4> Requests for This flight:</h4>
                     <% answer.requests.each do |request| %>
                       <% if request.deal == true %>
                         <%= link_to request.user.fullname, user_path(request.user) %>'s <%= link_to "Request", answer_request_path(answer, request) %>
@@ -49,16 +49,23 @@
             <% end %>
           <% end %>
         </div>
-
-        <h2>Requests Awaiting Your Approval</h2><hr>
-          <% @user.answers.each do |answer| %>
-            <% answer.requests.each do |request| %>
-              <% if request.deal == true %>
-                <p><%= request.user.fullname %>'s <%= request.item.itemname %></p>
+      </div>
+      <div class="row">
+        <h2>Waiting To Hear Back</h2><hr>
+        <% if @user.requests.any? %>
+          <% @user.requests.each do |request| %>
+            <% if request.answers.any? %>
+              <% request.answers.each do |answer| %>
+                <% if answer.deal == false %>
+                  <%= link_to answer.user.fullname, user_path(answer.user) %> <%= link_to "Flight", request_answer_path(request, answer)  %> 
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
+        <% end %>
       </div>
+
+
       <div class="row contact" >
         <h2>Contact Information</h2>
         <h4><%= @user.fullname %> </h4>
