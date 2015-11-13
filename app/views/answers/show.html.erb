@@ -1,11 +1,8 @@
 <% if current_user.id == @request.user.id %>
       <div class="container">
         <div class="row">
-          <% if @request.deal == true %>
+          <% binding.pry %>
             <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> is able to take your <%= @request.item.itemname%></h1>
-          <% else %>
-            <h1> <%= link_to @answer.user.fullname, user_path(@answer.user) %> maybe able to take your <%= @request.item.itemname%></h1>
-          <% end %>
           <div class="col-md-6">
             <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
           </div>

@@ -17,36 +17,39 @@
             <% if @user.requests.any? %>
               <% @user.requests.each do |request| %>
                 <h3><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromcountry %> || <%= request.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h3>
-                        <h3>Delivery Offers:</h3>
-                        <% request.answers.each do |answer| %>
+                  <% if current_user.id == request.user.id %>
+                    <h3>Delivery Offers:</h3>
+                      <% request.answers.each do |answer| %>
                         <% if answer.deal == true %>
                           <%= link_to answer.user.fullname, user_path(answer.user) %>'s <%= link_to 'Offer', request_answer_path(request, answer) %>
                         <% end %>
-                    <% end %>
+                      <% end %>
+                  <% end %>
               <% end %>
             <% else %>
-            <h4>bebebe You Ain't Seen Nothing Yet</h4>
+              <h4>bebebe You Ain't Seen Nothing Yet</h4>
             <% end %>
         </div>
       </div>
+      <br>
       <div class="row">
-        <h2>Outgoing Flights</h2><hr>
-        <% if @user.answers.any? %>
+        <div class="requestArea">
+          <h2>Outgoing Flights</h2><hr>
+          <% if @user.answers.any? %>
             <% @user.answers.each do |answer| %>
-              <h3> Coming From: <%= answer.fromcountry %>, Going To: <%= answer.toairport %>, on <%= answer.fulldate %> <%= link_to "View Flight", answer_path(answer), class:"btn btn-default" %> </h3>
-              <% if current_user.id != answer.user_id %>
-                <%= link_to "Request To Have Item Brought", new_answer_request_path(answer), class: "btn btn-default" %>
-              <% end %>
-                <% if answer.requests.any? && current_user.id == answer.user_id %>
-              <h4>Potential Carry Ons</h4>
+                <h4> Coming From: <%= answer.fromcountry %>, Going To: <%= answer.toairport %>, on <%= answer.fulldate %> <%= link_to "View Flight", answer_path(answer), class:"btn btn-default" %> </h4>
+                <% if current_user.id == answer.user.id %>
+                  <h3> Requests for Your flight:</h3>
                     <% answer.requests.each do |request| %>
-                        <h4>See <%= link_to request.user.fullname, user_path(request.user)  %>'s <%= link_to 'request', answer_request_path(answer, request) %></h4>
+                      <% if request.deal == true %>
+                        <%= link_to request.user.fullname, user_path(request.user) %>'s <%= link_to "Request", answer_request_path(answer, request) %>
+                      <% end %>
                     <% end %>
                 <% end %>
             <% end %>
-        <% else %>
-          <h3>No Requests Made</h3>
-        <% end %>
+          <% end %>
+        </div>
+
         <h2>Requests Awaiting Your Approval</h2><hr>
           <% @user.answers.each do |answer| %>
             <% answer.requests.each do |request| %>
@@ -56,7 +59,6 @@
             <% end %>
           <% end %>
       </div>
-
       <div class="row contact" >
         <h2>Contact Information</h2>
         <h4><%= @user.fullname %> </h4>

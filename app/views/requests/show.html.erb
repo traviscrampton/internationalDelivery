@@ -1,6 +1,7 @@
 <div class="container">
   <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   <div class="topThree">
+    <% binding.pry %>
       <div class="col-md-4 item_border">
         <div class="row">
         </div>
