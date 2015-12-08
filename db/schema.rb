@@ -11,21 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105172718) do
+ActiveRecord::Schema.define(version: 20151207234414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "americans", force: :cascade do |t|
-    t.string "name"
-    t.string "abbrev"
-    t.string "city"
+  create_table "airports", force: :cascade do |t|
+    t.string  "name"
+    t.decimal "lat"
+    t.decimal "lng"
   end
 
-  create_table "answers", force: :cascade do |t|
+  create_table "flights", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "fromcountry"
-    t.string  "toairport"
     t.string  "description"
     t.string  "day"
     t.string  "month"
@@ -33,15 +31,23 @@ ActiveRecord::Schema.define(version: 20151105172718) do
     t.boolean "deal",        default: false
   end
 
-  create_table "answers_requests", force: :cascade do |t|
+  create_table "flights_requests", force: :cascade do |t|
+    t.integer "flight_id"
     t.integer "request_id"
-    t.integer "answer_id"
   end
 
-  create_table "australians", force: :cascade do |t|
-    t.string "name"
-    t.string "abbrev"
-    t.string "city"
+  create_table "fromflights", force: :cascade do |t|
+    t.string  "airport"
+    t.integer "flight_id"
+    t.float   "longitude"
+    t.float   "latitude"
+  end
+
+  create_table "fromrequests", force: :cascade do |t|
+    t.string  "airport"
+    t.integer "request_id"
+    t.float   "longitude"
+    t.float   "latitude"
   end
 
   create_table "items", force: :cascade do |t|
@@ -52,21 +58,31 @@ ActiveRecord::Schema.define(version: 20151105172718) do
     t.integer  "itemimage_file_size"
     t.datetime "itemimage_updated_at"
     t.integer  "request_id"
-    t.boolean  "answer_deal",            default: false
-    t.boolean  "request_deal",           default: false
   end
 
   create_table "requests", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "fromcountry"
-    t.string  "airport"
     t.string  "daystart"
     t.string  "monthstart"
     t.string  "yearstart"
     t.string  "dayend"
     t.string  "monthend"
     t.string  "yearend"
-    t.boolean "deal",        default: false
+    t.boolean "deal",       default: false
+  end
+
+  create_table "toflights", force: :cascade do |t|
+    t.string  "airport"
+    t.integer "flight_id"
+    t.float   "longitude"
+    t.float   "latitude"
+  end
+
+  create_table "torequests", force: :cascade do |t|
+    t.string  "airport"
+    t.integer "request_id"
+    t.float   "longitude"
+    t.float   "latitude"
   end
 
   create_table "users", force: :cascade do |t|

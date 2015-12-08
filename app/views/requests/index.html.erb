@@ -5,7 +5,7 @@
     <% @requests.each do |request| %>
     <div class="delivery_index">
       <ul>
-          <hr><li> <%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || Coming From: <%= request.fromcountry %> || Going To: <%= request.airport %></li><hr>
+          <hr><li> <%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || Coming From: <%= request.fromrequest.airport %> || Going To: <%= request.torequest.airport %></li><hr>
       </ul>
     </div>
     <% end %>

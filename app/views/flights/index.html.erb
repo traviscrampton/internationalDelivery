@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Potential Flight Deliveries</h2><hr>
+    <div class="list_text_size">
+      <% @flights.each do |flight| %>
+        <% unless flight.deal == true  %>
+          <div class="delivery_index">
+            <ul>
+                <li><%= flight.user.fullname %>'s <%= link_to "Flight", flight_path(flight) %> From: <%= flight.fromflight.airport %>, To: <%= flight.toflight.airport %> on <%= flight.fulldate %></li><br>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+</div>

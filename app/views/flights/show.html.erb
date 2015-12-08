@@ -1,31 +1,31 @@
 <% if current_user.id == @request.user.id %>
       <div class="container">
         <div class="row">
-          <% if (@answer.deal == false && @request.deal == true) %>
-            <h1>Waiting to hear back from <%= link_to @answer.user.fullname, user_path(@answer.user) %> </h1>
+          <% if (@flight.deal == false && @request.deal == true) %>
+            <h1>Waiting to hear back from <%= link_to @flight.user.fullname, user_path(@flight.user) %> </h1>
           <% end %>
           <div class="col-md-6">
             <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
           </div>
           <div class="col-md-6">
-            <%= image_tag @answer.user.avatar.url(:medium) %>
+            <%= image_tag @flight.user.avatar.url(:medium) %>
           </div>
         </div>
-        <h3><%= @answer.description %></h3>
-        <h4>Arriving in <%= @answer.toairport %> on <%= @answer.fulldate %></h4>
+        <h3><%= @flight.description %></h3>
+        <h4>Arriving in <%= @flight.toairport %> on <%= @flight.fulldate %></h4>
         <% if current_user.id == @request.user.id %>
-            <% if (@answer.deal == false && @request.deal == false) %>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @answer.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
+            <% if (@flight.deal == false && @request.deal == false) %>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
             <% end %>
           <% end %>
-          
+
         <div class="modal" id="modalGo">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h3 class="modal-title">Delivery Confirmation</h3>
                 <div class="modal-body">
-                  <p>Are you sure that You want to <%= @answer.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+                  <p>Are you sure that You want to <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
                   <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
                 </div>
               </div>

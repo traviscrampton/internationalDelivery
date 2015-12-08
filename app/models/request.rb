@@ -5,15 +5,17 @@ class Request < ActiveRecord::Base
   validates :dayend, :presence => true
   validates :monthend, :presence => true
   validates :yearend, :presence => true
-  validates :fromcountry, :presence => true
-  validates :airport, :presence => true
-
 
 
 
   has_one :item
+  has_one :torequest
+  has_one :fromrequest
+  accepts_nested_attributes_for :torequest
+  accepts_nested_attributes_for :fromrequest
+  accepts_nested_attributes_for :item
   belongs_to :user
-  has_and_belongs_to_many :answers
+  has_and_belongs_to_many :flights
 
   def startdate
     return monthstart + " " + daystart + "," + " " + yearstart

@@ -31,16 +31,21 @@
       <h3>Which Country Would You Like To Ship From</h3><hr>
     </div>
 
-      <div class="field form-group">
-        <%= f.text_field :fromcountry, label:"Which Country Are You Coming From" %>
-    </div>
-      <div class="field form-group">
-        <%= f.text_field :airport, label:"Which Airport are you flying to" %>
-    </div>
-    <div class="field form-group">
-      <%= f.hidden_field :deal, value: false %>
-    </div>
-    <br>
+    <%= f.fields_for :torequest do |p| %>
+      <%= p.text_field :airport, label:"Which Airport Do You Want The Item Flown From?" %>
+    <% end %>
+    <%= f.fields_for :fromrequest do |p| %>
+      <%= p.text_field :airport, label:"Which Airport Do You Want The Item Flown To?" %>
+    <% end %>
+    <%= f.fields_for :item do |i| %>
+      <%= i.text_field :itemname, label:"What Is The Item?" %>
+    <% end %>
+    <%= f.fields_for :item do |i| %>
+      <%= i.text_area :itemdescription, label:"Item Description" %>
+    <% end %>
+    <%= f.fields_for :item do |i| %>
+      <%= i.file_field :itemimage, label:"Upload an Image"%>
+    <% end %>
 
     <div class="actions form-group">
       <%= f.submit "Post Request", class:"btn btn-primary" %>

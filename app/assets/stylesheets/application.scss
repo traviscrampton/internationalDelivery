@@ -3,6 +3,7 @@
 
 html, body{
   font-family: 'Arvo', serif;
+  background-color: #f8f8f8;
 }
 
 li{
@@ -101,6 +102,7 @@ border: 1px black solid;
   background-color: white;
   border: 1px black solid;
   margin-right: 3%;
+  margin-top: 3%;
 }
 
 // .item_border{
@@ -115,13 +117,7 @@ border: 1px black solid;
 .whichcountry{
   text-align: center;
 }
-#American{
-  display: none;
-}
 
-#Australian{
-  display: none;
-}
 .editanddelete{
   text-align: center;
 }
@@ -159,7 +155,7 @@ border: 1px black solid;
 .buttonUnite{
   margin-bottom: 20%;
 }
-#answerRender {
+#flightRender {
   display: none;
 }
 .requestArea {

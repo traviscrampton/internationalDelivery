@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :find_answer
+  before_action :find_flight
 
   def index
     @requests = Request.all
@@ -7,21 +7,25 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+    @request.build_torequest
+    @request.build_fromrequest
+    @request.build_item
   end
 
   def create
     @user = current_user
     @request = @user.requests.new(request_params)
-      @answer.requests.push(@request) if @answer
+    @request.assign_attributes(request_params)
+      @flight.requests.push(@request) if @flight
       if @request.save
-        redirect_to new_request_item_path(@request)
+        redirect_to request_path(@request)
       else
         render :new
       end
     end
 
   def show
-    if @answer
+    if @flight
       @request = Request.find(params[:id])
       @item = @request.item
       render :requestShow
@@ -66,10 +70,10 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :fromcountry, :airport, :deal)
+    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :deal, torequest_attributes: [:airport], fromrequest_attributes: [:airport], item_attributes: [:itemname, :itemdescription, :itemimage])
   end
 
-  def find_answer
-    @answer = params[:answer_id] ? Answer.find(params[:answer_id]) : nil
+  def find_flight
+    @flight = params[:answer_id] ? Flight.find(params[:flight_id]) : nil
   end
 end

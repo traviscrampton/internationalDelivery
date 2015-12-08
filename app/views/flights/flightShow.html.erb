@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="col-md-6">
+    <%= image_tag @flight.user.avatar.url(:thumb), :class => "imag" %>
+    <h1> <%= @flight.user.fullname %>'s Itinerary </h1><hr>
+  </div>
+  <div class="col-md-8">
+    <div id="flightInfo">
+      <h3>Flying From: <%= @flight.fromflight.airport %> </h3>
+      <h3>Flying into: <%= @flight.toflight.airport %></h3>
+      <h3>Date Of Flight: <%= @flight.fulldate %>  </h3>
+      <% if current_user.id != @flight.user.id %>
+        <%= link_to "Request them to bring an item", new_flight_request_path(@flight), class:"btn btn-default" %>
+      <% elsif current_user.id == @flight.user.id %>
+        <%= link_to "Edit Flight", edit_flight_path, class: "btn btn-default", id:"editflight", remote: true %>
+      <% end %>
+    </div>
+    <div id="flightRender">
+      <%= render 'flightAlone' %>
+      <button class="btn btn-default" id="goBack">Nevermind</button>
+    </div>
+  </div>
+</div>

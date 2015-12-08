@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
 validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
          has_attached_file :coverphoto, :styles => { :coversize => "1170x1000>"}, :default_url => "/images/:style/missing.png"
 validates_attachment_content_type :coverphoto, :content_type => /\Aimage\/.*\Z/
+
 has_many :requests
-has_many :answers
+has_many :flights
 
 def fullname
   return self.firstname + " " + self.lastname

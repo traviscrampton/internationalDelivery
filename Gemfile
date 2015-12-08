@@ -17,6 +17,7 @@ group :development do
   gem 'byebug'
   gem 'web-console'
   gem 'spring'
+  gem 'geocoder'
   gem 'quiet_assets'
 end
 

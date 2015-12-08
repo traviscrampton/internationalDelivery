@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   end
 
   resources :requests do
-    resources :answers
+    resources :flights
   end
 
-  resources :answers do
+  resources :flights do
     resources :requests
   end
 
