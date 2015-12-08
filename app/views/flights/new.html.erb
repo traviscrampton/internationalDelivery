@@ -8,9 +8,9 @@
         <%= image_tag @request.item.itemimage.url(:medium) %>
       </div>
       <div class="col-md-4">
-        <h2><%= @request.user.fullname %> needs their <%= @request.item.itemname %> brought from <%= @request.fromcountry %> to <%= @request.airport %> </h2>
+        <h2><%= @request.user.fullname %> needs their <%= @request.item.itemname %> brought from <%= @request.fromrequest.airport %> to <%= @request.torequest.airport %> </h2>
         <h3> Between <%= @request.startdate %> - <%= @request.enddate %></h3>
-        <h5><%= @request.airport %></h5>
+        <h5><%= @request.torequest.airport %></h5>
       </div>
       <div class="col-md-4">
         <%= render 'form' %>

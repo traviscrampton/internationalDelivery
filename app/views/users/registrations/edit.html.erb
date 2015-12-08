@@ -25,7 +25,10 @@
     <div class="field form-group">
           <%= f.file_field :coverphoto %>
     </div>
-    
+    <div class="field form-group">
+          <%= f.file_field :avatar %>
+    </div>
+
     <div class="field form-group">
        <i>(we need your current password to confirm your changes)</i><br />
       <%= f.password_field :current_password, autocomplete: "off" %>

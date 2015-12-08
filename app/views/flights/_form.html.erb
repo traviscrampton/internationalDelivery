@@ -13,11 +13,14 @@
   </div>
 
   <div class="field form-group">
-    <%= f.text_field :fromcountry, label: "What Country Are You Coming From?" %>
+    <%= f.fields_for :toflight do |p| %>
+      <%= p.text_field :airport, label: "Which Airport Are You Flying From?" %>
+    <% end %>
   </div>
-
   <div class="field form-group">
-    <%= f.text_field :toairport, label: "What Airport are you flying into" %>
+    <%= f.fields_for :fromflight do |t| %>
+      <%= t.text_field :airport, label: "Which Airport Are You Flying Into?" %>
+    <% end %>
   </div>
 
   <div class="field form-group">
@@ -29,6 +32,6 @@
   </div>
 
   <div class="actions form-group">
-    <%= f.submit "Submit Answer", class:"btn btn-primary" %>
+    <%= f.submit "Submit Response", class:"btn btn-primary" %>
   </div>
 <% end %>

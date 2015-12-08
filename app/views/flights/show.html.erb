@@ -12,7 +12,7 @@
           </div>
         </div>
         <h3><%= @flight.description %></h3>
-        <h4>Arriving in <%= @flight.toairport %> on <%= @flight.fulldate %></h4>
+        <h4>Arriving in <%= @flight.toflight.airport %> on <%= @flight.fulldate %></h4>
         <% if current_user.id == @request.user.id %>
             <% if (@flight.deal == false && @request.deal == false) %>
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>

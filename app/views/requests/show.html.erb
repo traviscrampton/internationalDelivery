@@ -21,7 +21,7 @@
         <%= image_tag(('arrow.png'), class: "airplaneimg") %>
         <div class="bringbtn">
           <% if current_user.id != @request.user.id %>
-            <%= link_to "Bring Item", new_request_answer_path(@request), class:"btn btn-default" %>
+            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default" %>
           <% end %>
         </div>
       </div>
