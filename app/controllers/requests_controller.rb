@@ -74,6 +74,6 @@ class RequestsController < ApplicationController
   end
 
   def find_flight
-    @flight = params[:answer_id] ? Flight.find(params[:flight_id]) : nil
+    @flight = params[:flight_id] ? Flight.find(params[:flight_id]) : nil
   end
 end

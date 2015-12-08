@@ -1,0 +1,78 @@
+
+<h1>Request <%= @flight.user.fullname %> to bring an Item on <%= @flight.fulldate %> </h1><hr>
+    <div class="col-md-4">
+      <h3>From: <%= @flight.fromflight.airport %>
+    </div>
+    <div class="col-md-4">
+      </h3> <%= image_tag(('horizontalArrow.png'), class:"zontalArrow") %>
+    </div>
+    <div class="col-md-4">
+       <h3> To: <%= @flight.toflight.airport %>  </h3>
+    </div>
+  <%= bootstrap_form_for [@flight, @request] do |f| %>
+      <div class="dates">
+        <h4>Pick A Starting Date</h4><hr>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :daystart, value: "No" %>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :monthstart, value: "No" %>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :yearstart, value: "No" %>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :dayend, value: @flight.day %>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :monthend, value: @flight.month %>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.hidden_field :yearend, value: @flight.year %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.fields_for :item do |i| %>
+          <%= i.text_field :itemname, label:"Item Name" %>
+        <% end %>
+      </div>
+      <div class="field form-group">
+        <%= f.fields_for :item do |i| %>
+          <%= i.text_area :itemdescription, label:"Item description" %>
+        <% end %>
+      </div>
+      <div class="field form_group">
+        <%= f.fields_for :item do |i| %>
+          <%= i.file_field :itemimage, label:"Upload an Image"%>
+        <% end %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.fields_for :fromrequest do |t| %>
+          <%= t.hidden_field :airport, value: @flight.fromflight.airport %>
+        <% end %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.fields_for :torequest do |t| %>
+          <%= t.hidden_field :airport, value: @flight.toflight.airport %>
+        <% end %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.hidden_field :deal, value: true %>
+      </div>
+
+      <br>
+
+    <div class="actions form-group centered">
+      <%= f.submit "Submit Request", class:"btn btn-primary" %>
+    </div>
+    <% end %>

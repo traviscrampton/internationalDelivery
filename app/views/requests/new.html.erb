@@ -1,8 +1,8 @@
 
+<div class="container">
   <% if current_user %>
-    <% if @answer %>
-      <div class="container">
-        <%= render 'answerRequest' %>
+    <% if @flight %>
+        <%= render 'flightRequest' %>
     <% else %>
         <%= render 'form' %>
     <% end %>

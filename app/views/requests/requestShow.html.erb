@@ -16,7 +16,7 @@
         <h3>For Your Flight On: <%= @request.enddate %> </h3>
       </div>
       <div class="col-md-12">
-        <h3>From: <%= @request.fromcountry %> to <%= @request.airport %> </h3>
+        <h3>From: <%= @request.fromrequest.airport %> to <%= @request.torequest.airport %> </h3>
       </div>
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Take <%= @request.user.fullname %>'s <%= @request.item.itemname %> </button>
         <div class="modal" id="modalGo">
@@ -25,8 +25,8 @@
               <div class="modal-header">
                 <h3 class="modal-title">Delivery Confirmation</h3>
                 <div class="modal-body">
-                  <p>Are you sure that You want to <%= @answer.user.fullname %> to take your <%= @request.item.itemname %>? </p>
-                  <%= link_to "I'll Take It", answer_path(@answer, toggle:true), method: :patch, class:'btn btn-primary'%>
+                  <p>Are you sure that You want to <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+                  <%= link_to "I'll Take It", flight_path(@flight, toggle:true), method: :patch, class:'btn btn-primary'%>
                 </div>
               </div>
             </div>
