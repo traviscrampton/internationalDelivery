@@ -16,11 +16,6 @@ Rails.application.routes.draw do
   end
 
 
-  # resources :answers do
-  #   resources :connections
-  # end
-
-
   resources :users, only: [:show]
 
 

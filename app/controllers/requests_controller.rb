@@ -44,8 +44,6 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    @australians = Australian.all
-    @americans = American.all
     @request = Request.find(params[:id])
     render :edit
   end

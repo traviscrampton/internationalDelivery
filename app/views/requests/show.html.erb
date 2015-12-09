@@ -4,7 +4,7 @@
           goingLat = <%= @request.torequest.latitude %>
           goingLng = <%= @request.torequest.longitude %>
         <% end %>
-        
+
 <div class="container">
   <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   <div class="topThree">
@@ -35,6 +35,15 @@
       <div class="col-md-4">
         <%= image_tag(('backpack.jpg'), class: "airplaneimg backpack") %>
       </div>
+    <div id="keepItHidden">
+      <div class="col-md-12">
+        <div class="keepItmargin">
+          <h1>Edit Your Dates and Locations</h1><hr>
+          <%= render 'form' %>
+          <%= link_to "Nevermind", request_path(@request), class:'btn btn-default ', remote:true %>
+        </div>
+      </div>
+  </div>
   </div>
    <div class="col-md-12 ">
     <div class="col-md-4">
@@ -49,7 +58,6 @@
       <hr>
         <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default", remote:true %>
 
-
         <%= link_to "Delete", request_path(@request), class: "btn btn-default",
                                :data => {:confirm => "Ya sure mate?",
                                          :method => "delete"} %>
@@ -63,13 +71,4 @@
       <div id="tomap" class="littleMaps"></div>
 
     </div>
-  </div>
-    <div id="keepItHidden">
-      <div class="col-md-12">
-        <div class="keepItmargin">
-          <h1>Edit Your Dates and Locations</h1><hr>
-          <%= render 'form' %>
-          <%= link_to "Nevermind", request_path(@request), class:'btn btn-default ', remote:true %>
-        </div>
-      </div>
   </div>

@@ -1,17 +1,17 @@
 
 
-<%= bootstrap_form_for [@request, @item] do |f| %>
-  <div class="field form-group">
-    <%= f.text_field :itemname, label: 'Name Of Item' %>
-  </div>
-  <div class="field form-group">
-    <%= f.text_field :itemdescription, label: 'Description Of Item' %>
-  </div>
-  <div class="field form-group">
-        <%= f.file_field :itemimage, label: 'Profile Picture'%>
-  </div>
-  <div class="actions form-group">
-    <%= f.submit "Post Item", class:"btn btn-primary" %>
-  </div>
+<%= bootstrap_form_for [@request] do |f| %>
+  <%= f.fields_for :item do |i| %>
+    <%= i.text_field :itemname, label:"What Is The Item?" %>
+  <% end %>
+  <%= f.fields_for :item do |i| %>
+    <%= i.text_area :itemdescription, label:"Item Description" %>
+  <% end %>
+  <%= f.fields_for :item do |i| %>
+    <%= i.file_field :itemimage, label:"Upload an Image"%>
+  <% end %>
 
+  <div class="actions form-group">
+    <%= f.submit "Edit", class:"btn btn-primary" %>
+  </div>
 <% end %>
