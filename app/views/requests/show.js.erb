@@ -3,3 +3,30 @@ $('#keepItHidden').hide()
 $('#jumbalaya').click(function(){
   alert("Hey Now Does This Even Work?");
 });
+
+function initMap() {
+  var fromRequestLatLng = {lat: fromrequestlat, lng: fromrequestlng};
+  var toRequestLatLng = {lat: torequestlat, lng: torequestlng};
+
+
+  var map = new google.maps.Map(document.getElementById('frommap'), {
+    zoom: 4,
+    center: fromRequestLatLng
+  });
+
+  var map1 = new google.maps.Map(document.getElementById('tomap'), {
+    zoom: 4,
+    center: toRequestLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: fromRequestLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+  var marker1 = new google.maps.Marker({
+    position: toRequestLatLng,
+    map: map1,
+    title: 'Hello World!'
+  });
+}

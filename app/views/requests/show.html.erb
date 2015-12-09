@@ -1,3 +1,10 @@
+        <%= javascript_tag do %>
+          comingLat = <%= @request.fromrequest.latitude %>
+          comingLng = <%= @request.fromrequest.longitude %>
+          goingLat = <%= @request.torequest.latitude %>
+          goingLng = <%= @request.torequest.longitude %>
+        <% end %>
+        
 <div class="container">
   <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   <div class="topThree">
@@ -31,8 +38,8 @@
   </div>
    <div class="col-md-12 ">
     <div class="col-md-4">
-
         <h2>From: <%= @request.fromrequest.airport %></h2><hr>
+        <div id="frommap" class="littleMaps"></div>
     </div>
     <div class="col-md-4">
       <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
@@ -53,8 +60,10 @@
     </div>
     <div class="col-md-4">
       <h3>To: <%= @request.torequest.airport %></h3><hr>
+      <div id="tomap" class="littleMaps"></div>
+
     </div>
-  </div> -->
+  </div>
     <div id="keepItHidden">
       <div class="col-md-12">
         <div class="keepItmargin">
