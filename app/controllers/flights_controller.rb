@@ -17,7 +17,11 @@ class FlightsController < ApplicationController
     @flight.assign_attributes(flight_params)
     @request.flights.push(@flight) if @request
     if @flight.save
-      redirect_to flight_path(@flight)
+      if @request
+        redirect_to user_path(@user)
+      else
+        redirect_to flight_path(@flight)
+      end
     else
       render :new
     end

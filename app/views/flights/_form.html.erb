@@ -14,12 +14,12 @@
 
   <div class="field form-group">
     <%= f.fields_for :toflight do |p| %>
-      <%= p.text_field :airport, label: "Which Airport Are You Flying From?" %>
+      <%= p.hidden_field :airport, value: @request.torequest.airport %>
     <% end %>
   </div>
   <div class="field form-group">
-    <%= f.fields_for :fromflight do |t| %>
-      <%= t.text_field :airport, label: "Which Airport Are You Flying Into?" %>
+    <%= f.fields_for :fromflight do |p| %>
+      <%= p.hidden_field :airport, value: @request.fromrequest.airport %>
     <% end %>
   </div>
 

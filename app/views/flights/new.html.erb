@@ -1,22 +1,44 @@
 <div class="container">
   <% if @request %>
-    <div class="row">
-      <div class="col-md-12 bringItem">
-        <h1>Bring Request</h1><hr>
-      </div>
-      <div class="col-md-4">
-        <%= image_tag @request.item.itemimage.url(:medium) %>
-      </div>
-      <div class="col-md-4">
-        <h2><%= @request.user.fullname %> needs their <%= @request.item.itemname %> brought from <%= @request.fromrequest.airport %> to <%= @request.torequest.airport %> </h2>
-        <h3> Between <%= @request.startdate %> - <%= @request.enddate %></h3>
-        <h5><%= @request.torequest.airport %></h5>
-      </div>
-      <div class="col-md-4">
-        <%= render 'form' %>
+    <%= javascript_tag do %>
+      comingLat = <%= @request.fromrequest.latitude %>
+      comingLng = <%= @request.fromrequest.longitude %>
+      goingLat = <%= @request.torequest.latitude %>
+      goingLng = <%= @request.torequest.longitude %>
+    <% end %>
+    <div class="col-md-6">
+      <h2>Bring <%= @request.user.fullname %>'s <%= @request.item.itemname %>! </h2>
+    </div>
+    <div class="col-md-6">
+      <div class="dateFloat">
+        <% if @request.startdate == "No No, No" %>
+          <h3><%= @request.enddate %></h3>
+        <% else %>
+          <h3>Between <%= @request.startdate %> - <%= @request.enddate %> </h3>
+        <% end %>
+
       </div>
     </div>
+    <div class="col-md-12">
+      <h4> <%= @request.item.itemdescription %> </h4><hr>
+    </div>
+      <div class="col-md-4">
+        <p><%= @request.fromrequest.airport %></p>
+        <div id="frommap" class="littleMaps"></div>
+      </div>
+      <div class="col-md-4 centered">
+        <br>
+        <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
+      </div>
+      <div class="col-md-4">
+        <p><%= @request.torequest.airport %></p>
+        <div id="tomap" class="littleMaps"></div>
+      </div>
+      <div class="col-md-12 formMargin">
+        <%= render 'form' %>
+      </div>
     <% else %>
+    <h2>Post A Flight</h2>
       <%= render 'flightAlone' %>
     <% end %>
   </div>

@@ -1,3 +1,10 @@
+<%= javascript_tag do %>
+  comingLat = <%= @flight.fromflight.latitude %>
+  comingLng = <%= @flight.fromflight.longitude %>
+  goingLat = <%= @flight.toflight.latitude %>
+  goingLng = <%= @flight.toflight.longitude %>
+<% end %>
+
 <% if current_user.id == @request.user.id %>
       <div class="container">
         <div class="row">
