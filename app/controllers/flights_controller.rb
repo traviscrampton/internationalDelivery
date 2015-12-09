@@ -37,6 +37,13 @@ class FlightsController < ApplicationController
     end
   end
 
+  def destroy
+    @flight = Flight.find(params[:id])
+    @user = @flight.user
+    @flight.destroy
+    redirect_to user_path(@user)
+  end
+
   def update
     @flight = Flight.find(params[:id])
     if params[:toggle] == 'true'

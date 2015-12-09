@@ -12,22 +12,28 @@
   </div>
     <div id="flightInfo">
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <h3>Flying From: <%= @flight.fromflight.airport %> </h3><br>
         <div id="frommap" class="littleMaps centered"></div>
       </div>
-      <div class="col-md-6 ">
+      <div class="col-md-4 centered">
+      <% if current_user.id != @flight.user.id %>
+        <%= link_to "Request them to bring an item", new_flight_request_path(@flight), class:"btn btn-default" %>
+      <% elsif current_user.id == @flight.user.id %>
+        <%= link_to "Edit Flight", edit_flight_path, class: "btn btn-default", id:"editflight", remote: true %>
+        <%= link_to "Delete", flight_path(@flight), class: "btn btn-default",
+                               :data => {:confirm => "Ya sure mate?",
+                                         :method => "delete"} %>
+      <% end %>
+
+      </div>
+      <div class="col-md-4 ">
         <div class="todestination">
           <h3>Flying into: <%= @flight.toflight.airport %></h3><br>
           <div id="tomap" class="littleMaps centered"></div>
         </div>
       </div>
       <br>
-      <% if current_user.id != @flight.user.id %>
-        <%= link_to "Request them to bring an item", new_flight_request_path(@flight), class:"btn btn-default" %>
-      <% elsif current_user.id == @flight.user.id %>
-        <%= link_to "Edit Flight", edit_flight_path, class: "btn btn-default", id:"editflight", remote: true %>
-      <% end %>
     </div>
     <div id="flightRender">
       <%= render 'flightAlone' %>

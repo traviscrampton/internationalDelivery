@@ -8,9 +8,9 @@ class Request < ActiveRecord::Base
 
 
 
-  has_one :item
-  has_one :torequest
-  has_one :fromrequest
+  has_one :item, dependent: :destroy
+  has_one :torequest, dependent: :destroy
+  has_one :fromrequest, dependent: :destroy
   accepts_nested_attributes_for :torequest
   accepts_nested_attributes_for :fromrequest
   accepts_nested_attributes_for :item
