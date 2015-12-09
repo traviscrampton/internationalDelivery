@@ -1,4 +1,32 @@
 <div class="container">
+  <div class="tabletxt">
+    <h2>Flights</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Flying From</th>
+          <th>Flying To</th>
+          <th>Date Of Flight:</th>
+          <th>Flight Page</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @flights.each do |flight| %>
+          <tr>
+            <td> <%= link_to flight.user.fullname, user_path(flight.user) %> </td>
+            <td> <%= flight.fromflight.airport %> </td>
+            <td> <%= flight.toflight.airport %> </td>
+            <td> <%= flight.fulldate %> </td>
+            <td> <%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <div class="container">
   <h2>Potential Flight Deliveries</h2><hr>
     <div class="list_text_size">
       <% @flights.each do |flight| %>
@@ -11,4 +39,4 @@
         <% end %>
       <% end %>
     </div>
-</div>
+</div> -->

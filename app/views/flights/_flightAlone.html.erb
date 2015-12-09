@@ -13,12 +13,12 @@
   </div>
 
   <div class="field form-group">
-    <%= f.fields_for :toflight do |p| %>
+    <%= f.fields_for :fromflight do |p| %>
       <%= p.text_field :airport, label: "Which Airport Are You Flying From?" %>
     <% end %>
   </div>
   <div class="field form-group">
-    <%= f.fields_for :fromflight do |t| %>
+    <%= f.fields_for :toflight do |t| %>
       <%= t.text_field :airport, label: "Which Airport Are You Flying Into?" %>
     <% end %>
   </div>

@@ -5,12 +5,12 @@
 
 
       var map = new google.maps.Map(document.getElementById('frommap'), {
-        zoom: 4,
+        zoom: 6,
         center: comingFrom
       });
 
       var map1 = new google.maps.Map(document.getElementById('tomap'), {
-        zoom: 4,
+        zoom: 6,
         center: goingTo
       });
 

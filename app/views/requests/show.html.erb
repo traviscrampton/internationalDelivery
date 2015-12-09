@@ -7,35 +7,36 @@
 
 
 <div class="container">
-  <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
-  <div class="topThree">
+  <div class="col-md-12">
+    <h2><%= image_tag @request.user.avatar(:thumb), class:'profilePic'%><%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5><hr>
+  </div>
+      <div id="nameAndDescription">
       <div class="col-md-4 item_border">
-        <div class="row">
-        </div>
-        <div id="nameAndDescription">
-          <%= image_tag @request.item.itemimage.url(:medium) %>
-          <h1><%= @request.item.itemname %></h1>
-          <h4><%= @request.item.itemdescription %></h4>
+        <h1><%= @request.item.itemname %></h1>
+        <%= image_tag @request.item.itemimage.url(:medium), class:"imgRequest" %>
+      </div>
+      <div class="col-md-8">
+        <h1>Description:</h1>
+      <%= @request.item.itemdescription %></h4>
+
           <% if current_user.id == @request.user_id %>
-            <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default', id:"editButton", remote: true %>
+            <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default buttn', id:"editButton", remote: true %>
           <% end %>
         </div>
+      </div>
         <div id="editRender">
           <%= render 'items/form' %>
           <button class="btn btn-default" id="backToNorm">Nevermind</button>
         </div>
-      </div>
-      <div class="col-md-4">
-        <%= image_tag(('arrow.png'), class: "airplaneimg") %>
+
+
+      <!-- <div class="col-md-4">
         <div class="bringbtn">
           <% if current_user.id != @request.user.id %>
             <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default" %>
           <% end %>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <%= image_tag(('backpack.jpg'), class: "airplaneimg backpack") %>
-      </div>
+        </div> -->
+
     <div id="keepItHidden">
       <div class="col-md-12">
         <div class="keepItmargin">
@@ -45,32 +46,39 @@
         </div>
       </div>
   </div>
-  </div>
-   <div class="col-md-12 ">
+<br><br>
+  <div >
+    <div class="col-md-12 mapsandthings">
+
     <div class="col-md-4">
-        <h3>From: <%= @request.fromrequest.airport %></h3><hr>
+        <h4>From: <%= @request.fromrequest.airport %></h4><hr>
         <div id="frommap" class="littleMaps"></div>
     </div>
-    <div class="col-md-4">
-      <%= image_tag(('airplane.gif'), :class => "airplaneimg")%>
-      <h3><%= @request.startdate %> - <%= @request.enddate %></h3>
+
+    <div class="col-md-4 midtext centered">
+      <h4> <%= @request.startdate %> - <%= @request.enddate %> </h4><hr>
       <div class="editanddelete">
         <% if current_user.id == @request.user_id %>
-      <hr>
-        <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default", remote:true %>
 
-        <%= link_to "Delete", request_path(@request), class: "btn btn-default",
+        <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default buttn", remote:true %>
+          <br><br><br><br>
+        <%= link_to "Delete", request_path(@request), class: "btn btn-default buttn",
                                :data => {:confirm => "Ya sure mate?",
                                          :method => "delete"} %>
           <% else %>
+            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default buttn" %>
           <% end %>
 
       </div>
     </div>
-    <div class="col-md-4">
-      <h3>To: <%= @request.torequest.airport %></h3><hr>
-      <div id="tomap" class="littleMaps"></div>
 
+    <div class="col-md-4">
+      <h4>To: <%= @request.torequest.airport %></h4><hr>
+      <div id="tomap" class="littleMaps"></div>
     </div>
-  <br><br>
+    </div>
   </div>
+
+  <br><br>
+
+      </div>

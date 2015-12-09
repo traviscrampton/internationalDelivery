@@ -1,5 +1,3 @@
-
-
 <%= bootstrap_form_for [@request] do |f| %>
   <%= f.fields_for :item do |i| %>
     <%= i.text_field :itemname, label:"What Is The Item?" %>
@@ -10,7 +8,6 @@
   <%= f.fields_for :item do |i| %>
     <%= i.file_field :itemimage, label:"Upload an Image"%>
   <% end %>
-
   <div class="actions form-group">
     <%= f.submit "Edit", class:"btn btn-primary" %>
   </div>

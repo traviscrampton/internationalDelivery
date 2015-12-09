@@ -27,7 +27,7 @@
         <div id="frommap" class="littleMaps"></div>
       </div>
       <div class="col-md-4 centered">
-        <br>
+        <p><%= @request.item.itemname %></p>
         <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
       </div>
       <div class="col-md-4">

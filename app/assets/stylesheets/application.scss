@@ -138,15 +138,25 @@ border: 1px black solid;
 .inlineButtons{
   display: inline;
 }
+.mTop{
+  margin-top: 50%;
+}
 
-.profilePic{
+.roundThumb{
   border-radius: 100px;
 }
 .backpack {
   margin-top: -10%;
 }
-.topThree{
-  margin-bottom: 40%;
+.mapsandthings{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.midtext {
+  // margin-top: 3.6%;
+  // h4{
+  //   font-size: 1.4em;
+  // }
 }
 
 #editRender{
@@ -170,7 +180,14 @@ border: 1px black solid;
   margin-top: 5%;
   margin-left: 6%;
 }
-
+.buttn{
+  width: 200px;
+  height: 55px;
+  font-size: 2em;
+}
+.mBotton{
+  margin-bottom: 50%;
+}
 .imgRequest{
   border: solid 2px black;
 }
@@ -196,4 +213,13 @@ border: 1px black solid;
 }
 .nameFloat{
   float:left;
+}
+
+.tabletxt{
+  th {
+    font-size: 1.5em;
+  }
+  td {
+    font-size: 1.2em;
+  }
 }
