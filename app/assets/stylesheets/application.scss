@@ -10,6 +10,11 @@ li{
   list-style-type: none;
 }
 
+.marginR{
+  border-right: solid 2px #D8D8D8;
+}
+
+
 .homephoto {
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('mtcook.jpg') no-repeat center ;
   color: white;
@@ -73,14 +78,18 @@ li{
   float:right;
   margin-top: 8%;
   text-align: center;
-
+    h2{
+    text-align: center;
+    text-shadow: 1px 1px black;
+    color: white;
+  }
+}
+.contactMarg{
+  margin-left: 33%;
+  margin-right: 33%;
 }
 
-.nameAndpic h2{
-  text-align: center;
-  text-shadow: 1px 1px black;
-  color: black;
-}
+
 
 .contact{
   color: black
@@ -170,6 +179,7 @@ border: 1px black solid;
 }
 .requestArea {
   background-color: #E8E8E8;
+  border: solid 2px black;
 }
 .replyRequest{
   display: none;

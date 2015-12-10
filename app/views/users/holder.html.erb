@@ -1,0 +1,29 @@
+<!-- <% if @user.requests.any? %>
+  <% @user.requests.each do |request| %>
+    <div class="centered">
+      <h4><%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || <%= request.fromrequest.airport %> || <%= request.torequest.airport %> || Between <%= request.monthstart %> <%= request.daystart %>, <%= request.yearstart %> - <%= request.monthend %> <%= request.dayend %>, <%= request.yearend %> </h4>
+    </div> -->
+      <!-- <% if current_user.id == request.user.id %>
+        <h3>Delivery Offers:</h3>
+          <% request.flights.each do |flight| %>
+            <% if flight.deal == true %>
+              <%= link_to flight.user.fullname, user_path(flight.user) %>'s <%= link_to 'Offer', request_flight_path(request, flight) %>
+            <% end %>
+          <% end %>
+      <% end %> -->
+
+      <!-- <% if @user.flights.any? %>
+        <% @user.flights.each do |flight| %>
+          <div class="centered">
+            <h4> Coming From: <%= flight.fromflight.airport %>, Going To: <%= flight.toflight.airport %>, on <%= flight.fulldate %> <%= link_to "View Flight", flight_path(flight), class:"btn btn-default" %> </h4>
+          </div>
+            <% if current_user.id == flight.user.id %>
+              <h4> Requests for This flight:</h4>
+                <% flight.requests.each do |request| %>
+                  <% if request.deal == true %>
+                    <%= link_to request.user.fullname, user_path(request.user) %>'s <%= link_to "Request", flight_request_path(flight, request) %>
+                  <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+      <% end %> -->
