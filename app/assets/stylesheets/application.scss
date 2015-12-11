@@ -10,9 +10,10 @@ li{
   list-style-type: none;
 }
 
-.marginR{
-  border-right: solid 2px #D8D8D8;
+.marginB{
+  border-bottom: solid 2px black;
 }
+
 
 
 .homephoto {
@@ -72,6 +73,10 @@ li{
 .editcover{
   float: right;
   margin-top: 50%
+}
+
+.borderT{
+  border-top: 2px solid #D8D8D8;
 }
 
 .nameAndpic{
@@ -150,6 +155,12 @@ border: 1px black solid;
 .mTop{
   margin-top: 50%;
 }
+.fright{
+  float: right;
+}
+.fleft{
+  float: left;
+}
 
 .roundThumb{
   border-radius: 100px;
@@ -195,6 +206,13 @@ border: 1px black solid;
   height: 55px;
   font-size: 2em;
 }
+
+.otherbuttn{
+  height:150px;
+  width:175px;
+  margin-left: -4%;
+  // margin-right: 3%;
+}
 .mBotton{
   margin-bottom: 50%;
 }
@@ -232,4 +250,16 @@ border: 1px black solid;
   td {
     font-size: 1.2em;
   }
+}
+
+.modal-dialog{
+  width: 85%;
+  height: auto;
+}
+.modal-dialog1{
+  text-align: center;
+  margin-top: 20%;
+  margin-left: 25%;
+  width: 50%;
+  height: auto;
 }

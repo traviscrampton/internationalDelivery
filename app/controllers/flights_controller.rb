@@ -44,10 +44,18 @@ class FlightsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def edit
+    @flight = Flight.find(params[:id])
+    render :edit
+  end
+
   def update
     @flight = Flight.find(params[:id])
     if params[:toggle] == 'true'
       @flight.update(deal:true)
+      redirect_to user_path(current_user)
+    elsif params[:toggle] == 'false'
+      @flight.update(deal:false)
       redirect_to user_path(current_user)
     else
       if @flight.update(flight_params)

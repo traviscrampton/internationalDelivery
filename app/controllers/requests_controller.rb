@@ -52,7 +52,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     if params[:toggle] == 'true'
       @request.update(deal:true)
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user)  
     else
       if @request.update(request_params)
         respond_to do |format|

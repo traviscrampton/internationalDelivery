@@ -11,33 +11,88 @@
           <% if (@flight.deal == false && @request.deal == true) %>
             <h1>Waiting to hear back from <%= link_to @flight.user.fullname, user_path(@flight.user) %> </h1>
           <% end %>
-          <div class="col-md-6">
-            <h1><%= image_tag @request.item.itemimage.url(:medium) %></h1>
+          <% if (@flight.deal == true && @request.deal == true) %>
+          <%= javascript_tag do %>
+            comingLat = <%= @flight.fromflight.latitude %>
+            comingLng = <%= @flight.fromflight.longitude %>
+            goingLat = <%= @flight.toflight.latitude %>
+            goingLng = <%= @flight.toflight.longitude %>
+          <% end %>
+          <div class="centered">
+            <h1> <%= @flight.user.fullname %> is interested in bringing your <%= @request.item.itemname %> </h1><hr>
           </div>
-          <div class="col-md-6">
-            <%= image_tag @flight.user.avatar.url(:medium) %>
+          <table class="table table-bordered">
+            <div class="col-md-12">
+              <tbody>
+                <tr>
+                  <div class="col-md-3">
+                    <td><%= image_tag @flight.user.avatar.url(:thumb), class:"roundThumb" %></td>
+                  </div>
+                  <div class="col-md-6">
+                    <td> <%= @flight.description %> </td>
+                  </div>
+                  <div class="col-md-3 fright">
+                    <td><%= image_tag @request.item.itemimage.url(:thumb), class:"roundThumb fright" %></td>
+                  </div>
+                </tr>
+              </tbody>
+            </div>
+          </table>
+            <div class="col-md-12 buttonUnite">
+              <div class="col-md-1"></div>
+              <div class="col-md-4 centered">
+                  <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
+                  <div id="frommap" class="littleMaps"></div>
+              </div>
+              <div class="col-md-2 ">
+                <br><br><br>
+                <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalGo">Let em Take It!</button>
+                <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+              </div>
+              <div class="col-md-4 centered">
+                <h5>Flying To: <%= @flight.toflight.airport %> </h5><br>
+                <div id="tomap" class="littleMaps"></div>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+            <div class="modal" id="modalGo">
+              <div class="modal-dialog1">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Delivery Confirmation</h3>
+                    <div class="modal-body">
+                      <p>Are you sure you want <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+                      <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="modalNo">
+            <div class="modal-dialog1">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">Delivery Confirmation</h3>
+                  <div class="modal-body">
+                    <p>Positive that you want to tell <%= @flight.user.fullname %> no? </p>
+                    <%= link_to "I'm Sure", flight_path(@flight, toggle:false), method: :patch, class:'btn btn-primary'%>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <h3><%= @flight.description %></h3>
-        <h4>Arriving in <%= @flight.toflight.airport %> on <%= @flight.fulldate %></h4>
+          <% end  %>
+
+
+        </div>
+
         <% if current_user.id == @request.user.id %>
             <% if (@flight.deal == false && @request.deal == false) %>
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
             <% end %>
           <% end %>
 
-        <div class="modal" id="modalGo">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title">Delivery Confirmation</h3>
-                <div class="modal-body">
-                  <p>Are you sure that You want to <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
-                  <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 <% end %>

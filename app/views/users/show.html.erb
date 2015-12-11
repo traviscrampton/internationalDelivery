@@ -1,141 +1,185 @@
 
 <div class="row">
-    <div class='asdf container' style="background-image: url(<%= @user.coverphoto.url %>);">
-      <div class="col-md-3 nameAndpic">
-        <%= image_tag @user.avatar.url(:medium), :class => "imag" %><hr>
-        <h2><%= @user.fullname %></h2><hr>
-      </div>
+  <div class='asdf container' style="background-image: url(<%= @user.coverphoto.url %>);">
+    <div class="col-md-3 nameAndpic">
+      <%= image_tag @user.avatar.url(:thumb), :class => "imag" %><hr>
+      <h2><%= @user.fullname %></h2><hr>
     </div>
+  </div>
 </div>
 
   <% if current_user.id == @user.id %>
-        <%= link_to 'Edit Cover Photo', edit_user_registration_path, class:"col-md-12 btn btn-default" %>
+    <%= link_to 'Edit Cover Photo', edit_user_registration_path, class:"col-md-12 btn btn-default" %>
   <% end %>
-        <div class="col-md-6 marginR">
-          <div class="dog">
-            <div class="centered">
-              <% if current_user.id = @user.id %>
-                <h4>Your Requests </h4>
-              <% else %>
-                <h4><%= @user.fullname %>'s Requests</h4>
-              <% end %>
-            </div>
-            <table class="table ">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Item</th>
-                  <th>Flying To</th>
-                  <th>Flight From</th>
-                  <th>Dates</th>
-                  <th>Page</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @user.requests.each do |request| %>
-                  <tr>
-                    <td> <%= image_tag request.item.itemimage.url(:thumb), class: "roundThumb"%></td>
-                    <td><%= request.item.itemname %> </td>
-                    <td><%= request.torequest.airport %> </td>
-                    <td><%= request.fromrequest.airport %> </td>
-                    <td><%= request.startdate %> - <%= request.enddate %> </td>
-                    <td><%= link_to "View", request_path(request), class:"btn btn-default" %> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-
-          </div>
-          </div>
-
-        <div class="col-md-6 marginL">
-              <div class="centered">
-                <% if current_user.id = @user.id %>
-                  <h4>Your Flights </h4>
-                <% else %>
-                  <h4><%= @user.fullname %>'s Flights</h4>
-                <% end %>
-              </div>
-              <table class="table ">
-                <thead>
-                  <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Date</th>
-                    <th>Page</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @user.flights.each do |flight| %>
-                    <tr>
-                      <td><%= flight.toflight.airport %> </td>
-                      <td><%= flight.fromflight.airport %> </td>
-                      <td><%= flight.fulldate %></td>
-                      <td><%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-
-        </div>
-    <div class="container">
-      <% if current_user.id == @user.id %>
-        <div class="col-md-12">
-          <div class="col-md-6">
-            <div class="centered">
-              <h4>Potential Items To Take</h4>
-                <% @user.flights.each do |flight| %>
-                  <% if flight.deal == true %>
-                    <% flight.requests.each do |request| %>
-                      <table class="table table-bordered">
-                        <tbody>
-                          <tr>
-                            <td><%= request.item.itemname %> </td>
-                            <td>FROM</td>
-                            <td><%= request.fromrequest.airport %> </td>
-                            <td>TO</td>
-                            <td><%= request.torequest.airport %></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    <% end %>
-                  <% end %>
-                <% end %>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="centered">
-              <h4>Potential Items To Have Brought</h4>
-                <% @user.requests.each do |request| %>
-                  <% if request.deal == true %>
+    <div class="col-md-12 marginB">
+      <div class="centered">
+        <% if current_user.id = @user.id %>
+          <h4>Your Requests </h4>
+        <% else %>
+          <span style="text-decoration: underline;"><h4><%= @user.fullname %>'s Requests</h4></span>
+        <% end %>
+      </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Item</th>
+              <th>Flying To</th>
+              <th>Flight From</th>
+              <th>Dates</th>
+              <th>Page</th>
+              <th>Offers?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user.requests.each do |request| %>
+              <tr>
+                <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb"%></td>
+                <td><%= request.item.itemname %> </td>
+                <td><%= request.torequest.airport %> </td>
+                <td><%= request.fromrequest.airport %> </td>
+                <td><%= request.startdate %> - <%= request.enddate %> </td>
+                <td><%= link_to "View", request_path(request), class:"btn btn-default" %> </td>
+                  <% if request.flights.any? %>
                     <% request.flights.each do |flight| %>
-                      <%= flight.fromflight.airport %> To <%= flight.toflight.airport %>
+                      <% if flight.deal == true %>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalMe">Offers</button><td>
+                          <div class="modal" id="modalMe">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h3 class="modal-title">Offers</h3>
+                                  <div class="modal-body">
+                                    <table class="table table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th>User</th>
+                                          <th>email</th>
+                                          <th>Itinerary</th>
+                                          <th>Date</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td><%= image_tag flight.user.avatar.url(:pic), class: "roundThumb" %></td>
+                                          <td><%= link_to flight.user.fullname, user_path(flight.user) %> </td>
+                                          <td><%= flight.user.email %> </td>
+                                          <td> <%= link_to "#{flight.toflight.airport} - #{flight.fromflight.airport}", request_flight_path(request, flight) %> </td>
+                                          <td><%= flight.fulldate %></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      <% end %>
                     <% end %>
                   <% end %>
+                <td></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 marginB">
+      <div class="centered">
+        <% if current_user.id = @user.id %>
+          <h4>Your Flights </h4>
+        <% else %>
+          <h4><%= @user.fullname %>'s Flights</h4>
+        <% end %>
+      </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>To</th>
+              <th>Date</th>
+              <th>Page</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user.flights.each do |flight| %>
+              <tr>
+                <td><%= flight.toflight.airport %> </td>
+                <td><%= flight.fromflight.airport %> </td>
+                <td><%= flight.fulldate %></td>
+                <td><%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 borderT"></div>
+
+
+<% if current_user.id == @user.id %>
+  <div class="borderT">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="centered">
+            <h4>Potential Items To Take</h4>
+            <% @user.flights.each do |flight| %>
+              <% if flight.deal == true %>
+                <% flight.requests.each do |request| %>
+                  <% if request.deal == false %>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td><%= request.item.itemname %> </td>
+                          <td><%= request.fromrequest.airport %> </td>
+                          <td>TO</td>
+                          <td><%= request.torequest.airport %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  <% end %>
                 <% end %>
-            </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
-      <% end %>
+        <div class="col-md-6">
+          <div class="centered">
+            <h4>Potential Items To Have Brought</h4>
+            <% @user.requests.each do |request| %>
+              <% if request.deal == true %>
+                <% request.flights.each do |flight| %>
+                  <% if flight.deal == false %>
+                    <%= flight.fromflight.airport %> To <%= flight.toflight.airport %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-
-<div class="col-md-12">
-  <div class="col-md-2">
+<div class="container">
+  <div class="col-md-12">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8 centered">
+      <h3>Contact Information</h3>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td><%= @user.fullname %> </td>
+            <td><%= @user.email %> </td>
+            <td><%= @user.country %></td>
+            <td><%= @user.territory %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+    </div>
   </div>
-  <div class="col-md-8 centered">
-    <h3>Contact Information</h3>
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <td><%= @user.fullname %> </td>
-          <td><%= @user.email %> </td>
-          <td><%= @user.country %></td>
-          <td><%= @user.territory %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-2">
-  </div>
-</div>
 </div>
