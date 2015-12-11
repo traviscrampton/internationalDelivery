@@ -99,6 +99,7 @@
               <th>To</th>
               <th>Date</th>
               <th>Page</th>
+              <th>Requests</th>
             </tr>
           </thead>
           <tbody>
@@ -108,6 +109,44 @@
                 <td><%= flight.fromflight.airport %> </td>
                 <td><%= flight.fulldate %></td>
                 <td><%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+                <% if flight.requests.any? %>
+                  <% flight.requests.each do |request| %>
+                    <% if request.deal == true %>
+                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalRequest">Requests</button><td>
+                      <div class="modal" id="modalRequest">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h3 class="modal-title">Offers</h3>
+                              <div class="modal-body">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>User</th>
+                                      <th>Item</th>
+                                      <th>Itinerary</th>
+                                      <th>Date</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><%= image_tag request.item.itemimage.url(:pic), class: "roundThumb" %></td>
+                                      <td><%= link_to request.user.fullname, user_path(request.user) %> </td>
+                                      <td><%= request.item.itemname %> </td>
+                                      <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", flight_request_path(flight, request) %> </td>
+                                      <td><%= request.startdate %> - <%= request.enddate %> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
@@ -145,12 +184,12 @@
         </div>
         <div class="col-md-6">
           <div class="centered">
-            <h4>Potential Items To Have Brought</h4>
+            <h4>Waiting To Hear Back </h4>
             <% @user.requests.each do |request| %>
               <% if request.deal == true %>
                 <% request.flights.each do |flight| %>
                   <% if flight.deal == false %>
-                    <%= flight.fromflight.airport %> To <%= flight.toflight.airport %>
+                    <p><%= link_to flight.user.fullname, user_path(flight.user) %> to bring your <%= link_to request.item.itemname, flight_request_path(flight, request) %></p>
                   <% end %>
                 <% end %>
               <% end %>

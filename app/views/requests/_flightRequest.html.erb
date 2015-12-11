@@ -4,47 +4,44 @@
   goingLat = <%= @flight.toflight.latitude %>
   goingLng = <%= @flight.toflight.longitude %>
 <% end %>
-<h1>Request <%= @flight.user.fullname %> to bring an Item on <%= @flight.fulldate %> </h1><hr>
-    <div class="col-md-4">
-      <h3>From: <%= @flight.fromflight.airport %>
+<div class="centered">
+  <h1>Request <%= @flight.user.fullname %> to bring an Item on <%= @flight.fulldate %> </h1><hr>
+</div>
+    <div class="col-md-12">
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <h5>From: <%= @flight.fromflight.airport %><h5>
         <div id="frommap" class="littleMaps"></div>
-    </div>
-    <div class="col-md-4">
-      </h3> <%= image_tag(('horizontalArrow.png'), class:"zontalArrow") %>
-    </div>
-    <div class="col-md-4">
-       <h3> To: <%= @flight.toflight.airport %> </h3>
-       <div id="tomap" class="littleMaps"></div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+         <h5> To: <%= @flight.toflight.airport %> </h5>
+         <div id="tomap" class="littleMaps"></div>
+      </div>
+      <div class="col-md-1"></div>
     </div>
     <div class="col-md-12 formMargin">
 
     <%= bootstrap_form_for [@flight, @request] do |f| %>
-        <div class="dates">
-          <h4>Pick A Starting Date</h4><hr>
+
+        <div class="field form-group col-md-2">
+          <%= f.select(:daystart, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Start Day')%>
+        </div>
+        <div class="field form-group col-md-2">
+          <%= f.select(:monthstart, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'Start Month' )%>
+        </div>
+        <div class="field form-group col-md-2">
+          <%= f.select(:yearstart, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'Start Year') %>
         </div>
 
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :daystart, value: "No" %>
+        <div class="field form-group col-md-2">
+          <%= f.select(:dayend, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'End Day') %>
         </div>
-
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :monthstart, value: "No" %>
+        <div class="field form-group col-md-2">
+          <%= f.select(:monthend, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ]), label: 'End Month') %>
         </div>
-
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :yearstart, value: "No" %>
-        </div>
-
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :dayend, value: @flight.day %>
-        </div>
-
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :monthend, value: @flight.month %>
-        </div>
-
-        <div class="field form-group col-md-4">
-          <%= f.hidden_field :yearend, value: @flight.year %>
+        <div class="field form-group col-md-2">
+          <%= f.select(:yearend, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'End Year') %>
         </div>
 
         <div class="field form-group">
