@@ -17,6 +17,7 @@ class FlightsController < ApplicationController
     @flight.assign_attributes(flight_params)
     @request.flights.push(@flight) if @request
     if @flight.save
+      binding.pry
       if @request
         @deal = Deal.where(flight_id: @flight, request_id: @request)
         @deal.update_all(flightdeal:true)
@@ -56,8 +57,12 @@ class FlightsController < ApplicationController
     @flight = Flight.find(params[:id])
     if params[:toggle] == 'true'
       @request = Request.find(params[:request_id])
-      @deal = Deal.where(flight_id: @flight, request_id: @request)
-      @deal.update_all(flightdeal:true)
+      @deal = Deal.find_by({flight_id: @flight.id, request_id: @request.id})
+      @deal.update(:flightdeal => true)
+        if @deal.flightdeal == true && @deal.requestdeal == true
+          @request.update(:done => true)
+          @flight.update(:done => true)
+        end
       redirect_to user_path(current_user)
     elsif params[:toggle] == 'false'
       @deal = Deal.where(flight_id: @flight, request_id: @request)
@@ -78,7 +83,7 @@ class FlightsController < ApplicationController
 
   private
   def flight_params
-    params.require(:flight).permit(:day, :year, :month, :description, toflight_attributes: [:airport], fromflight_attributes: [:airport], deal_attributes: [:flightdeal])
+    params.require(:flight).permit(:day, :year, :month, :description, :done, toflight_attributes: [:airport], fromflight_attributes: [:airport], deal_attributes: [:flightdeal])
   end
 
   def find_request

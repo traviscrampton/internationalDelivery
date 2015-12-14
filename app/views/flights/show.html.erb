@@ -6,7 +6,6 @@
 <% end %>
 
 <% if current_user.id == @request.user.id %>
-  <% binding.pry %>
       <div class="container">
         <% if @deal.flightdeal == true && @deal.requestdeal == false %>
           <div class="centered">

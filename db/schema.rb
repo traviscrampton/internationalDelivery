@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211225913) do
+ActiveRecord::Schema.define(version: 20151214033210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20151211225913) do
     t.string  "day"
     t.string  "month"
     t.string  "year"
+    t.boolean "done",        default: false
   end
 
   create_table "fromflights", force: :cascade do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20151211225913) do
     t.string  "dayend"
     t.string  "monthend"
     t.string  "yearend"
+    t.boolean "done",       default: false
   end
 
   create_table "toflights", force: :cascade do |t|

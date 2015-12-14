@@ -31,11 +31,7 @@ class RequestsController < ApplicationController
       @request = Request.find(params[:id])
       @deal = Deal.find_by({flight_id: @flight.id, request_id: @request.id})
       @item = @request.item
-        # if @deal.flightdeal == false && @deal.requestdeal == false
-        #   redirect_to user_path(current_user)
-        # else
-        # render :requestShow
-        # end
+      render :requestShow
     else
       @request = Request.find(params[:id])
       @item = @request.item
@@ -59,15 +55,18 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     if params[:toggle] == 'true'
       @flight = Flight.find(params[:flight_id])
-      @deal = Deal.where(flight_id: @flight, request_id: @request)
-      @deal.update_all(requestdeal:true)
+      @deal = Deal.find_by({flight_id: @flight.id, request_id: @request.id})
+      @deal.update(:requestdeal => true)
+        if @deal.flightdeal == true && @deal.requestdeal == true
+          @request.update(:done => true)
+          @flight.update(:done => true)
+        end
       redirect_to user_path(current_user)
     elsif params[:toggle] == 'false'
-      binding.pry
-      @flight = Flight.find(params[:flight_id])
-      @deal = Deal.where(flight_id: @flight, request_id: @request)
-      @deal.update_all(flightdeal:false)
+      @deal = Deal.find_by(flight_id: @flight, request_id: @request)
+      @deal.update(flightdeal:false)
       redirect_to user_path(current_user)
+    else
       if @request.update(request_params)
         respond_to do |format|
           format.html {redirect_to request_path(@request)}
@@ -82,7 +81,7 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, torequest_attributes: [:airport], fromrequest_attributes: [:airport], item_attributes: [:itemname, :itemdescription, :itemimage], deal_attributes: [:requestdeal])
+    params.require(:request).permit(:daystart, :monthstart, :yearstart, :dayend, :monthend, :yearend, :deal, torequest_attributes: [:airport], fromrequest_attributes: [:airport], item_attributes: [:itemname, :itemdescription, :itemimage], deal_attributes: [:requestdeal, :flightdeal])
   end
 
   def find_flight
