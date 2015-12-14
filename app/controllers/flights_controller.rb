@@ -17,7 +17,6 @@ class FlightsController < ApplicationController
     @flight.assign_attributes(flight_params)
     @request.flights.push(@flight) if @request
     if @flight.save
-      binding.pry
       if @request
         @deal = Deal.where(flight_id: @flight, request_id: @request)
         @deal.update_all(flightdeal:true)
@@ -65,8 +64,9 @@ class FlightsController < ApplicationController
         end
       redirect_to user_path(current_user)
     elsif params[:toggle] == 'false'
-      @deal = Deal.where(flight_id: @flight, request_id: @request)
-      @deal.update_all(requestdeal:false)
+      binding.pry
+      @deal = Deal.find_by(flight_id: @flight, request_id: @request)
+      @deal.update(requestdeal:false)
       redirect_to user_path(current_user)
     else
       if @flight.update(flight_params)

@@ -68,7 +68,7 @@
                                                 <td><%= image_tag flight.user.avatar.url(:pic), class: "roundThumb" %></td>
                                                 <td><%= link_to flight.user.fullname, user_path(flight.user) %> </td>
                                                 <td><%= flight.user.email %> </td>
-                                                <td> <%= link_to "#{flight.toflight.airport} - #{flight.fromflight.airport}", request_flight_path(request, flight) %> </td>
+                                                <td> <%= link_to "#{flight.toflight.airport} - #{flight.fromflight.airport}", flight_request_path(flight, request) %> </td>
                                                 <td><%= flight.fulldate %></td>
                                               </tr>
                                             </tbody>
@@ -141,7 +141,7 @@
                                             <td><%= image_tag request.item.itemimage.url(:pic), class: "roundThumb" %></td>
                                             <td><%= link_to request.user.fullname, user_path(request.user) %> </td>
                                             <td><%= request.item.itemname %> </td>
-                                            <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", flight_request_path(flight, request) %> </td>
+                                            <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", request_flight_path(request, flight) %> </td>
                                             <td><%= request.startdate %> - <%= request.enddate %> </td>
                                           </tr>
                                         </tbody>
@@ -171,7 +171,7 @@
       <div class="col-md-12">
         <div class="col-md-6">
           <div class="centered">
-            <h4>Potential Items To Take</h4>
+            <h4>Items You've Asked To Take</h4>
             <% @user.flights.each do |flight| %>
               <% flight.requests.each do |request| %>
                 <% request.deals.each do |deal| %>
@@ -179,7 +179,7 @@
                       <table class="table table-bordered">
                         <tbody>
                           <tr>
-                            <td><%= request.item.itemname %> </td>
+                            <td><%= link_to request.item.itemname, request_flight_path(request, flight) %> </td>
                             <td><%= request.fromrequest.airport %> </td>
                             <td>TO</td>
                             <td><%= request.torequest.airport %></td>
@@ -194,7 +194,7 @@
         </div>
         <div class="col-md-6">
           <div class="centered">
-            <h4>Waiting To Hear Back </h4>
+            <h4>Items You've Asked To Have Taken</h4>
             <% @user.requests.each do |request| %>
               <% request.flights.each do |flight| %>
                 <% flight.deals.each do |deal| %>
