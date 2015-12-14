@@ -18,6 +18,8 @@ class RequestsController < ApplicationController
     @request.assign_attributes(request_params)
       @flight.requests.push(@request) if @flight
       if @request.save
+        @deal = Deal.where(flight_id: @flight, request_id: @request)
+        @deal.update_all(requestdeal:true)
         redirect_to request_path(@request)
       else
         render :new
@@ -27,8 +29,13 @@ class RequestsController < ApplicationController
   def show
     if @flight
       @request = Request.find(params[:id])
+      @deal = Deal.find_by({flight_id: @flight.id, request_id: @request.id})
       @item = @request.item
-      render :requestShow
+        # if @deal.flightdeal == false && @deal.requestdeal == false
+        #   redirect_to user_path(current_user)
+        # else
+        # render :requestShow
+        # end
     else
       @request = Request.find(params[:id])
       @item = @request.item
@@ -51,9 +58,16 @@ class RequestsController < ApplicationController
   def update
     @request = Request.find(params[:id])
     if params[:toggle] == 'true'
-      @request.update(deal:true)
-      redirect_to user_path(current_user)  
-    else
+      @flight = Flight.find(params[:flight_id])
+      @deal = Deal.where(flight_id: @flight, request_id: @request)
+      @deal.update_all(requestdeal:true)
+      redirect_to user_path(current_user)
+    elsif params[:toggle] == 'false'
+      binding.pry
+      @flight = Flight.find(params[:flight_id])
+      @deal = Deal.where(flight_id: @flight, request_id: @request)
+      @deal.update_all(flightdeal:false)
+      redirect_to user_path(current_user)
       if @request.update(request_params)
         respond_to do |format|
           format.html {redirect_to request_path(@request)}
@@ -68,7 +82,7 @@ class RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, :deal, torequest_attributes: [:airport], fromrequest_attributes: [:airport], item_attributes: [:itemname, :itemdescription, :itemimage])
+    params.require(:request).permit(:daystart, :yearstart, :monthstart, :dayend, :monthend, :yearend, torequest_attributes: [:airport], fromrequest_attributes: [:airport], item_attributes: [:itemname, :itemdescription, :itemimage], deal_attributes: [:requestdeal])
   end
 
   def find_flight

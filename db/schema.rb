@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207234414) do
+ActiveRecord::Schema.define(version: 20151211225913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,18 +22,19 @@ ActiveRecord::Schema.define(version: 20151207234414) do
     t.decimal "lng"
   end
 
+  create_table "deals", force: :cascade do |t|
+    t.integer "flight_id"
+    t.integer "request_id"
+    t.boolean "flightdeal",  default: false
+    t.boolean "requestdeal", default: false
+  end
+
   create_table "flights", force: :cascade do |t|
     t.integer "user_id"
     t.string  "description"
     t.string  "day"
     t.string  "month"
     t.string  "year"
-    t.boolean "deal",        default: false
-  end
-
-  create_table "flights_requests", force: :cascade do |t|
-    t.integer "flight_id"
-    t.integer "request_id"
   end
 
   create_table "fromflights", force: :cascade do |t|
@@ -68,7 +69,6 @@ ActiveRecord::Schema.define(version: 20151207234414) do
     t.string  "dayend"
     t.string  "monthend"
     t.string  "yearend"
-    t.boolean "deal",       default: false
   end
 
   create_table "toflights", force: :cascade do |t|

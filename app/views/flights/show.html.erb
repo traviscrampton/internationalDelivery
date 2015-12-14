@@ -6,21 +6,17 @@
 <% end %>
 
 <% if current_user.id == @request.user.id %>
+  <% binding.pry %>
       <div class="container">
-        <div class="row">
-          <% if (@flight.deal == false && @request.deal == true) %>
-            <h1>Waiting to hear back from <%= link_to @flight.user.fullname, user_path(@flight.user) %> </h1>
-          <% end %>
-          <% if (@flight.deal == true && @request.deal == true) %>
-          <%= javascript_tag do %>
-            comingLat = <%= @flight.fromflight.latitude %>
-            comingLng = <%= @flight.fromflight.longitude %>
-            goingLat = <%= @flight.toflight.latitude %>
-            goingLng = <%= @flight.toflight.longitude %>
-          <% end %>
+        <% if @deal.flightdeal == true && @deal.requestdeal == false %>
           <div class="centered">
             <h1> <%= @flight.user.fullname %> is interested in bringing your <%= @request.item.itemname %> </h1><hr>
           </div>
+        <% elsif @deal.flightdeal == true && @deal.requestdeal == true %>
+          <div class="centered">
+            <h1> <%= @flight.user.fullname %> is bringing your <%= @request.item.itemname %> </h1><hr>
+          </div>
+        <% end %>
           <table class="table table-bordered">
             <div class="col-md-12">
               <tbody>
@@ -29,7 +25,9 @@
                     <td><%= image_tag @flight.user.avatar.url(:thumb), class:"roundThumb" %></td>
                   </div>
                   <div class="col-md-6">
-                    <td> <%= @flight.description %> </td>
+                    <div class="centered">
+                      <td> <%= @flight.description %> </td>
+                    </div>
                   </div>
                   <div class="col-md-3 fright">
                     <td><%= image_tag @request.item.itemimage.url(:thumb), class:"roundThumb fright" %></td>
@@ -46,8 +44,13 @@
               </div>
               <div class="col-md-2 ">
                 <br><br><br>
-                <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalGo">Let em Take It!</button>
-                <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+                <% if @deal.flightdeal == true && @deal.requestdeal == false %>
+                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalGo">Let em Take It!</button>
+                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+                <% elsif @deal.flightdeal == true && @deal.requestdeal == true %>
+                  <br><br><br><br>
+                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalCancel">Nevermind</button>
+                <% end %>
               </div>
               <div class="col-md-4 centered">
                 <h5>Flying To: <%= @flight.toflight.airport %> </h5><br>
@@ -55,44 +58,50 @@
               </div>
               <div class="col-md-1"></div>
             </div>
-            <div class="modal" id="modalGo">
+              <div class="modal" id="modalGo">
+                <div class="modal-dialog1">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">Delivery Confirmation</h3>
+                      <div class="modal-body">
+                        <p>Are you sure you want <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
+                        <%= link_to "Let Them Take It", flight_request_path(@flight, @request, toggle:true), method: :patch, class:'btn btn-primary'%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="modal" id="modalNo">
               <div class="modal-dialog1">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h3 class="modal-title">Delivery Confirmation</h3>
                     <div class="modal-body">
-                      <p>Are you sure you want <%= @flight.user.fullname %> to take your <%= @request.item.itemname %>? </p>
-                      <%= link_to "Let Them Take It", request_path(@request, toggle:true), method: :patch, class:'btn btn-primary'%>
+                      <p>Positive that you want to tell <%= @flight.user.fullname %> no? </p>
+                      <%= link_to "I'm Sure", flight_request_path(@flight, @request, toggle:false), method: :patch, class:'btn btn-primary'%>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal" id="modalNo">
-            <div class="modal-dialog1">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title">Delivery Confirmation</h3>
-                  <div class="modal-body">
-                    <p>Positive that you want to tell <%= @flight.user.fullname %> no? </p>
-                    <%= link_to "I'm Sure", flight_path(@flight, toggle:false), method: :patch, class:'btn btn-primary'%>
+            <div class="modal" id="modalCancel">
+              <div class="modal-dialog1">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Delivery Confirmation</h3>
+                    <div class="modal-body">
+                      <p>Positive that want to tell <%= @flight.user.fullname %> to no longer take your <%= @request.item.itemname %> </p>
+                      <%= link_to "I'm Sure", request_flight_path(@request, @flight, toggle:false), method: :patch, class:'btn btn-primary'%>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-          <% end  %>
 
 
         </div>
-
-        <% if current_user.id == @request.user.id %>
-            <% if (@flight.deal == false && @request.deal == false) %>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#modalGo">Check To See If <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %> </button>
-            <% end %>
-          <% end %>
 
 
 <% end %>

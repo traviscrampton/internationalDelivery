@@ -11,11 +11,12 @@ class Request < ActiveRecord::Base
   has_one :item, dependent: :destroy
   has_one :torequest, dependent: :destroy
   has_one :fromrequest, dependent: :destroy
+  has_many :deals, dependent: :destroy
   accepts_nested_attributes_for :torequest
   accepts_nested_attributes_for :fromrequest
   accepts_nested_attributes_for :item
   belongs_to :user
-  has_and_belongs_to_many :flights
+  has_many :flights, :through => :deals
 
   def startdate
     return monthstart + " " + daystart + "," + " " + yearstart
