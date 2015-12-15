@@ -13,13 +13,15 @@
       </thead>
       <tbody>
         <% @flights.each do |flight| %>
-          <tr>
-            <td> <%= link_to flight.user.fullname, user_path(flight.user) %> </td>
-            <td> <%= flight.fromflight.airport %> </td>
-            <td> <%= flight.toflight.airport %> </td>
-            <td> <%= flight.fulldate %> </td>
-            <td> <%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
-          </tr>
+          <% unless flight.done == true %>
+            <tr>
+              <td> <%= link_to flight.user.fullname, user_path(flight.user) %> </td>
+              <td> <%= flight.fromflight.airport %> </td>
+              <td> <%= flight.toflight.airport %> </td>
+              <td> <%= flight.fulldate %> </td>
+              <td> <%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+            </tr>
+          <% end %>  
         <% end %>
       </tbody>
     </table>

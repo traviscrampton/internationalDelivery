@@ -9,9 +9,97 @@
 </div>
 
   <% if current_user.id == @user.id %>
-    <%= link_to 'Edit Cover Photo', edit_user_registration_path, class:"col-md-12 btn btn-default" %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class:"col-md-12 btn btn-default" %>
   <% end %>
-    <div class="col-md-12 marginB">
+  <% if current_user.id == @user.id %>
+    <% if @user.requests.any? %>
+      <% @user.requests.each do |request| %>
+        <% if request.done == true %>
+          <div class="col-md-12 requestColor">
+            <div class="centered">
+              <h4>Items Confirmed For Delivery</h4>
+            </div>
+            <table class="table">
+              <thread>
+                <tr>
+                  <th>Image</th>
+                  <th>Item</th>
+                  <th>Who</th>
+                  <th>Date</th>
+                  <th>Coming From</th>
+                  <th>Going To</th>
+                  <th>View</th>
+                </tr>
+              </thread>
+              <tbody>
+                <tr>
+                  <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb"%></td>
+                  <td><%= request.item.itemname %></td>
+                    <% request.flights.each do |flight| %>
+                        <td><%= link_to flight.user.fullname, user_path(flight.user) %></td>
+                        <td><%= flight.fulldate %></td>
+                        <td><%= request.fromrequest.airport %></td>
+                        <td><%= request.torequest.airport %></td>
+                        <td> <%= link_to "View", flight_request_path(flight, request), class: 'btn btn-default' %> </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if @user.flights.any? %>
+      <% @user.flights.each do |flight| %>
+        <% if flight.done == true %>
+          <div class="col-md-12 TakeColor">
+            <div class="centered">
+              <h4>Items You're Taking</h4>
+            </div>
+            <table class="table">
+              <thread>
+                <tr>
+                  <th>Image</th>
+                  <th>Item</th>
+                  <th>For</th>
+                  <th>Date</th>
+                  <th>Coming From</th>
+                  <th>Going To</th>
+                  <th>View</th>
+                </tr>
+              </thread>
+              <tbody>
+                <tr>
+                  <% flight.requests.each do |request| %>
+                    <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb"%></td>
+                    <td><%= request.item.itemname %></td>
+                    <td><%= link_to request.user.fullname, user_path(request.user) %></td>
+                    <td><%= flight.fulldate %></td>
+                    <td><%= flight.fromflight.airport %></td>
+                    <td><%= flight.toflight.airport %></td>
+                    <td> <%= link_to 'View', request_flight_path(request, flight), class:"btn btn-default" %> </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="col-md-12 marginB bordered">
       <div class="centered">
         <% if current_user.id = @user.id %>
           <h4>Your Requests </h4>
@@ -33,7 +121,7 @@
           </thead>
           <tbody>
             <% @user.requests.each do |request| %>
-
+              <% unless request.done == true %>
 
                   <tr>
                     <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb"%></td>
@@ -43,15 +131,13 @@
                     <td><%= request.startdate %> - <%= request.enddate %> </td>
                     <td><%= link_to "View", request_path(request), class:"btn btn-default" %> </td>
                       <% if request.flights.any? %>
-                        <% request.flights.each do |flight| %>
-                          <% flight.deals.each do |deal| %>
-                            <% if deal.flightdeal == true %>
-                              <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalMe">Offers</button><td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalMe">Offers</button><td>
+                      <% end %>
                                 <div class="modal" id="modalMe">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h3 class="modal-title">Offers</h3>
+                                        <h3 class="modal-title centered">Offers</h3>
                                         <div class="modal-body">
                                           <table class="table table-bordered">
                                             <thead>
@@ -64,13 +150,19 @@
                                               </tr>
                                             </thead>
                                             <tbody>
-                                              <tr>
-                                                <td><%= image_tag flight.user.avatar.url(:pic), class: "roundThumb" %></td>
-                                                <td><%= link_to flight.user.fullname, user_path(flight.user) %> </td>
-                                                <td><%= flight.user.email %> </td>
-                                                <td> <%= link_to "#{flight.toflight.airport} - #{flight.fromflight.airport}", flight_request_path(flight, request) %> </td>
-                                                <td><%= flight.fulldate %></td>
-                                              </tr>
+                                              <% request.flights.each do |flight| %>
+                                                <% flight.deals.each do |deal| %>
+                                                  <% if deal.flightdeal == true %>
+                                                    <tr>
+                                                      <td><%= image_tag flight.user.avatar.url(:pic), class: "roundThumb" %></td>
+                                                      <td><%= link_to flight.user.fullname, user_path(flight.user) %> </td>
+                                                      <td><%= flight.user.email %> </td>
+                                                      <td> <%= link_to "#{flight.toflight.airport} - #{flight.fromflight.airport}", flight_request_path(flight, request) %> </td>
+                                                      <td><%= flight.fulldate %></td>
+                                                    </tr>
+                                                  <% end %>
+                                                <% end %>
+                                              <% end %>
                                             </tbody>
                                           </table>
                                         </div>
@@ -78,18 +170,15 @@
                                     </div>
                                   </div>
                                 </div>
-                            <% end %>
-                          <% end %>
-                        <% end %>
-                      <% end %>
+
                     <td></td>
                   </tr>
-
+              <% end %>
             <% end %>
           </tbody>
         </table>
     </div>
-    <div class="col-md-12 marginB">
+    <div class="col-md-12 marginB bordered">
       <div class="centered">
         <% if current_user.id = @user.id %>
           <h4>Your Flights </h4>
@@ -109,23 +198,21 @@
           </thead>
           <tbody>
             <% @user.flights.each do |flight| %>
-
+              <% unless flight.done == true %>
 
                   <tr>
                     <td><%= flight.fromflight.airport %> </td>
                     <td><%= flight.toflight.airport %> </td>
                     <td><%= flight.fulldate %></td>
                     <td><%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
-                    <% if flight.requests.any? %>
-                      <% flight.requests.each do |request| %>
-                        <% request.deals.each do |deal| %>
-                          <% if deal.requestdeal == true && deal.flightdeal == false %>
-                          <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalRequest">Requests</button><td>
+                      <% if flight.requests.any? %>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalRequest">Requests</button><td>
+                      <% end %>
                             <div class="modal" id="modalRequest">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h3 class="modal-title">Offers</h3>
+                                    <h3 class="modal-title centered">Offers</h3>
                                     <div class="modal-body">
                                       <table class="table table-bordered">
                                         <thead>
@@ -137,13 +224,21 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          <tr>
-                                            <td><%= image_tag request.item.itemimage.url(:pic), class: "roundThumb" %></td>
-                                            <td><%= link_to request.user.fullname, user_path(request.user) %> </td>
-                                            <td><%= request.item.itemname %> </td>
-                                            <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", request_flight_path(request, flight) %> </td>
-                                            <td><%= request.startdate %> - <%= request.enddate %> </td>
-                                          </tr>
+                                          <% if flight.requests.any? %>
+                                            <% flight.requests.each do |request| %>
+                                              <% request.deals.each do |deal| %>
+                                                <% if deal.requestdeal == true %>
+                                                  <tr>
+                                                    <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb" %></td>
+                                                    <td><%= link_to request.user.fullname, user_path(request.user) %> </td>
+                                                    <td><%= request.item.itemname %> </td>
+                                                    <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", request_flight_path(request, flight) %> </td>
+                                                    <td><%= request.startdate %> - <%= request.enddate %> </td>
+                                                  </tr>
+                                                <% end %>
+                                              <% end %>
+                                            <% end %>
+                                          <% end %>
                                         </tbody>
                                       </table>
                                     </div>
@@ -151,12 +246,10 @@
                                 </div>
                               </div>
                             </div>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                    <% end %>
+
                   </tr>
                 <% end %>
+              <% end %>
 
 
           </tbody>

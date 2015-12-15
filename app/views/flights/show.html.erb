@@ -16,7 +16,7 @@
           </div>
         <% elsif @deal.flightdeal == true && @deal.requestdeal == true %>
           <div class="centered">
-            <h1> <%= @flight.user.fullname %> is bringing your <%= @request.item.itemname %> </h1><hr>
+            <h1> Confirmed: You are bringing <%= link_to @request.user.fullname, user_path(@request.user) %>'s <%= @request.item.itemname %>! </h1><hr>
           </div>
         <% end %>
           <table class="table table-bordered">

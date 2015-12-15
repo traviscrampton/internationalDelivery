@@ -14,15 +14,17 @@
       </thead>
       <tbody>
         <% @requests.each do |request| %>
-          <tr>
-            <td> <%= image_tag request.item.itemimage.url(:thumb), class: "roundThumb"%></td>
-            <td> <br><br> <%= request.item.itemname %> </td>
-            <td> <br><br> <%= request.torequest.airport %> </td>
-            <td> <br><br> <%= request.fromrequest.airport %> </td>
-            <td> <br><br> <%= request.startdate %> - <%= request.enddate %> </td>
-            <td> <br><br> <%= link_to request.user.fullname, user_path(request.user) %> </td>
-            <td> <br><br> <%= link_to "View", request_path(request), class:"btn btn-default" %> </td>
-          </tr>
+          <% unless request.done == true %>
+            <tr>
+              <td> <%= image_tag request.item.itemimage.url(:thumb), class: "roundThumb"%></td>
+              <td> <br><br> <%= request.item.itemname %> </td>
+              <td> <br><br> <%= request.torequest.airport %> </td>
+              <td> <br><br> <%= request.fromrequest.airport %> </td>
+              <td> <br><br> <%= request.startdate %> - <%= request.enddate %> </td>
+              <td> <br><br> <%= link_to request.user.fullname, user_path(request.user) %> </td>
+              <td> <br><br> <%= link_to "View", request_path(request), class:"btn btn-default" %> </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

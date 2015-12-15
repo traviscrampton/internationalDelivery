@@ -1,19 +1,45 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html, body{
+html{
+  position: relative;
+  min-height: 100%;
+}
+
+
+body{
   font-family: 'Arvo', serif;
   background-color: #f8f8f8;
+  margin: 0 0 100px; /* bottom = footer height */
+}
+
+footer{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 20px;
+  width: 100%;
 }
 
 li{
   list-style-type: none;
 }
 
+
 .marginB{
   border-bottom: solid 2px black;
 }
+.TakeColor{
+  background-color: #ff9999;
+  border: solid 2px #666666;
+}
+.requestColor{
+  background-color: #99cc99;
+}
 
+.bordered{
+  border: solid 2px #666666;
+}
 
 
 .homephoto {
@@ -31,7 +57,7 @@ li{
 }
 
 .asdf{
-  height:50rem;
+  height:40rem;
   overflow: hidden;
   width: 100%;
   background: no-repeat center;
@@ -144,7 +170,18 @@ border: 1px black solid;
 }
 #formForItem{
   display: none;
+}
+#footer{
+  // position: absolute;
+  // text-align: center;
+  // // bottom:0;
+  margin-top: 20%;
+  // left: 0;
+  // right: 0;
+}
 
+.navbar-fixed-bottom{
+  margin-top: 20%;
 }
 .keepItmargin {
   margin-top: 10%;
@@ -195,6 +232,8 @@ border: 1px black solid;
 .replyRequest{
   display: none;
 }
+
+
 .zontalArrow{
   height: 50%;
   width: 50%;

@@ -61,10 +61,10 @@ class FlightsController < ApplicationController
         if @deal.flightdeal == true && @deal.requestdeal == true
           @request.update(:done => true)
           @flight.update(:done => true)
+          @dealdelete = Deal.where(flight_id: @flight.id).where.not(request_id: @request.id).destroy_all
         end
       redirect_to user_path(current_user)
     elsif params[:toggle] == 'false'
-      binding.pry
       @deal = Deal.find_by(flight_id: @flight, request_id: @request)
       @deal.update(requestdeal:false)
       redirect_to user_path(current_user)

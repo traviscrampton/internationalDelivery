@@ -5,14 +5,20 @@ goingLat = <%= @flight.toflight.latitude %>
 goingLng = <%= @flight.toflight.longitude %>
 <% end %>
   <div class="container ">
-    <% if current_user.id == @request.user.id && @deal.flightdeal == false && @deal.requestdeal == true %>
+    <% if current_user.id == @request.user.id %>
+    <% if @deal.flightdeal == false && @deal.requestdeal == true %>
         <div class="centered">
           <h3> Still Waiting To Hear Back Whether <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %></h3><hr>
         </div>
-    <% elsif current_user.id == @request.user.id && @deal.flightdeal == true && @deal.requestdeal == false %>
+    <% elsif @deal.flightdeal == true && @deal.requestdeal == false %>
       <div class="centered">
         <h3><%= @flight.user.fullname %> Is Interested In Taking Your <%= @request.item.itemname %></h3><hr>
       </div>
+      <% elsif @request.done == true %>
+        <div class="centered">
+          <h3>Confirmed: <%= @flight.user.fullname %> Is Taking Your <%= @request.item.itemname %></h3><hr>
+        </div>
+      <% end %>
     <% end %>
         <table class="table table-bordered">
           <div class="col-md-12">
@@ -33,14 +39,17 @@ goingLng = <%= @flight.toflight.longitude %>
             </tbody>
           </div>
         </table>
-        <div class="col-md-12 buttonUnite">
+        <div class="col-md-12">
           <div class="col-md-1"></div>
           <div class="col-md-4 centered">
             <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
             <div id="frommap" class="littleMaps"></div>
           </div>
-          <div class="col-md-2 ">
-            <br><br><br>
+          <div class="col-md-2">
+            <div class="centered">
+              <h4><%= @flight.fulldate %></h4>
+            </div>
+              <br><br>
             <% if current_user.id == @request.user.id && @deal.flightdeal == false && @deal.requestdeal == true %>
               <br><br><br>
               <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalCancel">Nevermind</button>
