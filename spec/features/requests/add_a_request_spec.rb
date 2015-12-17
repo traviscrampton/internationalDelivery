@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Users" do
+describe "request" do
   before do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
@@ -15,12 +15,11 @@ describe "Users" do
       select('21', from: "End Day")
       select('Feburary', from: "End Month")
       select('2017', from: "End Year")
-      fill_in "Which Country Are You Coming From", :with => "United States"
-      fill_in "Which Airport are you flying to", :with => "Melbourne International Airport"
-      click_button "Post Request"
-      fill_in "Name Of Item", :with => "Bicycle"
-      fill_in "Description Of Item", :with => "This is a really good bike that I need"
-      click_on "Post Item"
+      fill_in "Which Airport Do You Want The Item Flown From?", :with => "Melbourne International Airport"
+      fill_in "Which Airport Do You Want The Item Flown To?", :with => "San Francisco International Airport"
+      fill_in "What Is The Item", :with => "Bicycle"
+      fill_in "Item Description", :with => "This is a really good bike that I need"
+      click_on "Post Request"
       expect(page).to have_content "GIT IT"
     end
   end

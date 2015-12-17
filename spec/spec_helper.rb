@@ -19,6 +19,7 @@ require 'simplecov'
 
 SimpleCov.start
 
+
 RSpec.configure do |config|
 
   config.expect_with :rspec do |expectations|
@@ -29,6 +30,16 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 end
+
+def geocoded_by(airport)
+  latitude = 1
+  longitude = 1
+end
+def geocode
+  latitude = 1
+  longitude = 1
+end
+
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -45,6 +56,7 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
+
 
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.

@@ -25,9 +25,6 @@ class Request < ActiveRecord::Base
     return monthend + " " + dayend + "," + " " + yearend
   end
 
-  def requestToggle
-    @request = Request.find(params[:id])
-    @request.update_attributes(deal: true)
-  end
+
 
 end

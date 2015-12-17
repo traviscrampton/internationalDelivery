@@ -2,10 +2,15 @@ FactoryGirl.define do
   factory :user do
     email 'test@test.com'
     password 'dapassword'
+    firstname "Travis"
+    lastname "Crampton"
+    phonenumber "2813308004"
+    streetaddress "1431 Raspberry Ave"
+    country "United States"
+    territory "California"
+    zipcode "93433"
   end
-end
 
-FactoryGirl.define do 
   factory :request do
     daystart "12"
     monthstart "Feburary"
@@ -13,8 +18,7 @@ FactoryGirl.define do
     dayend "15"
     monthend "Feburary"
     yearend "2015"
-    fromcountry "United States"
-    airport "Melbourne International Airport"
     deal false
   end
+
 end

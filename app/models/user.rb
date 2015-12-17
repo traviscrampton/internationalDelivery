@@ -8,6 +8,15 @@ validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
          has_attached_file :coverphoto, :styles => { :coversize => "1170x1000>"}, :default_url => "/images/:style/missing.png"
 validates_attachment_content_type :coverphoto, :content_type => /\Aimage\/.*\Z/
 
+validates :firstname, :presence => true
+validates :lastname, :presence => true
+validates :phonenumber, :presence => true
+validates :streetaddress, :presence => true
+validates :country, :presence => true
+validates :territory, :presence => true
+validates :zipcode, :presence => true
+
+
 has_many :requests
 has_many :flights
 
