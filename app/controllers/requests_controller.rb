@@ -18,6 +18,10 @@ class RequestsController < ApplicationController
     @request.assign_attributes(request_params)
       @flight.requests.push(@request) if @flight
       if @request.save
+        if @flight
+          @deal = Deal.find_by(flight_id: @flight, request_id: @request)
+          @deal.update(requestdeal:true)
+        end  
         redirect_to request_path(@request)
       else
         render :new
