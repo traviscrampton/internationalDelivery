@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.3'
 gem 'rails'
 gem 'pg'
 gem 'uglifier'
@@ -16,6 +17,7 @@ group :development do
   gem 'byebug'
   gem 'web-console'
   gem 'spring'
+  gem 'sqlite3'
   gem 'protected_attributes'
   gem 'geocoder'
   gem 'quiet_assets'
@@ -25,6 +27,11 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'launchy'
   gem 'pry'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :test do
