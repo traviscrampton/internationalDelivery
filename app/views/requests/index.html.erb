@@ -1,4 +1,6 @@
 <div class="container">
+
+  <% if @requests.where(done:false).any? %>
     <h2>Requests</h2>
     <table class="table ">
       <thead>
@@ -28,21 +30,9 @@
         <% end %>
       </tbody>
     </table>
-</div>
-
-
-
-
-<!--
-<div class="container">
-<h2>All Delivery Requests</h2><hr>
-<div class="list_text_size">
-    <% @requests.each do |request| %>
-    <div class="delivery_index">
-      <ul>
-          <hr><li> <%= image_tag request.item.itemimage.url(:thumb)%> <%= link_to request.item.itemname, request_path(request) %> || Coming From: <%= request.fromrequest.airport %> || Going To: <%= request.torequest.airport %></li><hr>
-      </ul>
+  <% else %>
+    <div class="centered footer">
+      <h2>There Are No Requests Currently Posted <%= link_to "Click Here", new_request_path, class:"btn btn-primary" %> To Add A Request! </h2>
     </div>
-    <% end %>
-  </div>
-</div> -->
+  <% end %>
+</div>

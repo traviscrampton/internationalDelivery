@@ -1,20 +1,23 @@
 
 <div class="row">
-  <div class='asdf container' style="background-image: url(<%= @user.coverphoto.url %>);">
-    <div class="col-md-3 nameAndpic">
-      <%= image_tag @user.avatar.url(:thumb), :class => "imag" %><hr>
-      <h2><%= @user.fullname %></h2><hr>
+  <div class='asdf' style="background-image: url(<%= @user.coverphoto.url %>);">
+    <div class="col-md-12">
+
+      <div class="col-md-4 nameAndpic centered">
+        <%= image_tag @user.avatar.url(:medium), :class => "imag" %>
+        <h2><%= @user.fullname %></h2>
+      </div>
     </div>
   </div>
 </div>
 
   <% if current_user.id == @user.id %>
-    <%= link_to 'Edit Profile', edit_user_registration_path, class:"col-md-12 btn btn-default" %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class:"col-md-12 btn btn-danger editbuttn" %>
   <% end %>
   <% if current_user.id == @user.id %>
     <% if @user.requests.any? %>
       <% @user.requests.each do |request| %>
-        <% if request.done == true %>
+        <% if request.done == true && request.flights.where(done:true).any? %>
           <div class="col-md-12 requestColor">
             <div class="centered">
               <h4>Items Confirmed For Delivery</h4>
@@ -51,7 +54,7 @@
     <% end %>
     <% if @user.flights.any? %>
       <% @user.flights.each do |flight| %>
-        <% if flight.done == true %>
+        <% if flight.done == true && flight.requests.where(done:true).any? %>
           <div class="col-md-12 TakeColor">
             <div class="centered">
               <h4>Items You're Taking</h4>
@@ -93,14 +96,15 @@
 
 
 
-    <div class="col-md-12 marginB bordered">
+    <div class="col-md-12 centered marginB bordered sure">
       <div class="centered">
-        <% if current_user.id = @user.id %>
+        <% if current_user.id == @user.id %>
           <h4>Your Requests </h4>
         <% else %>
-          <span style="text-decoration: underline;"><h4><%= @user.fullname %>'s Requests</h4></span>
+          <h4><%= @user.fullname %>'s Requests</h4>
         <% end %>
       </div>
+      <% if @user.requests.where(done:false).any?  %>
         <table class="table">
           <thead>
             <tr>
@@ -128,8 +132,8 @@
                       <% if request.flights.any? && current_user.id == @user.id %>
                         <% request.flights.each do |flight| %>
                           <% flight.deals.each do |deal| %>
-                            <% if deal.flightdeal == true %>
-                              <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalMe">Offers</button><td>
+                            <% if deal.flightdeal == true && current_user.id == @user.id %>
+                              <td><button class="btn btn-warning" data-toggle="modal" data-target="#modalMe">Offers</button><td>
                                 <div class="modal" id="modalMe">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
@@ -171,15 +175,25 @@
             <% end %>
           </tbody>
         </table>
+      <% elsif current_user.id == @user.id %>
+        <div class="centered">
+          <%= link_to "Make A Delivery Request", new_request_path, class:"btn btn-primary buttnmargin "   %>
+        </div>
+      <% else %>
+        <div class="centered">
+          <h5>No Requests Currently</h5>
+        </div>
+      <% end %>
     </div>
     <div class="col-md-12 marginB bordered">
       <div class="centered">
-        <% if current_user.id = @user.id %>
+        <% if current_user.id == @user.id %>
           <h4>Your Flights </h4>
         <% else %>
           <h4><%= @user.fullname %>'s Flights</h4>
         <% end %>
       </div>
+      <% if @user.flights.where(done:false).any? %>
         <table class="table">
           <thead>
             <tr>
@@ -218,6 +232,7 @@
                                                 <th>User</th>
                                                 <th>Item</th>
                                                 <th>Itinerary</th>
+                                                <th>Date</th>
                                               </tr>
                                             </thead>
                                             <tbody>
@@ -244,9 +259,17 @@
               <% end %>
           </tbody>
         </table>
+      <% elsif current_user.id == @user.id %>
+        <div class="centered">
+          <%= link_to "Post A Flight", new_flight_path, class:"btn btn-warning buttnmargin"   %>
+        </div>
+      <% else %>
+        <div class="centered">
+          <h5>No Flights Currently</h5>
+        </div>
+      <% end %>
     </div>
     <div class="col-md-12 borderT"></div>
-
 
 <% if current_user.id == @user.id %>
   <div class="borderT">
@@ -277,7 +300,7 @@
         </div>
         <div class="col-md-6">
           <div class="centered">
-            <h4>Items You've Asked To Take</h4>
+            <h4>Items You've Asked To Have Taken</h4>
               <table class="table table-bordered">
                 <tbody>
                   <% @user.requests.each do |request| %>
@@ -301,7 +324,7 @@
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 <% end %>
 

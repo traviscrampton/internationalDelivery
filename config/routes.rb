@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :requests do
-    resources :items, only: [:edit]
-  end
+
 
   resources :requests do
     resources :flights

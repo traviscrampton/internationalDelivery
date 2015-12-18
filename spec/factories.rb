@@ -10,6 +10,18 @@ FactoryGirl.define do
     territory "California"
     zipcode "93433"
   end
+  factory :user2 do
+    email 'jim@test.com'
+    password 'dapassword'
+    firstname "jim"
+    lastname "Crampton"
+    phonenumber "2813308004"
+    streetaddress "1431 Raspberry Ave"
+    country "United States"
+    territory "California"
+    zipcode "93433"
+  end
+
 
   factory :request do
     daystart "12"

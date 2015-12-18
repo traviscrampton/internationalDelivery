@@ -1,41 +1,36 @@
-<%= javascript_tag do %>
-  comingLat = <%= @flight.fromflight.latitude %>
-  comingLng = <%= @flight.fromflight.longitude %>
-  goingLat = <%= @flight.toflight.latitude %>
-  goingLng = <%= @flight.toflight.longitude %>
-<% end %>
-
 <div class="container">
-    <div class="col-md-2">
-      <%= image_tag @flight.user.avatar.url(:thumb), :class => "imag" %>
-    </div>
-    <div class="col-md-10">
-      <h1> <%= @flight.user.fullname %>'s Itinerary </h1>
-    </div>
+  <div class="col-md-12 centered">
+    <h1><%= image_tag @flight.user.avatar.url(:thumb), :class => "imag roundThumb" %><%= @flight.user.fullname %>'s Itinerary </h1><hr>
+  </div>
   <div class="col-md-12">
-    <h3>Description: <%= @flight.description %></h3><hr>
+    <h3>Description:</h3> <h4><%= @flight.description %></h4><hr>
   </div>
 
 
   <div id="flightInfo">
       <div class="col-md-4">
         <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
+        <div class="fromLat" data-lat="<%= @flight.fromflight.latitude %>"></div>
+        <div class="fromLng" data-lng="<%= @flight.fromflight.longitude %>"></div>
         <div id="frommap" class="littleMaps centered"></div>
       </div>
       <div class="col-md-4 centered">
         <br><br><br>
         <% if current_user.id != @flight.user.id %>
-          <%= link_to "Request them to bring an item", new_flight_request_path(@flight), class:"btn btn-default" %>
+          <%= link_to "Request them to bring an item", new_flight_request_path(@flight), class:"btn btn-primary " %>
         <% elsif current_user.id == @flight.user.id %>
-          <%= link_to "Edit Flight", edit_flight_path, class: "btn btn-default buttn", id:"editflight", remote: true %>
+            <br><br><br>
+          <%= link_to "Edit Flight", edit_flight_path, class: "btn btn-primary buttn", id:"editflight", remote: true %>
             <br><br>
-          <%= link_to "Delete", flight_path(@flight), class: "btn btn-default buttn",
+          <%= link_to "Delete", flight_path(@flight), class: "btn btn-warning buttn",
                                  :data => {:confirm => "Ya sure mate?",
                                            :method => "delete"} %>
         <% end %>
       </div>
       <div class="col-md-4 ">
         <div class="todestination">
+          <div class="toLat" data-lat="<%= @flight.toflight.latitude %>"></div>
+          <div class="toLng" data-lng="<%= @flight.toflight.longitude %>"></div>
           <h5>Flying into: <%= @flight.toflight.airport %></h5><br>
           <div id="tomap" class="littleMaps centered"></div>
         </div>
@@ -44,6 +39,9 @@
     </div>
 
     <div id="flightRender">
+      <div class="centered">
+        <h2>Edit Your Flight Details</h2>
+      </div>
       <%= render 'flightAlone' %>
       <button class="btn btn-default" id="goBack">Nevermind</button>
     </div>

@@ -1,3 +1,41 @@
+<%= javascript_tag do %>
+  comingLat = <%= @request.fromrequest.latitude %>
+  comingLng = <%= @request.fromrequest.longitude %>
+  goingLat = <%= @request.torequest.latitude %>
+  goingLng = <%= @request.torequest.longitude %>
+<% end %>
+<div class="col-md-6">
+  <h2>Bring <%= @request.user.fullname %>'s <%= @request.item.itemname %>! </h2>
+</div>
+<div class="col-md-6">
+  <div class="dateFloat">
+    <% if @request.startdate == "No No, No" %>
+      <h3><%= @request.enddate %></h3>
+    <% else %>
+      <h3>Between <%= @request.startdate %> - <%= @request.enddate %> </h3>
+    <% end %>
+
+  </div>
+</div>
+<div class="col-md-12">
+  <h4> <%= @request.item.itemdescription %> </h4><hr>
+</div>
+<div class="col-md-12 picAndDescription">
+  <div class="col-md-4">
+    <p><%= @request.fromrequest.airport %></p>
+    <div id="frommap" class="littleMaps"></div>
+  </div>
+  <div class="col-md-4 centered">
+    <p><%= @request.item.itemname %></p>
+    <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
+  </div>
+  <div class="col-md-4">
+    <p><%= @request.torequest.airport %></p>
+    <div id="tomap" class="littleMaps"></div>
+  </div>
+</div>
+  <br><br><br>
+
 <%= bootstrap_form_for [@request, @flight] do |f| %>
 
   <div class="field form-group col-md-4">
@@ -28,11 +66,11 @@
       <% end %>
   </div>
 
-  <div class="field form-group">
-    <%= f.text_area :description %>
+  <div class="field form-group col-md-12">
+    <%= f.text_area :description, label: "Description" %>
   </div>
 
-  <div class="actions form-group">
-    <%= f.submit "Submit Response", class:"btn btn-primary" %>
+  <div class="actions form-group col-md-12 centered">
+    <%= f.submit "Submit Response", class:"btn btn-primary postbuttn" %>
   </div>
 <% end %>

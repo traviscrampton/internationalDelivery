@@ -1,29 +1,35 @@
 <div class="container">
-  <div class="tabletxt">
-    <h2>Flights</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Flying From</th>
-          <th>Flying To</th>
-          <th>Date Of Flight:</th>
-          <th>Flight Page</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @flights.each do |flight| %>
-          <% unless flight.done == true %>
-            <tr>
-              <td> <%= link_to flight.user.fullname, user_path(flight.user) %> </td>
-              <td> <%= flight.fromflight.airport %> </td>
-              <td> <%= flight.toflight.airport %> </td>
-              <td> <%= flight.fulldate %> </td>
-              <td> <%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
-            </tr>
-          <% end %>  
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <% if @flights.where(done:false).any? %>
+    <div class="tabletxt">
+      <h2>Flights</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Flying From</th>
+            <th>Flying To</th>
+            <th>Date Of Flight:</th>
+            <th>Flight Page</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @flights.each do |flight| %>
+            <% unless flight.done == true %>
+              <tr>
+                <td> <%= link_to flight.user.fullname, user_path(flight.user) %> </td>
+                <td> <%= flight.fromflight.airport %> </td>
+                <td> <%= flight.toflight.airport %> </td>
+                <td> <%= flight.fulldate %> </td>
+                <td> <%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="centered footer">
+      <h2>There Are No Flights Currently Posted <%= link_to "Click Here", new_flight_path, class:"btn btn-warning" %> To Add A Flight! </h2>
+    </div>
+  <% end %>
 </div>

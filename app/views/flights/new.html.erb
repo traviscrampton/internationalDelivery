@@ -1,44 +1,16 @@
 <div class="container">
-  <% if @request %>
-    <%= javascript_tag do %>
-      comingLat = <%= @request.fromrequest.latitude %>
-      comingLng = <%= @request.fromrequest.longitude %>
-      goingLat = <%= @request.torequest.latitude %>
-      goingLng = <%= @request.torequest.longitude %>
-    <% end %>
-    <div class="col-md-6">
-      <h2>Bring <%= @request.user.fullname %>'s <%= @request.item.itemname %>! </h2>
-    </div>
-    <div class="col-md-6">
-      <div class="dateFloat">
-        <% if @request.startdate == "No No, No" %>
-          <h3><%= @request.enddate %></h3>
-        <% else %>
-          <h3>Between <%= @request.startdate %> - <%= @request.enddate %> </h3>
-        <% end %>
-
-      </div>
-    </div>
-    <div class="col-md-12">
-      <h4> <%= @request.item.itemdescription %> </h4><hr>
-    </div>
-      <div class="col-md-4">
-        <p><%= @request.fromrequest.airport %></p>
-        <div id="frommap" class="littleMaps"></div>
-      </div>
-      <div class="col-md-4 centered">
-        <p><%= @request.item.itemname %></p>
-        <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
-      </div>
-      <div class="col-md-4">
-        <p><%= @request.torequest.airport %></p>
-        <div id="tomap" class="littleMaps"></div>
-      </div>
+  <% if current_user %>
+    <% if @request %>
       <div class="col-md-12 formMargin">
         <%= render 'form' %>
       </div>
     <% else %>
-    <h2>Post A Flight</h2>
+      <div class="centered">
+        <h2>Post A Flight</h2>
+      </div>
       <%= render 'flightAlone' %>
     <% end %>
+  <% else %>
+      <h2>Please <%= link_to 'Sign Up', new_user_registration_path %> Or <%= link_to 'Log In', new_user_session_path %> To Post A Flight</h2>
+  <% end %>
   </div>

@@ -1,7 +1,6 @@
-
-    function initMap() {
-      var comingFrom = {lat: comingLat, lng: comingLng};
-      var goingTo = {lat: goingLat, lng: goingLng};
+  function initMap() {
+      var comingFrom = {lat: $(".fromLat").data("lat"), lng: $(".fromLng").data("lng")}
+      var goingTo = {lat: $(".toLat").data("lat"), lng: $(".toLng").data("lng")}
 
 
       var map = new google.maps.Map(document.getElementById('frommap'), {

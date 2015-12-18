@@ -1,1 +1,14 @@
-$('#keepItHidden').show();
+$( document).ready(function() {
+
+  $("#editButton").click(function(){
+    $('#RequestPage').hide();
+    $('#editRender').show();
+  });
+
+
+  $("#backToNorm").click(function(){
+    $("#editRender").hide();
+    $('#RequestPage').show()
+  });
+
+});

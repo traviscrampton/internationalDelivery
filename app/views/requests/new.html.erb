@@ -4,7 +4,10 @@
     <% if @flight %>
         <%= render 'flightRequest' %>
     <% else %>
-        <%= render 'form' %>
+      <div class="centered">
+        <h1>Request an International Delivery</h1>
+      </div>
+      <%= render 'form' %>
     <% end %>
       </div>
   <% else %>

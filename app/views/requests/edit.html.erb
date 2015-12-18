@@ -1,3 +1,6 @@
-<h3>Edit <%= @request.item.itemname %></h3>
-
-<%= render 'form' %>
+<div class="container">
+  <div class="centered">
+    <h3> <%= image_tag @request.item.itemimage.url(:thumb), class:"roundThumb" %>   Edit Request For Your <%= @request.item.itemname %>  </h3>
+  </div>
+    <%= render 'form' %>
+</div>

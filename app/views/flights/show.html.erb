@@ -1,9 +1,4 @@
-<%= javascript_tag do %>
-  comingLat = <%= @flight.fromflight.latitude %>
-  comingLng = <%= @flight.fromflight.longitude %>
-  goingLat = <%= @flight.toflight.latitude %>
-  goingLng = <%= @flight.toflight.longitude %>
-<% end %>
+
 <% if current_user.id == @flight.user.id %>
       <div class="container">
         <% if @deal.flightdeal == true && @deal.requestdeal == false %>
@@ -42,20 +37,24 @@
               <div class="col-md-1"></div>
               <div class="col-md-4 centered">
                   <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
+                  <div class="fromLat" data-lat="<%= @flight.fromflight.latitude %>"></div>
+                  <div class="fromLng" data-lng="<%= @flight.fromflight.longitude %>"></div>
                   <div id="frommap" class="littleMaps"></div>
               </div>
               <div class="col-md-2 ">
                 <br><br><br>
                 <% if @deal.flightdeal == false && @deal.requestdeal == true %>
-                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalGo">I'll Take It!</button>
-                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+                  <button class="btn btn-primary centered otherbuttn" data-toggle="modal" data-target="#modalGo">I'll Take It!</button>
+                  <button class="btn btn-warning centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
                 <% elsif @deal.flightdeal == true && @deal.requestdeal == false %>
                   <br><br><br>
-                  <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNever">Nevermind</button>
+                  <button class="btn btn-warning centered otherbuttn" data-toggle="modal" data-target="#modalNever">Nevermind</button>
                 <% end %>
               </div>
               <div class="col-md-4 centered">
                 <h5>Flying To: <%= @flight.toflight.airport %> </h5><br>
+                <div class="toLat" data-lat="<%= @flight.toflight.latitude %>"></div>
+                <div class="toLng" data-lng="<%= @flight.toflight.longitude %>"></div>
                 <div id="tomap" class="littleMaps"></div>
               </div>
               <div class="col-md-1"></div>

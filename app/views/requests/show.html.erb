@@ -1,56 +1,36 @@
-<%= javascript_tag do %>
-  comingLat = <%= @request.fromrequest.latitude %>
-  comingLng = <%= @request.fromrequest.longitude %>
-  goingLat = <%= @request.torequest.latitude %>
-  goingLng = <%= @request.torequest.longitude %>
-<% end %>
 
 
 <div class="container">
+  <div id="RequestPage">
+
   <div class="col-md-12">
     <h2><%= image_tag @request.user.avatar(:thumb), class:'roundThumb'%>  <%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5><hr>
   </div>
-      <div id="nameAndDescription">
-      <div class="col-md-4 item_border">
-        <h1><%= @request.item.itemname %></h1>
-        <%= image_tag @request.item.itemimage.url(:medium), class:"imgRequest" %>
+  <div class="col-md-12 picAndDescription">
+    <div class="col-md-6 item_border centered">
+      <h1><%= @request.item.itemname %></h1>
+      <%= image_tag @request.item.itemimage.url(:medium), class:"imgRequest" %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="centered">
+        <h1>Description</h1><hr>
+        <h4><%= @request.item.itemdescription %></h4>
       </div>
-      <div class="col-md-8">
-        <h1>Description:</h1>
-      <%= @request.item.itemdescription %></h4>
+      <br>
+        <% if current_user.id == @request.user_id %>
+        <% end %>
+    </div>
 
-          <% if current_user.id == @request.user_id %>
-            <%= link_to "Edit Item", edit_request_item_path(@request, @item), class:'btn btn-default buttn', id:"editButton", remote: true %>
-          <% end %>
-        </div>
-      </div>
-        <div id="editRender">
-          <%= render 'items/form' %>
-          <button class="btn btn-default" id="backToNorm">Nevermind</button>
-        </div>
-
-
-      <!-- <div class="col-md-4">
-        <div class="bringbtn">
-          <% if current_user.id != @request.user.id %>
-            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default" %>
-          <% end %>
-        </div> -->
-
-    <div id="keepItHidden">
-      <div class="col-md-12">
-        <div class="keepItmargin">
-          <h1>Edit Your Dates and Locations</h1><hr>
-          <%= render 'form' %>
-          <%= link_to "Nevermind", request_path(@request), class:'btn btn-default ', remote:true %>
-        </div>
-      </div>
   </div>
-<br><br>
-  <div >
-    <div class="col-md-12 mapsandthings">
 
+
+
+    <div class="col-md-12 mapsandthings">
+      <div id="MapsAndButtons">
     <div class="col-md-4">
+        <div class="fromLat" data-lat="<%= @request.fromrequest.latitude %>"></div>
+        <div class="fromLng" data-lng="<%= @request.fromrequest.longitude %>"></div>
         <h4>From: <%= @request.fromrequest.airport %></h4><hr>
         <div id="frommap" class="littleMaps"></div>
     </div>
@@ -59,26 +39,35 @@
       <h4> <%= @request.startdate %> - <%= @request.enddate %> </h4><hr>
       <div class="editanddelete">
         <% if current_user.id == @request.user_id %>
-
-        <%= link_to 'Edit Request', edit_request_path(@request), class:"btn btn-default buttn", remote:true %>
+        <br><br><br>
+        <%= link_to "Edit Request", edit_request_path(@request), class:'btn btn-primary buttn', id:"editButton"%>
           <br><br><br><br>
-        <%= link_to "Delete", request_path(@request), class: "btn btn-default buttn",
+        <%= link_to "Delete", request_path(@request), class: "btn btn-warning buttn",
                                :data => {:confirm => "Ya sure mate?",
                                          :method => "delete"} %>
           <% else %>
-            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default buttn" %>
+            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-warning buttn" %>
           <% end %>
-
       </div>
     </div>
 
     <div class="col-md-4">
       <h4>To: <%= @request.torequest.airport %></h4><hr>
-      <div id="tomap" class="littleMaps"></div>
-    </div>
+      <div class="toLat" data-lat="<%= @request.torequest.latitude %>"></div>
+      <div class="toLng" data-lng="<%= @request.torequest.longitude %>"></div>
+      <div id="tomap" class="littleMaps" ></div>
     </div>
   </div>
+  <div id="editRequestRender">
+    <%= render 'requestedit' %>
+    <button class="btn btn-default" id="ShowTheRequest">Nevermind</button>
+  </div>
 
+</div>
+</div>
   <br><br>
-
-      </div>
+  <div id="editRender">
+    <%= render 'form' %>
+    <button class="btn btn-default" id="backToNorm">Nevermind</button>
+  </div>
+</div>

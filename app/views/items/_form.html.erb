@@ -1,14 +1,7 @@
-<%= bootstrap_form_for [@request] do |f| %>
+<%= bootstrap_form_for [@request], remote:true, :authenticity_token => true do |f| %>
   <%= f.fields_for :item do |i| %>
     <%= i.text_field :itemname, label:"What Is The Item?" %>
-  <% end %>
-  <%= f.fields_for :item do |i| %>
     <%= i.text_area :itemdescription, label:"Item Description" %>
-  <% end %>
-  <%= f.fields_for :item do |i| %>
     <%= i.file_field :itemimage, label:"Upload an Image"%>
   <% end %>
-  <div class="actions form-group">
-    <%= f.submit "Edit", class:"btn btn-primary" %>
-  </div>
 <% end %>
