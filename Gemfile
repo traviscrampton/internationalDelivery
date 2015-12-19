@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
 gem 'rails'
-gem 'pg'
+gem 'geocoder'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -17,9 +16,7 @@ group :development do
   gem 'byebug'
   gem 'web-console'
   gem 'spring'
-  gem 'sqlite3'
   gem 'protected_attributes'
-  gem 'geocoder'
   gem 'quiet_assets'
 end
 
@@ -40,3 +37,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
 end
+
+ruby "2.2.3"
