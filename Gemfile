@@ -11,8 +11,7 @@ gem 'devise'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'bootstrap_form'
 gem 'masonry-rails'
-gem 'aws-sdk', '~> 2.2', '>= 2.2.8'
-
+gem 'aws-sdk', '< 2.0'
 group :development do
   gem 'byebug'
   gem 'web-console'
