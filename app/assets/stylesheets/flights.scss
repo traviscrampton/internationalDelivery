@@ -1,0 +1,38 @@
+.flight_description_box{
+  background-color: white;
+  padding-bottom: 2%;
+  text-align: center;
+  box-shadow: 2px 2px 2px 2px rgba(128,0,0, 0.8);
+  strong{
+    float: left;
+    margin-right: 2%;
+  }
+  h2{
+    margin-top: 1%;
+    text-align: center;
+  }
+     h5{
+      padding: 1%;
+      text-align: center;
+      margin: 20px 15% 20px 15%;
+    }
+}
+.flight_map_box{
+  background-color: white;
+  padding-bottom: 2%;
+  text-align: center;
+  margin: 20px auto 20px auto;
+  box-shadow: 2px 2px 2px 2px rgba(197,179,88, 0.8);
+    strong{
+      float: left;
+      margin-right: 2%;
+    }
+    h2{
+      margin-top: 1%;
+      text-align: center;
+    }
+}
+
+.edit_form{
+  margin-top: 20px;
+}

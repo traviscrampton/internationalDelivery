@@ -1,16 +1,18 @@
-  <div class="container ">
+  <div class="container">
+    <div class="user_request_box">
+      <br>
     <% if current_user.id == @request.user.id %>
     <% if @deal.flightdeal == false && @deal.requestdeal == true %>
         <div class="centered">
-          <h3> Still Waiting To Hear Back Whether <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %></h3><hr>
+          <h3> Still Waiting To Hear Back Whether <%= @flight.user.fullname %> Will Take Your <%= @request.item.itemname %></h3><br>
         </div>
     <% elsif @deal.flightdeal == true && @deal.requestdeal == false %>
       <div class="centered">
-        <h3><%= @flight.user.fullname %> Is Interested In Taking Your <%= @request.item.itemname %></h3><hr>
+        <h3><%= @flight.user.fullname %> Is Interested In Taking Your <%= @request.item.itemname %></h3><br>
       </div>
       <% elsif @request.done == true %>
         <div class="centered">
-          <h3>Confirmed: <%= @flight.user.fullname %> Is Taking Your <%= @request.item.itemname %></h3><hr>
+          <h3>Confirmed: <%= @flight.user.fullname %> Is Taking Your <%= @request.item.itemname %></h3><br>
         </div>
       <% end %>
     <% end %>
@@ -26,35 +28,36 @@
                     <td> <%= @flight.description %> </td>
                   </div>
                   <div class="col-md-3 fright">
-                    <td><%= image_tag @request.item.itemimage.url(:thumb), class:"roundThumb fright" %></td>
+                    <td><%= image_tag @request.item.itemimage.url(:thumb), class:"roundThumb" %></td>
                   </div>
               <% end %>
               </tr>
             </tbody>
           </div>
         </table>
-        <div class="col-md-12">
-          <div class="col-md-1"></div>
-          <div class="col-md-4 centered">
+        <br><br>
+      </div>
+        <div class="col-md-12 map_box">
+          <div class="col-md-4">
             <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
             <div class="fromLat" data-lat="<%= @flight.fromflight.latitude %>"></div>
             <div class="fromLng" data-lng="<%= @flight.fromflight.longitude %>"></div>
             <div id="frommap" class="littleMaps"></div>
           </div>
-          <div class="col-md-2">
-            <div class="centered">
+          <div class="col-md-4">
               <h4><%= @flight.fulldate %></h4>
-            </div>
-              <br><br>
             <% if current_user.id == @request.user.id && @deal.flightdeal == false && @deal.requestdeal == true %>
-              <br><br><br>
-              <button class="btn btn-primary centered otherbuttn" data-toggle="modal" data-target="#modalCancel">Nevermind</button>
+            <div class="decide_buttons">
+              <button class="btn btn-default nevermind" data-toggle="modal" data-target="#modalCancel">Nevermind</button>
+            </div>
             <% elsif current_user.id == @request.user.id && @deal.flightdeal == true && @deal.requestdeal == false %>
-              <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalTake">Let Em Take It</button>
-              <button class="btn btn-default centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+            <div class="decide_buttons">
+              <button class="btn btn-default" data-toggle="modal" data-target="#modalTake">Let Em Take It</button>
+              <button class="btn btn-default" data-toggle="modal" data-target="#modalNo">No Thanks</button>
+            </div>
             <% end %>
           </div>
-          <div class="col-md-4 centered">
+          <div class="col-md-4">
             <h5>Flying To: <%= @flight.toflight.airport %> </h5><br>
             <div class="toLat" data-lat="<%= @flight.toflight.latitude %>"></div>
             <div class="toLng" data-lng="<%= @flight.toflight.longitude %>"></div>

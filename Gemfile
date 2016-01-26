@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.2.3"
+
 gem 'rails'
 gem 'geocoder'
 gem 'uglifier'
@@ -12,6 +14,7 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'bootstrap_form'
 gem 'masonry-rails'
 gem 'aws-sdk', '< 2.0'
+
 group :development do
   gem 'byebug'
   gem 'web-console'
@@ -37,5 +40,3 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
 end
-
-ruby "2.2.3"

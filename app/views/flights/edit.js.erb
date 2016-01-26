@@ -1,7 +1,1 @@
-$('#flightInfo').hide()
-$('#flightRender').show()
-
-$('#goBack').click(function(){
-  $('#flightRender').hide()
-  $('#flightInfo').show()
-});
+$('#flightInfo').replaceWith("<%= j render 'flightAlone' %>");

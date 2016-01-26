@@ -1,9 +1,10 @@
-
 <% if current_user.id == @flight.user.id %>
       <div class="container">
+        <div class="user_request_box">
+          <br>
         <% if @deal.flightdeal == true && @deal.requestdeal == false %>
           <div class="centered">
-            <h2> Still Waiting To See If <%= @request.user.fullname %> wants you to bring their <%= @request.item.itemname %> </h2><hr>
+            <h2> Still Waiting To See If <%= @request.user.fullname %> wants you to bring their <%= @request.item.itemname %> </h2>
           </div>
         <% elsif @deal.flightdeal == false && @deal.requestdeal == true %>
           <div class="centered">
@@ -11,9 +12,10 @@
           </div>
         <% elsif @deal.flightdeal == true && @deal.requestdeal == true %>
           <div class="centered">
-            <h1> Confirmed: You are bringing <%= link_to @request.user.fullname, user_path(@request.user) %>'s <%= @request.item.itemname %>! </h1><hr>
+            <h1> Confirmed: You are bringing <%= link_to @request.user.fullname, user_path(@request.user) %>'s <%= @request.item.itemname %>! </h1><br>
           </div>
         <% end %>
+        <br>
           <table class="table table-bordered">
             <div class="col-md-12">
               <tbody>
@@ -33,31 +35,31 @@
               </tbody>
             </div>
           </table>
-            <div class="col-md-12 buttonUnite">
-              <div class="col-md-1"></div>
-              <div class="col-md-4 centered">
+          <br><br>
+        </div>
+            <div class="col-md-12 map_box">
+              <div class="col-md-4">
                   <h5>Flying From: <%= @flight.fromflight.airport %> </h5><br>
                   <div class="fromLat" data-lat="<%= @flight.fromflight.latitude %>"></div>
                   <div class="fromLng" data-lng="<%= @flight.fromflight.longitude %>"></div>
                   <div id="frommap" class="littleMaps"></div>
               </div>
-              <div class="col-md-2 ">
-                <br><br><br>
+              <div class="col-md-4">
                 <% if @deal.flightdeal == false && @deal.requestdeal == true %>
                   <button class="btn btn-primary centered otherbuttn" data-toggle="modal" data-target="#modalGo">I'll Take It!</button>
                   <button class="btn btn-warning centered otherbuttn" data-toggle="modal" data-target="#modalNo">No Thanks</button>
                 <% elsif @deal.flightdeal == true && @deal.requestdeal == false %>
-                  <br><br><br>
-                  <button class="btn btn-warning centered otherbuttn" data-toggle="modal" data-target="#modalNever">Nevermind</button>
+                  <div class="decide_buttons">
+                    <button class="btn btn-default nevermind" data-toggle="modal" data-target="#modalNever">Nevermind</button>
+                  </div>
                 <% end %>
               </div>
-              <div class="col-md-4 centered">
+              <div class="col-md-4">
                 <h5>Flying To: <%= @flight.toflight.airport %> </h5><br>
                 <div class="toLat" data-lat="<%= @flight.toflight.latitude %>"></div>
                 <div class="toLng" data-lng="<%= @flight.toflight.longitude %>"></div>
                 <div id="tomap" class="littleMaps"></div>
               </div>
-              <div class="col-md-1"></div>
             </div>
               <div class="modal" id="modalGo">
                 <div class="modal-dialog1">

@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class='asdf' style="background-image: url(<%= @user.coverphoto.url %>);">
+  <div class='profile_head' style="background-image: url(<%= @user.coverphoto.url %>);">
     <div class="col-md-12">
 
       <div class="col-md-4 nameAndpic centered">
@@ -96,7 +96,7 @@
 
 
 
-    <div class="col-md-12 centered marginB bordered sure">
+    <div class="col-md-12 centered bordered">
       <div class="centered">
         <% if current_user.id == @user.id %>
           <h4>Your Requests </h4>

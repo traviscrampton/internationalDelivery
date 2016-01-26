@@ -5,40 +5,32 @@
     </div>
     <br><br>
     <% if !current_user %>
-      <%= link_to 'Sign Up', new_user_registration_path, class:'btn btn-primary buttn' %>
-      <%= link_to 'Log in', new_user_session_path, class: 'btn btn-warning buttn' %>
+    <div class="homebuttn">
+      <%= link_to 'Sign Up', new_user_registration_path %>
+      <%= link_to 'Log in', new_user_session_path %>
+    </div>
     <% end %>
   </div>
   <br>
 
-  <div class="col-md-12">
-    <div class="col-md-4 undertext">
-      <div class="centered">
+  <div class="col-md-12 under_text">
+    <div class="col-md-4">
         <h3>What is it?</h3><hr>
-      </div>
-      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank. <%= link_to "READ MORE[...]", new_user_registration_path %></p>
-      <div class="imagetag buttonUnite centered">
+      <p>Get It International Delivery solves the problem of not being able to get items that you need that aren't available in your current country, through connecting users who are already coming to your current country you can coordinate them to bring the items that you want and need! An example being if you  needed a pair of trekking boots in made in the United States but you need them to get to Thailand. Coordinate with people coming to vacation in Thailand who can bring what you'd like. </p>
         <%=image_tag("air6.png", alt: "Example Image")%>
-      </div>
     </div>
 
-    <div class="col-md-4 undertext">
-      <div class="centered">
+    <div class="col-md-4">
         <h3>How Does It Work?</h3><hr>
-      </div>
-      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank.<%= link_to "READ MORE[...]", new_user_registration_path %></p>
-      <div class="imagetag centered">
+      <p>Users can use this platform to coordinate with each other by Simply Sign-up or Log-in and you'll be able to add either items that you need, or flights that you have to our site and users who are wanting to make a few bucks by bringing over your things, or those who need items delivered can look at your items and contact you if neccesary! A great way to get into contact with those who would be able to either help or for someone who needs help. It's as easy as joining our community to get started.</p>
+      <div class="image_middle">
         <%=image_tag("package36", alt: "Example Image")%>
       </div>
     </div>
 
-    <div class="col-md-4 undertext">
-      <div class="centered">
+    <div class="col-md-4">
         <h3>Pay for your Luggage</h3><hr>
-      </div>
-      <p>con ipsum dolor amet sausage beef ribs tenderloin kevin doner tri-tip shoulder pork loin pastrami tail. Kielbasa kevin drumstick, pork belly spare ribs pork loin frankfurter shoulder cow landjaeger shankle. Rump tenderloin pig t-bone jowl, andouille pork belly fatback spare ribs venison meatloaf pork chop turducken shank porchetta. Sirloin ground round short loin, prosciutto hamburger tongue jowl salami frankfurter picanha bresaola. Landjaeger swine pork chicken, short ribs tri-tip tongue fatback flank. <%= link_to "READ MORE[...]", new_user_registration_path %></p>
-      <div class="imagetag centered">
+      <p>For Users who are willing to bring things over for those who are already in the country, it's a great opportunity to save money on your current luggage. Travelers can pay for a good amount of their luggage just by bringing smaller items. For people getting items delivered they are able to save huge sums of money as international delivery is quite expensive. So for both parties its a win-win situation.  Users who use our platform are able to save money on shipping when it would otherwise be very expensive.</p>
         <%=image_tag("delivery33.png", alt: "Example Image")%>
-      </div>
     </div>
   </div>

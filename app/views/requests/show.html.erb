@@ -3,56 +3,62 @@
 <div class="container">
   <div id="RequestPage">
 
-  <div class="col-md-12">
-    <h2><%= image_tag @request.user.avatar(:thumb), class:'roundThumb'%>  <%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5><hr>
+  <div class="col-md-12 user_request_box">
+    <h2><%= image_tag @request.user.avatar(:thumb), class:'roundThumb'%>  <%=  link_to  @request.user.fullname, user_path(@request.user) %></h2><h5><%= @request.user.email %></h5>
   </div>
-  <div class="col-md-12 picAndDescription">
-    <div class="col-md-6 item_border centered">
-      <h1><%= @request.item.itemname %></h1>
+  <div class="col-md-12 description_box">
+    <div class="col-md-6">
+      <h2><%= @request.item.itemname %></h2>
       <%= image_tag @request.item.itemimage.url(:medium), class:"imgRequest" %>
     </div>
-
     <div class="col-md-6">
-      <div class="centered">
-        <h1>Description</h1><hr>
+      <div>
+        <h2>Description</h2>
         <h4><%= @request.item.itemdescription %></h4>
+        <h5><strong>From:</strong><%= @request.fromrequest.airport %></h5>
+        <h5><strong>To: </strong><%= @request.torequest.airport %></h5>
+        <h4> <%= @request.startdate %> - <%= @request.enddate %> </h4>
       </div>
       <br>
-        <% if current_user.id == @request.user_id %>
-        <% end %>
     </div>
 
   </div>
 
 
 
-    <div class="col-md-12 mapsandthings">
+    <div class="col-md-12 mapsandthings map_box">
       <div id="MapsAndButtons">
     <div class="col-md-4">
         <div class="fromLat" data-lat="<%= @request.fromrequest.latitude %>"></div>
         <div class="fromLng" data-lng="<%= @request.fromrequest.longitude %>"></div>
-        <h4>From: <%= @request.fromrequest.airport %></h4><hr>
+        <h5>From: <%= @request.fromrequest.airport %></h5><hr>
         <div id="frommap" class="littleMaps"></div>
     </div>
 
-    <div class="col-md-4 midtext centered">
-      <h4> <%= @request.startdate %> - <%= @request.enddate %> </h4><hr>
-      <div class="editanddelete">
-        <% if current_user.id == @request.user_id %>
-        <br><br><br>
-        <%= link_to "Edit Request", edit_request_path(@request), class:'btn btn-primary buttn', id:"editButton"%>
-          <br><br><br><br>
-        <%= link_to "Delete", request_path(@request), class: "btn btn-warning buttn",
-                               :data => {:confirm => "Ya sure mate?",
-                                         :method => "delete"} %>
+    <div class="col-md-4 centered">
+        <% if current_user %>
+          <% if current_user.id == @request.user_id %>
+          <div class="your_buttons">
+            <%= link_to "Edit Request", edit_request_path(@request), class:'btn btn-default', id:"editButton"%>
+            <%= link_to "Delete", request_path(@request), class: "btn btn-default",
+                                   :data => {:confirm => "Ya sure mate?",
+                                             :method => "delete"} %>
+          </div>
           <% else %>
-            <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-warning buttn" %>
+            <div class="your_buttons">
+              <%= link_to "Bring Item", new_request_flight_path(@request), class:"btn btn-default" %>
+            </div>
+            <% end %>
+          <% else %>
+            <div class="user_buttons">
+              <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-default" %>
+              <%= link_to 'Log in', new_user_session_path, class:"btn btn-default" %>
+            </div>
           <% end %>
-      </div>
     </div>
 
     <div class="col-md-4">
-      <h4>To: <%= @request.torequest.airport %></h4><hr>
+      <h5>To: <%= @request.torequest.airport %></h5><hr>
       <div class="toLat" data-lat="<%= @request.torequest.latitude %>"></div>
       <div class="toLng" data-lng="<%= @request.torequest.longitude %>"></div>
       <div id="tomap" class="littleMaps" ></div>

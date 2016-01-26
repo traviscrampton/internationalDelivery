@@ -1,76 +1,72 @@
-<%= javascript_tag do %>
-  comingLat = <%= @request.fromrequest.latitude %>
-  comingLng = <%= @request.fromrequest.longitude %>
-  goingLat = <%= @request.torequest.latitude %>
-  goingLng = <%= @request.torequest.longitude %>
-<% end %>
-<div class="col-md-6">
-  <h2>Bring <%= @request.user.fullname %>'s <%= @request.item.itemname %>! </h2>
-</div>
-<div class="col-md-6">
-  <div class="dateFloat">
-    <% if @request.startdate == "No No, No" %>
-      <h3><%= @request.enddate %></h3>
-    <% else %>
-      <h3>Between <%= @request.startdate %> - <%= @request.enddate %> </h3>
+  <div class="container">
+
+    <div class="form_user_request_box">
+      <div class="col-md-12">
+        <div class="col-md-6 ">
+          <h3> <%= image_tag @request.user.avatar.url(:pic) %> Bring <%= @request.user.fullname %>'s <%= @request.item.itemname %>! </h3>
+        </div>
+        <div class="col-md-6">
+          <% if @request.startdate == "No No, No" %>
+            <h3><%= @request.enddate %></h3>
+          <% else %>
+            <h3>Between <%= @request.startdate %> - <%= @request.enddate %> </h3>
+          <% end %>
+        </div>
+      </div>
+        <h4> <%= @request.item.itemdescription %> </h4><br>
+    </div>
+  <div class="col-md-12 description_box">
+    <div class="col-md-4">
+      <p><%= @request.fromrequest.airport %></p>
+      <div class="fromLat" data-lat="<%= @request.fromrequest.latitude %>"></div>
+      <div class="fromLng" data-lng="<%= @request.fromrequest.longitude %>"></div>
+      <div id="frommap" class="littleMaps"></div>
+    </div>
+    <div class="col-md-4 centered">
+      <p><%= @request.item.itemname %></p>
+      <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
+    </div>
+    <div class="col-md-4">
+      <p><%= @request.torequest.airport %></p>
+      <div class="toLat" data-lat="<%= @request.torequest.latitude %>"></div>
+      <div class="toLng" data-lng="<%= @request.torequest.longitude %>"></div>
+      <div id="tomap" class="littleMaps" ></div>
+    </div>
+  </div>
+
+  <div class="col-md-12 map_box">
+    <h2>Please Enter Your Flight Details</h2><hr>
+    <%= bootstrap_form_for [@request, @flight] do |f| %>
+      <div class="field form-group col-md-4">
+        <%= f.select(:day, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ])) %>
+      </div>
+      <div class="field form-group col-md-4">
+        <%= f.select(:month, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ])) %>
+      </div>
+      <div class="field form-group col-md-4">
+        <%= f.select(:year, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ])) %>
+      </div>
+      <div class="field form-group">
+        <%= f.fields_for :toflight do |p| %>
+          <%= p.hidden_field :airport, value: @request.torequest.airport %>
+        <% end %>
+      </div>
+      <div class="field form-group">
+        <%= f.fields_for :fromflight do |p| %>
+          <%= p.hidden_field :airport, value: @request.fromrequest.airport %>
+        <% end %>
+      </div>
+      <div class="field form-group">
+          <%= f.fields_for :deal do |p| %>
+            <%= p.hidden_field :flightdeal, value: true %>
+          <% end %>
+      </div>
+      <div class="field form-group col-md-12">
+        <%= f.text_area :description, label: "Description" %>
+      </div>
+      <div class="actions form-group col-md-12 centered">
+        <%= f.submit "Submit Response", class:"submitter" %>
+      </div>
     <% end %>
-
   </div>
 </div>
-<div class="col-md-12">
-  <h4> <%= @request.item.itemdescription %> </h4><hr>
-</div>
-<div class="col-md-12 picAndDescription">
-  <div class="col-md-4">
-    <p><%= @request.fromrequest.airport %></p>
-    <div id="frommap" class="littleMaps"></div>
-  </div>
-  <div class="col-md-4 centered">
-    <p><%= @request.item.itemname %></p>
-    <%= image_tag @request.item.itemimage.url(:medium), class:'imgRequest' %>
-  </div>
-  <div class="col-md-4">
-    <p><%= @request.torequest.airport %></p>
-    <div id="tomap" class="littleMaps"></div>
-  </div>
-</div>
-  <br><br><br>
-
-<%= bootstrap_form_for [@request, @flight] do |f| %>
-
-  <div class="field form-group col-md-4">
-    <%= f.select(:day, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ])) %>
-  </div>
-
-  <div class="field form-group col-md-4">
-    <%= f.select(:month, options_for_select([['January'], ['Feburary'], ['March'], ['April'], ['May'], ['June'], ['July'], ['August'], ['September'], ['October'], ['November'], ['December'] ])) %>
-  </div>
-
-  <div class="field form-group col-md-4">
-    <%= f.select(:year, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ])) %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.fields_for :toflight do |p| %>
-      <%= p.hidden_field :airport, value: @request.torequest.airport %>
-    <% end %>
-  </div>
-  <div class="field form-group">
-    <%= f.fields_for :fromflight do |p| %>
-      <%= p.hidden_field :airport, value: @request.fromrequest.airport %>
-    <% end %>
-  </div>
-  <div class="field form-group">
-      <%= f.fields_for :deal do |p| %>
-        <%= p.hidden_field :flightdeal, value: true %>
-      <% end %>
-  </div>
-
-  <div class="field form-group col-md-12">
-    <%= f.text_area :description, label: "Description" %>
-  </div>
-
-  <div class="actions form-group col-md-12 centered">
-    <%= f.submit "Submit Response", class:"btn btn-primary postbuttn" %>
-  </div>
-<% end %>

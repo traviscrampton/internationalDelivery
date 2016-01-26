@@ -1,9 +1,8 @@
 
 
   <%= bootstrap_form_for [@request] do |f| %>
-<div class="dates">
   <h4>Pick A Date Range</h4><hr>
-</div>
+
 
     <div class="field form-group col-md-2">
       <%= f.select(:daystart, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10], ['11', 11], ['12', 12], ['13', 13], ['14', 14], ['15', 15], ['16', 16], ['16', 16], ['17', 17], ['18', 18], ['19', 19], ['20', 20], ['21', 21], ['22', 22], ['23', 23], ['24', 24], ['25', 25], ['26', 26], ['27', 27], ['29', 29], ['30', 30], ['31', 31], ]), label: 'Start Day')%>
@@ -24,9 +23,8 @@
     <div class="field form-group col-md-2">
       <%= f.select(:yearend, options_for_select([['2015'], ['2016'], ['2017'], ['2018'], ['2019'], ['2020'] ]), label: 'End Year') %>
     </div>
-    <div class="col-md-12 ">
       <h4>From Where to Where?</h4><hr>
-    </div>
+      <div class="dont-center">
 
     <%= f.fields_for :fromrequest do |p| %>
       <%= p.text_field :airport, label:"Which Airport Do You Want The Item Flown From?" %>
@@ -45,6 +43,6 @@
     <% end %>
 
     <div class="actions form-group centered">
-      <%= f.submit "Post Request", class:"btn btn-primary postbuttn" %>
+      <%= f.submit "Post Request", class:"submitter" %>
     </div>
     <% end %>

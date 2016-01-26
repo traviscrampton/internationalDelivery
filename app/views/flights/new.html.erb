@@ -1,16 +1,14 @@
-<div class="container">
-  <% if current_user %>
-    <% if @request %>
-      <div class="col-md-12 formMargin">
-        <%= render 'form' %>
-      </div>
-    <% else %>
-      <div class="centered">
-        <h2>Post A Flight</h2>
-      </div>
-      <%= render 'flightAlone' %>
-    <% end %>
-  <% else %>
-      <h2>Please <%= link_to 'Sign Up', new_user_registration_path %> Or <%= link_to 'Log In', new_user_session_path %> To Post A Flight</h2>
-  <% end %>
+  <div class="container">
+    <% if current_user %>
+      <% if @request %>
+          <%= render 'form' %>
+      <% else %>
+        <div class="form_box">
+          <h1>Post A Flight</h1>
+            <%= render 'flightAlone' %>
+        </div>
+      <% end %>
   </div>
+    <% else %>
+      <h2>Please <%= link_to 'Sign Up', new_user_registration_path %> or <%= link_to 'Log In', new_user_session_path %> to request a delievery</h2>
+    <% end %>

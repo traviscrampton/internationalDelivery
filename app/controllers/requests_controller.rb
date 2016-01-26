@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
         if @flight
           @deal = Deal.find_by(flight_id: @flight, request_id: @request)
           @deal.update(requestdeal:true)
-        end  
+        end
         redirect_to request_path(@request)
       else
         render :new
@@ -66,7 +66,6 @@ class RequestsController < ApplicationController
         end
       redirect_to user_path(current_user)
     elsif params[:toggle] == 'false'
-      binding.pry
       @deal = Deal.find_by(flight_id: @flight, request_id: @request)
       @deal.update(flightdeal:false)
       redirect_to user_path(current_user)

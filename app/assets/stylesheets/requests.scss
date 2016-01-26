@@ -1,0 +1,148 @@
+
+.description_box{
+  background-color: white;
+  padding-bottom: 2%;
+  text-align: center;
+  box-shadow: 2px 2px 2px 2px rgba(128,0,0, 0.8);
+  strong{
+    float: left;
+    margin-right: 2%;
+  }
+  h2{
+    margin-top: 1%;
+    text-align: center;
+  }
+     h5{
+      padding: 1%;
+      background-color: #f8f8f8;
+      text-align: left;
+      margin: 20px 15% 20px 15%;
+    }
+    .imgRequest{
+      width: 352px;
+      height: 297px;
+    }
+}
+.user_request_box{
+  box-sizing: border-box;
+  background-color: white;
+  margin: 30px auto 20px auto;
+  box-shadow: 2px 2px 2px 2px black;
+  text-align: center;
+    table{
+      margin: 0px auto 0px auto;
+    }
+}
+
+.user_buttons{
+  margin-top: 40%;
+  a{
+    border: 2px solid #f8f8f8;
+    padding: 10px 50px 10px 50px;
+    min-width: 217px;
+    color: inherit;
+    font-size: 3rem;
+  }
+  a:hover{
+    border: 1px solid #f8f8f8;
+  }
+  a:first-child{
+    background-color: rgba(128,0,0, 0.8);
+  }
+  a:nth-child(2){
+    background-color:	rgba(197,179,88, 0.8);
+    margin-top: 20px;
+  }
+
+}
+.your_buttons{
+  margin-top: 40%;
+  color: white;
+  a{
+    border: 2px solid #f8f8f8;
+    padding: 10px 50px 10px 50px;
+    min-width: 217px;
+    color: inherit;
+    font-size: 3rem;
+  }
+
+  a:first-child{
+    background-color: rgba(128,0,0, 0.8);
+  }
+  a:nth-child(2){
+    background-color:	rgba(197,179,88, 0.8);
+    margin-top: 20px;
+  }
+
+}
+
+.map_box{
+  background-color: white;
+  padding-bottom: 2%;
+  text-align: center;
+  margin: 20px auto 20px auto;
+  box-shadow: 2px 2px 2px 2px rgba(197,179,88, 0.8);
+  strong{
+    float: left;
+    margin-right: 2%;
+  }
+  h2{
+    margin-top: 1%;
+    text-align: center;
+  }
+  .submitter{
+    background-color: rgba(128,0,0, 0.8);
+    border: 2px solid #f8f8f8;
+    padding: 10px 50px 10px 50px;
+    color: white;
+    font-size: 3rem;
+  }
+    .submitter:hover {
+      background-color: white;
+      color: rgb(128,0,0);
+      border-radius: none;
+      border-color: rgb(128,0,0);
+
+  }
+  .non-center{
+    text-align: left;
+  }
+}
+
+.form_user_request_box{
+  box-sizing: border-box;
+  background-color: white;
+  margin: 30px auto 20px auto;
+  box-shadow: 2px 2px 2px 2px black;
+  text-align: center;
+  h3:first-child {
+    float: left;
+  }
+    h3:nth-child(2) {
+      float: right;
+    }
+}
+
+.decide_buttons{
+  button{
+    height:150px;
+    width:175px;
+      border: 2px solid #f8f8f8;
+      min-width: 217px;
+      color: white;
+      font-size: 2rem;
+    }
+    button:hover{
+      border: 1px solid #f8f8f8;
+    }
+    button:first-child{
+      background-color: rgba(128,0,0, 0.8);
+    }
+    button:nth-child(2){
+      background-color:	rgba(197,179,88, 0.8);
+      margin-top: 20px;
+    }
+    .nevermind{
+      margin-top: 35%;
+    }
+}
