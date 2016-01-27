@@ -27,3 +27,89 @@
             <% end %>
         <% end %>
       <% end %> -->
+
+
+          <div class="col-md-12 marginB bordered">
+            <div class="centered">
+              <% if current_user.id == @user.id %>
+                <h4>Your Flights </h4>
+              <% else %>
+                <h4><%= @user.fullname %>'s Flights</h4>
+              <% end %>
+            </div>
+            <% if @user.flights.where(done:false).any? %>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Date</th>
+                    <th>Page</th>
+                    <% if current_user.id == @user.id  %>
+                      <th>Requests?</th>
+                    <% end %>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user.flights.each do |flight| %>
+                    <% unless flight.done == true %>
+                        <tr>
+                          <td><%= flight.fromflight.airport %> </td>
+                          <td><%= flight.toflight.airport %> </td>
+                          <td><%= flight.fulldate %></td>
+                          <td><%= link_to "View", flight_path(flight), class:"btn btn-default" %> </td>
+                            <% if flight.requests.any? && current_user.id == @user.id %>
+                              <% flight.requests.each do |request| %>
+                                <% request.deals.each do |deal| %>
+                                  <% if deal.requestdeal == true %>
+                                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalRequest">Requests</button><td>
+                                      <div class="modal" id="modalRequest">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h3 class="modal-title centered">Offers</h3>
+                                              <div class="modal-body">
+                                                <table class="table table-bordered">
+                                                  <thead>
+                                                    <tr>
+                                                      <th></th>
+                                                      <th>User</th>
+                                                      <th>Item</th>
+                                                      <th>Itinerary</th>
+                                                      <th>Date</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td><%= image_tag request.item.itemimage.url(:pin), class: "roundThumb" %></td>
+                                                      <td><%= link_to request.user.fullname, user_path(request.user) %> </td>
+                                                      <td><%= request.item.itemname %> </td>
+                                                      <td> <%= link_to "#{request.torequest.airport} - #{request.fromrequest.airport}", request_flight_path(request, flight) %> </td>
+                                                      <td><%= request.startdate %> - <%= request.enddate %> </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  <% end %>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        </tr>
+                    <% end %>
+                </tbody>
+              </table>
+            <% elsif current_user.id == @user.id %>
+              <div class="centered">
+                <%= link_to "Post A Flight", new_flight_path, class:"btn btn-warning buttnmargin"   %>
+              </div>
+            <% else %>
+              <div class="centered">
+                <h5>No Flights Currently</h5>
+              </div>
+            <% end %>
+          </div>

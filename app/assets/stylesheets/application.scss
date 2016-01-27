@@ -127,12 +127,17 @@ li{
 }
 
 .nameAndpic{
-  float:right;
+  text-align: center;
+  float: right;
   margin-top: 10%;
     h2{
-    text-shadow: 1px 1px black;
+    text-shadow: 2px 2px black;
     color: white;
-    margin-right: 10%;
+  }
+  img{
+    width: 250px;
+    height: 200px;
+    border: 2px solid white;
   }
 }
 .contactMarg{
